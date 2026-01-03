@@ -1,4 +1,54 @@
-[README.md](https://github.com/user-attachments/files/24417697/README.md)[Uploadi# FIFOX - AI-Powered Restaurant Automation System
+# FIFOX - AI-Powered Restaurant Automation System
+
+## 🦊 Overview
+
+FIFOX is a comprehensive AI-powered restaurant management system featuring 13 specialized AI "foxes" (agents) that handle operations, content creation, and customer interactions.
+
+**Core Philosophy:** Running a restaurant should feel like playing a video game. Click buttons. Stuff happens. No stress.
+
+---
+
+## 📁 Repository Structure
+
+```
+fifox-system/
+├── README.md                    # This file
+├── prompts/
+│   ├── MASTER_PROMPT.md         # Complete system prompt
+│   ├── MARA_PROMPT.md           # Phone order agent (Order Lock Protocol)
+│   ├── LARA_PROMPT.md           # Kitchen manager
+│   ├── CONTENT_FOXES.md         # All 8 content creator foxes
+│   └── VERA_PROMPT.md           # Content verification
+├── workflows/
+│   ├── CONTENT_WORKFLOW.md      # Two-click posting system
+│   ├── ORDER_WORKFLOW.md        # Order lock flow
+│   └── TRIGGERS.md              # All button/action triggers
+├── avatars/
+│   ├── FOX_PROFILES.md          # All 13 fox personalities & image prompts
+│   └── AVATAR_GENERATION.md     # Single prompt for all foxes
+└── frontend/
+    └── command-center.jsx       # React Command Center UI
+```
+
+---
+
+## 🚀 Quick Start
+
+1. Clone this repo
+2. Read `prompts/MASTER_PROMPT.md` for the complete system
+3. Generate avatars using `avatars/AVATAR_GENERATION.md`
+4. Deploy the Command Center from `frontend/`
+
+---
+
+## 📚 Documentation
+
+- [Master System Prompt](prompts/MASTER_PROMPT.md)
+- [Fox Profiles & Avatars](avatars/FOX_PROFILES.md)
+- [Workflows & Triggers](workflows/TRIGGERS.md)
+
+[README.md](https://github.com/user[README (1).md](https://github.com/user-attachments/files/24418059/README.1.md)
+-attachments/files/24417697/README.md)[Uploadi# FIFOX - AI-Powered Restaurant Automation System
 
 ## 🦊 Overview
 
