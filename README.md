@@ -1,4 +1,4 @@
-G# CHANGING TIDE - AI-Powered Restaurant Automation System
+ - AI-Powered Restaurant Automation System
 
 ![FIFOX Command Center Logo](fifox_command_center_logo.png)
 
@@ -481,7 +481,7 @@ Professional portrait photo of a 26 year old Puerto Rican woman with realistic p
 
 ---
 
-### 12. FARAH - Facebook Content Creator
+### 12. FARA - Facebook Content Creator
 
 **Basic Info:**
 
@@ -575,11 +575,11 @@ THE 13 FIFOX TEAM MEMBERS:
 
 9. KARA - Age 25, Irish-American, light brown caramel soft curls, GOLDEN YELLOW fox ears, golden yellow polo, bubbly engaging expression
 
-10. IRA - Age 27, Persian-American, dark luxurious wavy voluminous hair, PURPLE AND MAGENTA fox ears, purple polo, gold hoop earrings, elegant confident expression
+10. IaRA - Age 27, Persian-American, dark luxurious wavy voluminous hair, PURPLE AND MAGENTA fox ears, purple polo, gold hoop earrings, elegant confident expression
 
 11. GARA - Age 26, Puerto Rican, brown to blonde ombre long flowing hair, PINK AND ORANGE fox ears, pink polo, warm relatable friendly expression
 
-12. FARAH - Age 32, Egyptian-American, dark brown/black professional neat bun, NAVY BLUE fox ears, navy polo, professional trustworthy warm expression
+12. FARA - Age 32, Egyptian-American, dark brown/black professional neat bun, NAVY BLUE fox ears, navy polo, professional trustworthy warm expression
 
 13. BARA - Age 29, Indian-American, long dark black sleek polished hair, RED fox ears, red polo, thoughtful engaging presenter expression
 
@@ -595,8 +595,8 @@ Output as a grid or individual portraits. Each must be clearly distinguishable w
 | Correct | Wrong |
 |---------|-------|
 | FIFOX | ~~Firefox~~ |
-| Ira | ~~Iara~~ |
-| Farah | ~~Fara~~ |
+| Iara | ~~Iara~~ |
+| Fara | ~~Fara~~ |
 | Lara | ~~Laura~~ ~~LARA~~ |
 | VERA | (all caps is correct) |
 
