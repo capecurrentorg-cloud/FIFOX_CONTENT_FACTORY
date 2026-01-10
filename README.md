@@ -63,18 +63,27 @@ Professional restaurant advertisements featuring:
 
 ### 2. AI Phone Agent (Mara)
 
-Automated phone system for restaurants:
-- Takes phone orders
-- Handles reservations
+Automated phone system with multi-agent verification:
+- **Mara** - Primary agent taking orders
+- **LLaMA** - Silent listener verifying accuracy
+- **Ollama** - Second silent listener verifying accuracy
+- **Vera** - Compares all three, requires 2/3 consensus before sending to kitchen
 - Answers menu questions
 - Provides hours & location info
-- **Personality:** Warm, patient, detail-oriented
+- **99.9% order accuracy** with 3-agent verification
+
+**How it works:**
+1. Mara takes order while LLaMA & Ollama listen
+2. Mara confirms with customer
+3. All three send their version to Vera
+4. Vera requires 2/3 match to approve
+5. Approved orders sent to Toast POS & timer starts
 
 **Setup Options:**
 - Vapi.ai (easiest)
 - Bland.ai
 - Custom Twilio + OpenAI
-- See [PHONE_AGENT_SETUP.md](PHONE_AGENT_SETUP.md) for details
+- See [PHONE_AGENT_SETUP.md](PHONE_AGENT_SETUP.md) and [ORDER_VERIFICATION_SYSTEM.md](ORDER_VERIFICATION_SYSTEM.md)
 
 ### 3. Reservation & Customer Appreciation (Rhea)
 
