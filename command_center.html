@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FIFOX Command Center - Order Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        overflow: hidden;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #e67e22, #f39c12);
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    
+    .header h1 {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .header .time {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+    
+    .dashboard {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.5fr;
+        height: calc(100vh - 70px);
+        gap: 0;
+    }
+    
+    .panel {
+        padding: 20px;
+        overflow-y: auto;
+        border-right: 1px solid #333;
+    }
+    
+    .panel:last-child {
+        border-right: none;
+    }
+    
+    .panel-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #e67e22;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Active Orders Panel */
+    .order-card {
+        background: #1a1a1a;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-left: 4px solid #e67e22;
+        transition: transform 0.2s;
+    }
+    
+    .order-card:hover {
+        transform: translateX(5px);
+        background: #252525;
+    }
+    
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .order-number {
+        font-weight: bold;
+        font-size: 16px;
+        color: #e67e22;
+    }
+    
+    .order-time {
+        color: #888;
+        font-size: 14px;
+    }
+    
+    .customer-name {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #ccc;
+    }
+    
+    .order-items {
+        font-size: 13px;
+        color: #999;
+        margin-bottom: 10px;
+    }
+    
+    .order-status {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .status-pending { background: #3498db; }
+    .status-preparing { background: #f39c12; }
+    .status-ready { background: #2ecc71; }
+    .status-delivery { background: #9b59b6; }
+    
+    /* Timer Panel */
+    .timer-item {
+        background: #1a1a1a;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .timer-order {
+        font-weight: bold;
+        min-width: 60px;
+    }
+    
+    .timer-bar {
+        flex: 1;
+        height: 20px;
+        background: #333;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .timer-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2ecc71, #f39c12, #e74c3c);
+        transition: width 1s linear;
+    }
+    
+    .timer-text {
+        font-size: 14px;
+        color: #e67e22;
+        font-weight: bold;
+        min-width: 50px;
+        text-align: right;
+    }
+    
+    .timer-stats {
+        background: #1a1a1a;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .timer-stats .stat {
+        margin: 10px 0;
+    }
+    
+    .timer-stats .stat-value {
+        font-size: 24px;
+        color: #e67e22;
+        font-weight: bold;
+    }
+    
+    /* Map Panel */
+    #map {
+        width: 100%;
+        height: calc(100% - 60px);
+        border-radius: 10px;
+        background: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+    }
+    
+    .map-placeholder {
+        text-align: center;
+    }
+    
+    .map-placeholder p {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    
+    /* Demo banner */
+    .demo-banner {
+        background: #e74c3c;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+<body>
+    <div class="demo-banner">
+        🚧 DEMO MODE - Connect to Toast POS & Google Maps API for live data
+    </div>
+    
+    <div class="header">
+        <h1>🦊 FIFOX COMMAND CENTER</h1>
+        <div class="time" id="current-time">12:45 PM</div>
+    </div>
+    
+    <div class="dashboard">
+        <!-- Active Orders Panel -->
+        <div class="panel">
+            <div class="panel-title">Active Orders (5)</div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-number">#1247</span>
+                    <span class="order-time">🕐 12:34</span>
+                </div>
+                <div class="customer-name">John Doe - (555) 123-4567</div>
+                <div class="order-items">
+                    1x Ribeye Steak ($26.99)<br>
+                    1x Caesar Salad ($9.99)
+                </div>
+                <span class="order-status status-preparing">🔥 PREPARING</span>
+            </div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-number">#1248</span>
+                    <span class="order-time">🕐 12:28</span>
+                </div>
+                <div class="customer-name">Jane Smith - (555) 234-5678</div>
+                <div class="order-items">
+                    1x Grilled Salmon ($22.99)<br>
+                    1x House Wine ($12.00)
+                </div>
+                <span class="order-status status-ready">✓ READY</span>
+            </div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-number">#1249</span>
+                    <span class="order-time">🕐 12:20</span>
+                </div>
+                <div class="customer-name">Mike Johnson - (555) 345-6789</div>
+                <div class="order-items">
+                    2x Signature Burger ($31.98)<br>
+                    1x Chicken Wings ($14.99)
+                </div>
+                <span class="order-status status-delivery">🚗 OUT FOR DELIVERY</span>
+            </div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-number">#1250</span>
+                    <span class="order-time">🕐 12:15</span>
+                </div>
+                <div class="customer-name">Sarah Williams - (555) 456-7890</div>
+                <div class="order-items">
+                    1x Lobster Roll ($28.99)<br>
+                    1x Mac & Cheese ($16.99)
+                </div>
+                <span class="order-status status-preparing">🔥 PREPARING</span>
+            </div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-number">#1251</span>
+                    <span class="order-time">🕐 12:40</span>
+                </div>
+                <div class="customer-name">Tom Brown - (555) 567-8901</div>
+                <div class="order-items">
+                    1x Fish Tacos ($15.99)<br>
+                    1x Greek Salad ($11.99)
+                </div>
+                <span class="order-status status-pending">⏳ PENDING</span>
+            </div>
+        </div>
+        
+        <!-- Timer Panel -->
+        <div class="panel">
+            <div class="panel-title">Order Timers</div>
+            
+            <div class="timer-item">
+                <span class="timer-order">#1247</span>
+                <div class="timer-bar">
+                    <div class="timer-fill" style="width: 53%;"></div>
+                </div>
+                <span class="timer-text">8 min</span>
+            </div>
+            
+            <div class="timer-item">
+                <span class="timer-order">#1248</span>
+                <div class="timer-bar">
+                    <div class="timer-fill" style="width: 80%;"></div>
+                </div>
+                <span class="timer-text">12 min</span>
+            </div>
+            
+            <div class="timer-item">
+                <span class="timer-order">#1249</span>
+                <div class="timer-bar">
+                    <div class="timer-fill" style="width: 95%;"></div>
+                </div>
+                <span class="timer-text">18 min</span>
+            </div>
+            
+            <div class="timer-item">
+                <span class="timer-order">#1250</span>
+                <div class="timer-bar">
+                    <div class="timer-fill" style="width: 100%;"></div>
+                </div>
+                <span class="timer-text">22 min</span>
+            </div>
+            
+            <div class="timer-item">
+                <span class="timer-order">#1251</span>
+                <div class="timer-bar">
+                    <div class="timer-fill" style="width: 33%;"></div>
+                </div>
+                <span class="timer-text">5 min</span>
+            </div>
+            
+            <div class="timer-stats">
+                <div class="stat">
+                    <div>Average Time</div>
+                    <div class="stat-value">13 min</div>
+                </div>
+                <div class="stat">
+                    <div>Total Today</div>
+                    <div class="stat-value">47 orders</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map Panel -->
+        <div class="panel">
+            <div class="panel-title">Delivery Map</div>
+            <div id="map">
+                <div class="map-placeholder">
+                    <div style="font-size: 48px;">🗺️</div>
+                    <p>Google Maps integration</p>
+                    <p style="font-size: 12px; margin-top: 20px;">
+                        Add your Google Maps API key to display<br>
+                        live delivery locations and routes
+                    </p>
+                    <p style="margin-top: 20px; color: #e67e22;">
+                        📍 #1247 - 123 Main St<br>
+                        📍 #1248 - 456 Oak Ave<br>
+                        📍 #1249 - 789 Pine Rd<br>
+                        📍 #1250 - 321 Elm St
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Update clock
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // Simulate timer updates (demo)
+        setInterval(() => {
+            document.querySelectorAll('.timer-fill').forEach(fill => {
+                let width = parseInt(fill.style.width);
+                if (width < 100) {
+                    fill.style.width = (width + 1) + '%';
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

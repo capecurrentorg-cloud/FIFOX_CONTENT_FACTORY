@@ -14,72 +14,310 @@
         text-align: center;
         color: #e67e22;
         text-shadow: 0 0 10px #e67e22;
+        margin-bottom: 40px;
     }
     .gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
         max-width: 1400px;
         margin: 0 auto;
+        padding: 20px;
     }
     .video-card {
         background: #2a2a2a;
-        border-radius: 10px;
-        padding: 20px;
-        text-align: center;
-        transition: transform 0.3s;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
         border: 2px solid #333;
     }
     .video-card:hover {
-        transform: scale(1.05);
+        transform: translateY(-10px);
         border-color: #e67e22;
+        box-shadow: 0 10px 30px rgba(230, 126, 34, 0.3);
+    }
+    .video-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+    .video-card-content {
+        padding: 20px;
+        text-align: center;
     }
     .video-card a {
         color: #e67e22;
         text-decoration: none;
         font-size: 18px;
         font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
+    .video-card a:hover {
+        color: #f39c12;
     }
     .video-card p {
         color: #aaa;
         font-size: 14px;
-        margin-top: 10px;
+        margin: 0;
+        line-height: 1.4;
+    }
+    .video-number {
+        background: #e67e22;
+        color: #000;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 10px;
     }
 </style>
 </head>
 <body>
     <h1>🦊 FIFOX Content Factory - Video Gallery</h1>
     <div class="gallery">
-        <div class="video-card"><a href="Foxes/video_1.html">Video 1: SIGNATURE BURGER</a><p>8oz grass-fed beef burger</p></div>
-        <div class="video-card"><a href="Foxes/video_2.html">Video 2: GRILLED SALMON</a><p>Wild-caught Atlantic salmon</p></div>
-        <div class="video-card"><a href="Foxes/video_3.html">Video 3: CAESAR SALAD</a><p>Fresh romaine with parmesan</p></div>
-        <div class="video-card"><a href="Foxes/video_4.html">Video 4: RIBEYE STEAK</a><p>12oz prime ribeye</p></div>
-        <div class="video-card"><a href="Foxes/video_5.html">Video 5: CHICKEN PASTA</a><p>Grilled chicken with alfredo</p></div>
-        <div class="video-card"><a href="Foxes/video_6.html">Video 6: SEAFOOD PLATTER</a><p>Fresh shrimp & scallops</p></div>
-        <div class="video-card"><a href="Foxes/video_7.html">Video 7: MUSHROOM RISOTTO</a><p>Creamy arborio rice</p></div>
-        <div class="video-card"><a href="Foxes/video_8.html">Video 8: FISH TACOS</a><p>Crispy cod with slaw</p></div>
-        <div class="video-card"><a href="Foxes/video_9.html">Video 9: BBQ RIBS</a><p>Slow-cooked baby back ribs</p></div>
-        <div class="video-card"><a href="Foxes/video_10.html">Video 10: LOBSTER ROLL</a><p>Fresh lobster meat</p></div>
-        <div class="video-card"><a href="Foxes/video_11.html">Video 11: CAPRESE SALAD</a><p>Fresh mozzarella & tomatoes</p></div>
-        <div class="video-card"><a href="Foxes/video_12.html">Video 12: PORK CHOPS</a><p>Pan-seared with apple compote</p></div>
-        <div class="video-card"><a href="Foxes/video_13.html">Video 13: SHRIMP SCAMPI</a><p>Jumbo shrimp in garlic butter</p></div>
-        <div class="video-card"><a href="Foxes/video_14.html">Video 14: VEGGIE BURGER</a><p>Black bean patty with avocado</p></div>
-        <div class="video-card"><a href="Foxes/video_15.html">Video 15: CRAB CAKES</a><p>Maryland-style crab cakes</p></div>
-        <div class="video-card"><a href="Foxes/video_16.html">Video 16: STEAK FAJITAS</a><p>Sizzling beef with peppers</p></div>
-        <div class="video-card"><a href="Foxes/video_17.html">Video 17: GREEK SALAD</a><p>Cucumber, tomato & feta</p></div>
-        <div class="video-card"><a href="Foxes/video_18.html">Video 18: CHICKEN WINGS</a><p>Crispy buffalo or BBQ wings</p></div>
-        <div class="video-card"><a href="Foxes/video_19.html">Video 19: FILET MIGNON</a><p>8oz tender beef filet</p></div>
-        <div class="video-card"><a href="Foxes/video_20.html">Video 20: TUNA POKE BOWL</a><p>Fresh ahi tuna with rice</p></div>
-        <div class="video-card"><a href="Foxes/video_21.html">Video 21: MAC & CHEESE</a><p>Three-cheese blend</p></div>
-        <div class="video-card"><a href="Foxes/video_22.html">Video 22: LAMB CHOPS</a><p>Herb-crusted lamb</p></div>
-        <div class="video-card"><a href="Foxes/video_23.html">Video 23: VEGETABLE STIR-FRY</a><p>Seasonal vegetables</p></div>
-        <div class="video-card"><a href="Foxes/video_24.html">Video 24: PULLED PORK SANDWICH</a><p>Slow-smoked pulled pork</p></div>
-        <div class="video-card"><a href="Foxes/video_25.html">Video 25: SUSHI ROLLS</a><p>Chef's selection</p></div>
-        <div class="video-card"><a href="Foxes/video_26.html">Video 26: CHICKEN TENDERS</a><p>Hand-breaded crispy tenders</p></div>
-        <div class="video-card"><a href="Foxes/video_27.html">Video 27: SALMON SALAD</a><p>Grilled salmon over greens</p></div>
-        <div class="video-card"><a href="Foxes/video_28.html">Video 28: PRIME RIB</a><p>Slow-roasted prime rib</p></div>
-        <div class="video-card"><a href="Foxes/video_29.html">Video 29: VEGETABLE LASAGNA</a><p>Layered pasta with ricotta</p></div>
-        <div class="video-card"><a href="Foxes/video_30.html">Video 30: COCONUT SHRIMP</a><p>Coconut-breaded shrimp</p></div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Signature Burger">
+            <div class="video-card-content">
+                <span class="video-number">#1</span>
+                <a href="Foxes/video_1.html">SIGNATURE BURGER</a>
+                <p>8oz grass-fed beef burger with aged cheddar & bacon</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400" alt="Grilled Salmon">
+            <div class="video-card-content">
+                <span class="video-number">#2</span>
+                <a href="Foxes/video_2.html">GRILLED SALMON</a>
+                <p>Wild-caught Atlantic salmon with lemon butter</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400" alt="Caesar Salad">
+            <div class="video-card-content">
+                <span class="video-number">#3</span>
+                <a href="Foxes/video_3.html">CAESAR SALAD</a>
+                <p>Fresh romaine with parmesan & croutons</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=400" alt="Ribeye Steak">
+            <div class="video-card-content">
+                <span class="video-number">#4</span>
+                <a href="Foxes/video_4.html">RIBEYE STEAK</a>
+                <p>12oz prime ribeye with garlic butter</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400" alt="Chicken Pasta">
+            <div class="video-card-content">
+                <span class="video-number">#5</span>
+                <a href="Foxes/video_5.html">CHICKEN PASTA</a>
+                <p>Grilled chicken with creamy alfredo</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1559737558-2f8b6e6c4f7e?w=400" alt="Seafood Platter">
+            <div class="video-card-content">
+                <span class="video-number">#6</span>
+                <a href="Foxes/video_6.html">SEAFOOD PLATTER</a>
+                <p>Fresh shrimp, scallops & calamari</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1476124369491-c4d6d4e1eb88?w=400" alt="Mushroom Risotto">
+            <div class="video-card-content">
+                <span class="video-number">#7</span>
+                <a href="Foxes/video_7.html">MUSHROOM RISOTTO</a>
+                <p>Creamy arborio rice with wild mushrooms</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1599974789162-f1c9c60e62e0?w=400" alt="Fish Tacos">
+            <div class="video-card-content">
+                <span class="video-number">#8</span>
+                <a href="Foxes/video_8.html">FISH TACOS</a>
+                <p>Crispy cod with cabbage slaw</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400" alt="BBQ Ribs">
+            <div class="video-card-content">
+                <span class="video-number">#9</span>
+                <a href="Foxes/video_9.html">BBQ RIBS</a>
+                <p>Slow-cooked baby back ribs</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1534939268851-c2cd58d0b04b?w=400" alt="Lobster Roll">
+            <div class="video-card-content">
+                <span class="video-number">#10</span>
+                <a href="Foxes/video_10.html">LOBSTER ROLL</a>
+                <p>Fresh lobster on toasted butter roll</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400" alt="Caprese Salad">
+            <div class="video-card-content">
+                <span class="video-number">#11</span>
+                <a href="Foxes/video_11.html">CAPRESE SALAD</a>
+                <p>Fresh mozzarella & tomatoes</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400" alt="Pork Chops">
+            <div class="video-card-content">
+                <span class="video-number">#12</span>
+                <a href="Foxes/video_12.html">PORK CHOPS</a>
+                <p>Pan-seared with apple compote</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1563458838198-59e0cd6555e9?w=400" alt="Shrimp Scampi">
+            <div class="video-card-content">
+                <span class="video-number">#13</span>
+                <a href="Foxes/video_13.html">SHRIMP SCAMPI</a>
+                <p>Jumbo shrimp in garlic butter</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400" alt="Veggie Burger">
+            <div class="video-card-content">
+                <span class="video-number">#14</span>
+                <a href="Foxes/video_14.html">VEGGIE BURGER</a>
+                <p>Black bean patty with avocado</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?w=400" alt="Crab Cakes">
+            <div class="video-card-content">
+                <span class="video-number">#15</span>
+                <a href="Foxes/video_15.html">CRAB CAKES</a>
+                <p>Maryland-style with remoulade</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1599974579630-ec1c57b7be27?w=400" alt="Steak Fajitas">
+            <div class="video-card-content">
+                <span class="video-number">#16</span>
+                <a href="Foxes/video_16.html">STEAK FAJITAS</a>
+                <p>Sizzling beef with peppers</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400" alt="Greek Salad">
+            <div class="video-card-content">
+                <span class="video-number">#17</span>
+                <a href="Foxes/video_17.html">GREEK SALAD</a>
+                <p>Cucumber, tomato, olives & feta</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?w=400" alt="Chicken Wings">
+            <div class="video-card-content">
+                <span class="video-number">#18</span>
+                <a href="Foxes/video_18.html">CHICKEN WINGS</a>
+                <p>Crispy buffalo or BBQ wings</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=400" alt="Filet Mignon">
+            <div class="video-card-content">
+                <span class="video-number">#19</span>
+                <a href="Foxes/video_19.html">FILET MIGNON</a>
+                <p>8oz tender beef filet</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Tuna Poke Bowl">
+            <div class="video-card-content">
+                <span class="video-number">#20</span>
+                <a href="Foxes/video_20.html">TUNA POKE BOWL</a>
+                <p>Fresh ahi tuna with rice & avocado</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?w=400" alt="Mac & Cheese">
+            <div class="video-card-content">
+                <span class="video-number">#21</span>
+                <a href="Foxes/video_21.html">MAC & CHEESE</a>
+                <p>Three-cheese blend</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400" alt="Lamb Chops">
+            <div class="video-card-content">
+                <span class="video-number">#22</span>
+                <a href="Foxes/video_22.html">LAMB CHOPS</a>
+                <p>Herb-crusted with mint chimichurri</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400" alt="Vegetable Stir-Fry">
+            <div class="video-card-content">
+                <span class="video-number">#23</span>
+                <a href="Foxes/video_23.html">VEGETABLE STIR-FRY</a>
+                <p>Seasonal vegetables in ginger soy</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1628238289717-4db0e00be3e0?w=400" alt="Pulled Pork Sandwich">
+            <div class="video-card-content">
+                <span class="video-number">#24</span>
+                <a href="Foxes/video_24.html">PULLED PORK SANDWICH</a>
+                <p>Slow-smoked with coleslaw</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400" alt="Sushi Rolls">
+            <div class="video-card-content">
+                <span class="video-number">#25</span>
+                <a href="Foxes/video_25.html">SUSHI ROLLS</a>
+                <p>Chef's selection of fresh rolls</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=400" alt="Chicken Tenders">
+            <div class="video-card-content">
+                <span class="video-number">#26</span>
+                <a href="Foxes/video_26.html">CHICKEN TENDERS</a>
+                <p>Hand-breaded crispy tenders</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400" alt="Salmon Salad">
+            <div class="video-card-content">
+                <span class="video-number">#27</span>
+                <a href="Foxes/video_27.html">SALMON SALAD</a>
+                <p>Grilled salmon over mixed greens</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400" alt="Prime Rib">
+            <div class="video-card-content">
+                <span class="video-number">#28</span>
+                <a href="Foxes/video_28.html">PRIME RIB</a>
+                <p>Slow-roasted with au jus</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1621510456681-2330135e5871?w=400" alt="Vegetable Lasagna">
+            <div class="video-card-content">
+                <span class="video-number">#29</span>
+                <a href="Foxes/video_29.html">VEGETABLE LASAGNA</a>
+                <p>Layered pasta with roasted vegetables</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <img src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=400" alt="Coconut Shrimp">
+            <div class="video-card-content">
+                <span class="video-number">#30</span>
+                <a href="Foxes/video_30.html">COCONUT SHRIMP</a>
+                <p>Coconut-breaded with pineapple sauce</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
