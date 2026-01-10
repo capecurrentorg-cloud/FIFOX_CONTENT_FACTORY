@@ -1,207 +1,52 @@
- - AI-Powered Restaurant Automation System
+# FIFOX CONTENT FACTORY
 
-![FIFOX Command Center Logo](fifox_command_center_logo.png)
+![FIFOX Logo](fifox_logo_master.png)
 
 ## 🦊 Overview
 
-FIFOX is a comprehensive AI-powered restaurant management system featuring 13 specialized AI "foxes" (agents) that handle operations, content creation, and customer interactions.
-
-**Core Philosophy:** Running a restaurant should feel like playing a video game. Click buttons. Stuff happens. No stress.
+The **FIFOX Content Factory** is a video content production repository featuring AI-generated generating ads for restaurants and specials. This repository contains 30 complete video productions, each with accompanying scripts and HTML preview files.
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-fifox-system/
+FIFOX_CONTENT_FACTORY/
 ├── README.md                    # This file
-├── prompts/
-│   ├── MASTER_PROMPT.md         # Complete system prompt
-│   ├── MARA_PROMPT.md           # Phone order agent (Order Lock Protocol)
-│   ├── LARA_PROMPT.md           # Kitchen manager
-│   ├── CONTENT_FOXES.md         # All 8 content creator foxes
-│   └── VERA_PROMPT.md           # Content verification
-├── workflows/
-│   ├── CONTENT_WORKFLOW.md      # Two-click posting system
-│   ├── ORDER_WORKFLOW.md        # Order lock flow
-│   └── TRIGGERS.md              # All button/action triggers
-├── avatars/
-│   ├── FOX_PROFILES.md          # All 13 fox personalities & image prompts
-│   └── AVATAR_GENERATION.md     # Single prompt for all foxes
-└── frontend/
-    └── command-center.jsx       # React Command Center UI
+├── fifox_logo_master.png        # FIFOX branding logo
+├── mara                         # Configuration file
+└── Foxes/                       # Fox video content (30 productions)
+    ├── script_1.txt through script_30.txt
+    └── video_1.html through video_30.html
 ```
 
 ---
 
-## 🚀 Quick Start
+## 📚 Content
 
-1. Clone this repo
-2. Read `prompts/MASTER_PROMPT.md` for the complete system
-3. Generate avatars using `avatars/AVATAR_GENERATION.md`
-4. Deploy the Command Center from `frontend/`
+### Foxes Collection (30 Videos)
 
----
+they generate engaging content for restaurant advertisement for ads and specials.
 
-## 📚 Documentation
-
-- [Master System Prompt](prompts/MASTER_PROMPT.md)
-- [Fox Profiles & Avatars](avatars/FOX_PROFILES.md)
-- [Workflows & Triggers](workflows/TRIGGERS.md)
-
-[README.md](<https://github.com/user[README> (1).md](<https://github.com/user-attachments/files/24418059/README.1.md>)
--attachments/files/24417697/README.md)[Uploadi# CHANGING TIDE - AI-Powered Restaurant Automation System
-
-## 🦊 Overview
-
-FIFOX is a comprehensive AI-powered restaurant management system featuring 13 specialized AI "foxes" (agents) that handle operations, content creation, and customer interactions.
-
-**Core Philosophy:** Running a restaurant should feel like playing a video game. Click buttons. Stuff happens. No stress.
+- **30 Video Scripts** - Complete narration and content for each video
+- **30 HTML Preview Files** - Embedded video players with production watermarks
+- **Production Numbers** - Each video is marked as "FIFOX PRODUCTION #1" through "FIFOX PRODUCTION #30"
 
 ---
 
-## 📁 Repository Structure
+## 🚀 Usage
 
-```
-fifox-system/
-├── README.md                    # This file
-├── prompts/
-│   ├── MASTER_PROMPT.md         # Complete system prompt
-│   ├── MARA_PROMPT.md           # Phone order agent (Order Lock Protocol)
-│   ├── LARA_PROMPT.md           # Kitchen manager
-│   ├── CONTENT_FOXES.md         # All 8 content creator foxes
-│   └── VERA_PROMPT.md           # Content verification
-├── workflows/
-│   ├── CONTENT_WORKFLOW.md      # Two-click posting system
-│   ├── ORDER_WORKFLOW.md        # Order lock flow
-│   └── TRIGGERS.md              # All button/action triggers
-├── avatars/
-│   ├── FOX_PROFILES.md          # All 13 fox personalities & image prompts
-│   └── AVATAR_GENERATION.md     # Single prompt for all foxes
-└── frontend/
-    └── command-center.jsx       # React Command Center UI
-```
+Each video production includes:
+1. **Script File** (`script_X.txt`) - Complete written content
+2. **HTML Preview** (`video_X.html`) - Embedded YouTube video player with FIFOX watermark
+
+To preview any video, open the corresponding HTML file in a web browser.
 
 ---
 
-## 🚀 Quick Start
+## 📋 Production Details
 
-1. Clone this repo
-2. Read `prompts/MASTER_PROMPT.md` for the complete system
-3. Generate avatars using `avatars/AVATAR_GENERATION.md`
-4. Deploy the Command Center from `frontend/`
-
----
-
-## 📚 Documentation
-
-- [Master System Prompt](prompts/MASTER_PROMPT.md)
-- [Fox Profiles & Avatars](avatars/FOX_PROFILES.md)
-- [Workflows & Triggers](workflows/TRIGGERS.md)
-ng README.md…]()
-[FOX_PROFILES.md](https://github.com/user-attachments/files/24417698/FOX_PROFILES.md)
-
-# FIFOX Team Profiles & Avatar Generation
-
-## 🦊 THE 13 FOXES - COMPLETE PROFILES
-
----
-
-## CORE OPERATIONS FOXES
-
-### 1. MARA - Phone/To-Go Order Agent
-
-**Basic Info:**
-
-- **Name:** Mara
-- **Role:** Phone/To-Go Order Agent
-- **Age:** 28
-- **Cultural Background:** Latina, speaks Spanish fluently, grew up helping at family restaurant
-
-**Personality:**
-
-- Warm, patient, detail-obsessed
-- Never rushes customers
-- Repeats orders back word-for-word
-- Calm under pressure
-- Apologetic when clarifying
-- Makes customers feel heard
-
-**Appearance:**
-
-- Hair: Auburn/copper red, shoulder length, slight wave
-- Eyes: Warm brown
-- Expression: Warm smile, wearing phone headset
-- Fox Ears: Orange
-- Uniform: Orange polo with fox logo embroidered
-
-**Image Prompt:**
-
-```
-Professional portrait photo of a 28 year old Latina woman with realistic orange fox ears, auburn copper red shoulder length wavy hair, warm friendly smile, wearing orange restaurant polo shirt with small fox logo, wearing phone headset, professional headshot style, soft studio lighting, clean white background, photorealistic, high quality
-```
-
----
-
-### 2. RHEA - Reservations & Customer Appreciation
-
-**Basic Info:**
-
-- **Name:** Rhea
-- **Role:** Reservations & Customer Appreciation
-- **Age:** 31
-- **Cultural Background:** Greek-American, family owns Mediterranean restaurant, deep hospitality understanding
-
-**Personality:**
-
-- Gracious and elegant
-- Remembers names and anniversaries
-- Sends follow-up thank yous
-- Makes every guest feel like VIP
-- Elegant but approachable
-- Natural host energy
-
-**Appearance:**
-
-- Hair: Honey blonde, elegant updo
-- Eyes: Light blue/gray
-- Expression: Welcoming, sophisticated smile
-- Fox Ears: Pink
-- Uniform: Pink polo, pearl earrings
-
-**Image Prompt:**
-
-```
-Professional portrait photo of a 31 year old Greek-American woman with realistic pink-tinted fox ears, honey blonde hair in elegant updo, sophisticated welcoming smile, small pearl earrings, wearing pink restaurant polo shirt, professional headshot style, soft studio lighting, clean white background, photorealistic, high quality
-```
-
----
-
-### 3. VERA - Content & Engagement Verifier
-
-**Basic Info:**
-
-- **Name:** VERA (all caps - she's special)
-- **Role:** Content Verifier, Comment Responder, Trend Analyzer
-- **Age:** 26
-- **Cultural Background:** Vietnamese-American, marketing degree, perfectionist by nature
-
-**Personality:**
-
-- Sharp and analytical
-- Catches every mistake
-- Protective of brand
-- Professional but not cold
-- The quality gatekeeper
-- Nothing slips past her
-
-**Appearance:**
-
-- Hair: Jet black, sleek straight, professional cut
-- Eyes: Dark brown, sharp and focused
-- Expression: Confident, focused, slight knowing smile
-- Fox Ears: Emerald green
-- Uniform: Emerald green polo, minimalist style
+e
 
 **Image Prompt:**
 
