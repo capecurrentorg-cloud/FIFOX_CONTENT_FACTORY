@@ -4,7 +4,13 @@
 
 ## 🦊 Overview
 
-The **FIFOX Content Factory** is a video content production repository featuring AI-generated generating ads for restaurants and specials. This repository contains 30 complete video productions, each with accompanying scripts and HTML preview files.
+The **FIFOX Content Factory** is a complete AI-powered restaurant automation system featuring:
+- 30 professional video ads for menu items
+- AI phone agent (Mara) for handling calls and orders
+- Restaurant menu management
+- Social media content generation
+
+**Live Demo:** https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/
 
 ---
 
@@ -12,39 +18,134 @@ The **FIFOX Content Factory** is a video content production repository featuring
 
 ```
 FIFOX_CONTENT_FACTORY/
-├── README.md                    # This file
-├── fifox_logo_master.png        # FIFOX branding logo
-├── mara                         # Configuration file
-└── Foxes/                       # Fox video content (30 productions)
-    ├── script_1.txt through script_30.txt
-    └── video_1.html through video_30.html
+├── README.md                           # This file
+├── index.html                          # Video gallery homepage
+├── fifox_logo_master.png               # FIFOX branding logo
+│
+├── Foxes/                              # 30 Restaurant video ads
+│   ├── script_1.txt through script_30.txt    # Video scripts
+│   └── video_1.html through video_30.html    # Video ad pages with images
+│
+├── sample_restaurant_menu.json         # Restaurant menu data
+│
+├── Phone Agent (Mara)/
+│   ├── PHONE_AGENT_SETUP.md           # Phone agent setup guide
+│   ├── mara_agent_prompt.txt          # AI agent prompt for Mara
+│   ├── phone_agent_config.json        # Agent configuration
+│   └── setup_phone_agent.py           # Setup script
+│
+└── Content Generators/
+    ├── generate_restaurant_content.py  # Generate video scripts & HTML
+    ├── generate_images.py             # Add images to videos
+    ├── test_content_generator.py      # Test social media posts
+    └── fix_videos.py                  # Fix/update existing videos
 ```
 
 ---
 
-## 📚 Content
+## 📚 Content Features
 
-### Foxes Collection (30 Videos)
+### 1. Video Ads (30 Complete Productions)
 
-they generate engaging content for restaurant advertisement for ads and specials.
+Professional restaurant advertisements featuring:
+- **Food Photography** - High-quality images of each menu item
+- **Animated Text** - Title and description with zoom effects
+- **FIFOX Watermark** - Production branding
+- **Menu Items Include:**
+  - Signature Burger, Grilled Salmon, Caesar Salad
+  - Ribeye Steak, Chicken Pasta, Seafood Platter
+  - And 24 more delicious items!
 
-- **30 Video Scripts** - Complete narration and content for each video
-- **30 HTML Preview Files** - Embedded video players with production watermarks
-- **Production Numbers** - Each video is marked as "FIFOX PRODUCTION #1" through "FIFOX PRODUCTION #30"
+**View Gallery:** [index.html](https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/)
+
+### 2. AI Phone Agent (Mara)
+
+Automated phone system for restaurants:
+- Takes phone orders
+- Handles reservations
+- Answers menu questions
+- Provides hours & location info
+- **Personality:** Warm, patient, detail-oriented
+
+**Setup Options:**
+- Vapi.ai (easiest)
+- Bland.ai
+- Custom Twilio + OpenAI
+- See [PHONE_AGENT_SETUP.md](PHONE_AGENT_SETUP.md) for details
+
+### 3. Restaurant Menu System
+
+JSON-based menu management:
+- Appetizers, Entrees, Desserts, Beverages
+- Pricing and descriptions
+- Dietary tags
+- Hours and contact info
+
+### 4. Social Media Content Generator
+
+Automated post generation:
+- Menu item highlights
+- Daily specials
+- Promotional content
+- Customizable templates
 
 ---
 
-## 🚀 Usage
+## 🚀 Quick Start
 
-Each video production includes:
-1. **Script File** (`script_X.txt`) - Complete written content
-2. **HTML Preview** (`video_X.html`) - Embedded YouTube video player with FIFOX watermark
+### View Video Ads
+Visit: https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/
 
-To preview any video, open the corresponding HTML file in a web browser.
+### Generate New Content
+```bash
+# Generate all 30 video ads
+python generate_restaurant_content.py
+
+# Add images to videos
+python generate_images.py
+
+# Test social media posts
+python test_content_generator.py
+```
+
+### Setup Phone Agent
+```bash
+# Generate Mara's configuration
+python setup_phone_agent.py
+
+# Then follow instructions in PHONE_AGENT_SETUP.md
+```
+
+### Customize Menu
+Edit `sample_restaurant_menu.json` with your actual menu items, then regenerate:
+```bash
+python setup_phone_agent.py  # Updates phone agent
+python test_content_generator.py  # Tests with new menu
+```
 
 ---
 
-## 📋 Production Details
+## 🎨 Customization
+
+### Change Menu Items
+1. Edit `sample_restaurant_menu.json`
+2. Update menu items in `generate_restaurant_content.py`
+3. Run: `python generate_restaurant_content.py`
+4. Commit and push changes
+
+### Update Phone Agent Personality
+1. Edit `phone_agent_config.json`
+2. Run: `python setup_phone_agent.py`
+3. Upload new `mara_agent_prompt.txt` to your phone platform
+
+### Add API Keys for Custom Images
+1. Copy `.env.example` to `.env`
+2. Add your API keys (OpenAI, Stability AI, etc.)
+3. Update `generate_images.py` to use custom generation
+
+---
+
+## 📋 Current Production Status
 
 e
 
@@ -96,57 +197,72 @@ Professional portrait photo of a 34 year old Nigerian-American woman with realis
 
 - **Name:** Lara
 - **Role:** Kitchen Manager - Inventory, Delivery Invoices, Menu Generator
-- **Age:** 38
-- **Cultural Background:** Italian-American, grew up in restaurant kitchen, knows food inside-out
-
-**Personality:**
-
-- Organized and efficient
-- No-nonsense but fair
-- Knows every ingredient cost
-- Turns delivery chaos into profit
-- Practical problem solver
-- The backbone of operations
-
-**Appearance:**
-
-- Hair: Dark brown, practical ponytail
-- Eyes: Hazel, capable look
-- Expression: Capable, no-nonsense, trustworthy
-- Fox Ears: Red-orange
-- Uniform: White chef coat with red accents (or red polo), often has towel over shoulder
-
-**Image Prompt:**
-
-```
-Professional portrait photo of a 38 year old Italian-American woman with realistic red-orange fox ears, dark brown hair in practical ponytail, capable confident no-nonsense expression, wearing white chef coat with red accents, professional headshot style, soft studio lighting, clean white background, photorealistic, high quality
-```
+- **Total Video Ads:** 30 ✓
+- **Menu System:** Ready ✓
+- **Phone Agent (Mara):** Configuration ready ✓
+- **Content Generators:** Operational ✓
+- **GitHub Pages:** Live ✓
 
 ---
 
-## PLATFORM CONTENT CREATORS
+## 🔧 Technical Requirements
 
-### 6. TIRA - TikTok Copywriter
+- **Python 3.8+** for scripts
+- **Web browser** for viewing ads
+- **Git** for version control
+- **Optional:** API keys for advanced features (OpenAI, Stability AI, Vapi.ai)
 
-**Basic Info:**
+---
 
-- **Name:** Tira
-- **Role:** TikTok Content Creator (trends, dances, quick hits)
-- **Age:** 22
-- **Cultural Background:** Korean-American, grew up on social media, natural performer
+## 📞 Phone Agent Platforms
 
-**Personality:**
+### Recommended: Vapi.ai
+- Easiest setup
+- $0.05-0.12 per minute
+- Natural voice AI
+- https://vapi.ai
 
-- High energy
-- Knows every trend
-- Quick wit
-- Gen Z fluent
-- Makes food look fun
-- Never cringe
+### Alternative Options
+- **Bland.ai** - Similar to Vapi
+- **Twilio + OpenAI** - More control, more complex
+- **RetellAI** - Restaurant-focused
+- **Local LLaMA** - Free but requires GPU
 
-**Appearance:**
+See [PHONE_AGENT_SETUP.md](PHONE_AGENT_SETUP.md) for detailed comparison.
 
-- Hair: Black with bright pink highlights/streaks
+---
+
+## 🎯 Future Enhancements
+
+- [ ] Custom AI-generated images (with API keys)
+- [ ] Video export to MP4 format
+- [ ] Direct social media posting integration
+- [ ] Analytics dashboard
+- [ ] Multi-restaurant support
+- [ ] Mobile app integration
+
+---
+
+## 📄 License
+
+This project is part of the FIFOX restaurant automation system.
+
+---
+
+## 🆘 Support
+
+- **Issues:** Open a GitHub issue
+- **Documentation:** See PHONE_AGENT_SETUP.md
+- **Updates:** Pull latest from main branch
+
+---
+
+## 🎉 Credits
+
+**FIFOX** - Making restaurant automation simple and effective.
+
+Built with ❤️ for restaurant owners who want to focus on food, not phones.
+
 - Eyes: Dark brown, playful
 - Expression: Playful, energetic, camera-ready
 - Fox Ears: Black and pink gradient
