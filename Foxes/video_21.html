@@ -4,18 +4,83 @@
 <head>
 <title>Foxes - Video 21</title>
 <style>
-    body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #fff; font-family: sans-serif; overflow: hidden; }
-    .slide { text-align: center; animation: zoom 5s infinite alternate; }
-    h1 { font-size: 80px; text-transform: uppercase; color: #e67e22; text-shadow: 0 0 20px #e67e22; }
-    p { font-size: 30px; margin-top: 20px; }
-    .watermark { position: absolute; bottom: 20px; right: 20px; opacity: 0.5; }
-    @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+    body { 
+        background: #000; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        margin: 0; 
+        color: #fff; 
+        font-family: sans-serif; 
+        overflow: hidden; 
+    }
+    .container {
+        text-align: center;
+        position: relative;
+        width: 90%;
+        max-width: 1200px;
+    }
+    .food-image {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 10px 50px rgba(230, 126, 34, 0.5);
+        margin-bottom: 30px;
+        animation: fadeZoom 3s ease-in-out infinite alternate;
+    }
+    .text-content {
+        animation: slideUp 2s ease-out;
+    }
+    h1 { 
+        font-size: 60px; 
+        text-transform: uppercase; 
+        color: #e67e22; 
+        text-shadow: 0 0 20px #e67e22; 
+        margin: 10px 0;
+    }
+    p { 
+        font-size: 24px; 
+        margin-top: 15px;
+        color: #ecf0f1;
+    }
+    .watermark { 
+        position: absolute; 
+        bottom: 20px; 
+        right: 20px; 
+        opacity: 0.5;
+        font-size: 14px;
+    }
+    @keyframes fadeZoom { 
+        from { 
+            transform: scale(0.98); 
+            opacity: 0.9;
+        } 
+        to { 
+            transform: scale(1.02); 
+            opacity: 1;
+        } 
+    }
+    @keyframes slideUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 </style>
 </head>
 <body>
-    <div class="slide">
-        <h1>MAC & CHEESE</h1>
-        <p>Creamy three-cheese blend with breadcrumb topping.</p>
+    <div class="container">
+        <img src="https://source.unsplash.com/800x600/?cheese,food,restaurant" alt="MAC & CHEESE" class="food-image" />
+        <div class="text-content">
+            <h1>MAC & CHEESE</h1>
+            <p>Creamy three-cheese blend with breadcrumb topping</p>
+        </div>
     </div>
     <div class="watermark">FIFOX PRODUCTION #21</div>
 </body>
