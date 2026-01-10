@@ -1,0 +1,107 @@
+.fox-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-top: 4px solid;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.fox-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.fox-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fox-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.fox-info {
+  flex: 1;
+}
+
+.fox-name {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.fox-role {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.fox-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.fox-description {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.fox-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.85rem;
+}
+
+.fox-age {
+  color: #888;
+  font-weight: 500;
+}
+
+.fox-ears {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.fox-card-footer {
+  margin-top: 1rem;
+}
+
+.fox-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fox-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
