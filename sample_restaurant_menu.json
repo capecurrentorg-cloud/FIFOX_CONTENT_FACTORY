@@ -1,0 +1,100 @@
+{
+  "restaurant_name": "The Golden Fox Bistro",
+  "tagline": "Farm-to-Table Coastal Cuisine",
+  "categories": {
+    "appetizers": [
+      {
+        "name": "Crispy Fox Wings",
+        "description": "Spicy buffalo wings with blue cheese dip",
+        "price": 12.99,
+        "tags": ["spicy", "popular"]
+      },
+      {
+        "name": "Garden Fresh Bruschetta",
+        "description": "Heirloom tomatoes, basil, garlic on toasted baguette",
+        "price": 9.99,
+        "tags": ["vegetarian"]
+      },
+      {
+        "name": "Coastal Calamari",
+        "description": "Lightly fried with lemon aioli",
+        "price": 14.99,
+        "tags": ["seafood"]
+      }
+    ],
+    "entrees": [
+      {
+        "name": "Grilled Atlantic Salmon",
+        "description": "Wild-caught salmon with seasonal vegetables and lemon butter",
+        "price": 26.99,
+        "tags": ["seafood", "gluten-free", "signature"]
+      },
+      {
+        "name": "Fox's Famous Burger",
+        "description": "8oz grass-fed beef, aged cheddar, bacon, special sauce",
+        "price": 16.99,
+        "tags": ["popular"]
+      },
+      {
+        "name": "Tuscan Chicken Pasta",
+        "description": "Grilled chicken, sun-dried tomatoes, spinach in cream sauce",
+        "price": 19.99,
+        "tags": ["pasta"]
+      },
+      {
+        "name": "Mushroom Risotto",
+        "description": "Creamy arborio rice with wild mushrooms and truffle oil",
+        "price": 18.99,
+        "tags": ["vegetarian", "signature"]
+      }
+    ],
+    "desserts": [
+      {
+        "name": "Chocolate Lava Cake",
+        "description": "Warm chocolate cake with vanilla ice cream",
+        "price": 8.99,
+        "tags": ["popular"]
+      },
+      {
+        "name": "Lemon Cheesecake",
+        "description": "House-made with graham cracker crust",
+        "price": 7.99,
+        "tags": []
+      }
+    ],
+    "beverages": [
+      {
+        "name": "House Wines",
+        "description": "Red, White, or Rosé by the glass",
+        "price": 9.00,
+        "tags": []
+      },
+      {
+        "name": "Craft Beers",
+        "description": "Rotating selection of local brews",
+        "price": 7.00,
+        "tags": []
+      },
+      {
+        "name": "Signature Cocktails",
+        "description": "Ask your server for today's specials",
+        "price": 12.00,
+        "tags": ["popular"]
+      }
+    ]
+  },
+  "hours": {
+    "monday": "Closed",
+    "tuesday": "4:00 PM - 10:00 PM",
+    "wednesday": "4:00 PM - 10:00 PM",
+    "thursday": "4:00 PM - 10:00 PM",
+    "friday": "4:00 PM - 11:00 PM",
+    "saturday": "12:00 PM - 11:00 PM",
+    "sunday": "12:00 PM - 9:00 PM"
+  },
+  "contact": {
+    "phone": "(555) 123-4567",
+    "email": "info@goldenfoxbistro.com",
+    "address": "123 Harbor Street, Coastal City, ST 12345"
+  }
+}
