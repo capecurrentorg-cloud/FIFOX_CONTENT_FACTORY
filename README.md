@@ -2062,6 +2062,73 @@ Output as a grid or individual portraits. Each must be clearly distinguishable.
 
 ---
 
+## 🖼️ AVATAR SYSTEM
+
+The FIFOX system includes a complete avatar management system for all 13 agents. Each agent has a profile picture that can be used in the Command Center, social media posts, and marketing materials.
+
+### Quick Setup
+
+1. **Generate Avatars:**
+   - Use the avatar generation prompt above with AI tools (Gemini, Midjourney, DALL-E, etc.)
+   - Generate all 13 fox agents with their unique characteristics
+
+2. **Place Avatar Files:**
+   - Save images in the `avatars/` directory
+   - Use naming convention: `{agent-name}.png` (e.g., `mara.png`, `rhea.png`)
+   - Supported formats: PNG, JPG, JPEG, WEBP
+
+3. **Validate Setup:**
+   ```bash
+   python setup_avatars.py
+   ```
+   This will:
+   - Check that all 13 avatars are present
+   - Generate an HTML gallery page (`fox_gallery.html`)
+   - Display setup instructions for any missing avatars
+
+4. **View Gallery:**
+   - Open `fox_gallery.html` in your browser
+   - See all 13 FIFOX agents with their avatars
+
+### Avatar Configuration
+
+Avatar paths and metadata are stored in `agent_avatars.json`:
+- Each agent has a mapped avatar path
+- Includes role, color theme, and ear color
+- Used by Command Center and content generation tools
+
+### Directory Structure
+
+```
+avatars/
+├── README.md              # Detailed avatar instructions
+├── mara.png              # Mara - Phone Orders
+├── rhea.png              # Rhea - Reservations
+├── vera.png              # Vera - Quality Control
+├── dara.png              # Dara - Content Strategy
+├── lara.png              # Lara - Kitchen Operations
+├── tira.png              # Tira - TikTok
+├── tora.png              # Tora - Twitter/X
+├── sara.png              # Sara - Snapchat
+├── kara.png              # Kara - Facebook
+├── iara.png              # IaRA - Instagram
+├── gara.png              # Gara - Pinterest/LinkedIn
+├── fara.png              # Fara - Copywriter
+└── bara.png              # Bara - YouTube
+```
+
+### Usage
+
+Once avatars are set up:
+- **Command Center**: Shows agent avatars in the dashboard
+- **Social Posts**: Include agent profile pictures in content
+- **Marketing**: Use in promotional materials
+- **Documentation**: Visual reference for team roles
+
+For detailed instructions, see: [`avatars/README.md`](avatars/README.md)
+
+---
+
 ## ⚠️ CRITICAL SPELLING RULES
 
 **NEVER MISSPELL THESE:**
