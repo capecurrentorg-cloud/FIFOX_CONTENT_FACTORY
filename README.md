@@ -34,6 +34,9 @@ FIFOX_CONTENT_FACTORY/
 │   ├── phone_agent_config.json        # Agent configuration
 │   └── setup_phone_agent.py           # Setup script
 │
+├── Customer Engagement (Rhea)/
+│   └── CUSTOMER_ENGAGEMENT_SETUP.md   # Reservations & rewards setup
+│
 └── Content Generators/
     ├── generate_restaurant_content.py  # Generate video scripts & HTML
     ├── generate_images.py             # Add images to videos
@@ -73,7 +76,26 @@ Automated phone system for restaurants:
 - Custom Twilio + OpenAI
 - See [PHONE_AGENT_SETUP.md](PHONE_AGENT_SETUP.md) for details
 
-### 3. Restaurant Menu System
+### 3. Reservation & Customer Appreciation (Rhea)
+
+Automated customer relationship and reward system:
+- **Reservation Management** - Book and confirm reservations
+- **Birthday Tracking** - Send free dessert offers on birthdays
+- **Anniversary Rewards** - Free appetizer for dining anniversaries
+- **Social Media Monitoring** - Track mentions, reviews, and engagement
+- **Loyalty Program** - Automatic rewards for frequent visitors
+- **Personality:** Gracious, elegant, remembers every customer
+
+**Features:**
+- Automatic birthday/anniversary emails
+- Customer preference tracking
+- Review response automation
+- VIP customer identification
+- Social media engagement
+
+**Setup:** See [CUSTOMER_ENGAGEMENT_SETUP.md](CUSTOMER_ENGAGEMENT_SETUP.md) for details
+
+### 4. Restaurant Menu System
 
 JSON-based menu management:
 - Appetizers, Entrees, Desserts, Beverages
@@ -81,7 +103,7 @@ JSON-based menu management:
 - Dietary tags
 - Hours and contact info
 
-### 4. Social Media Content Generator
+### 5. Social Media Content Generator
 
 Automated post generation:
 - Menu item highlights
@@ -200,6 +222,7 @@ Professional portrait photo of a 34 year old Nigerian-American woman with realis
 - **Total Video Ads:** 30 ✓
 - **Menu System:** Ready ✓
 - **Phone Agent (Mara):** Configuration ready ✓
+- **Customer Engagement (Rhea):** Setup guide ready ✓
 - **Content Generators:** Operational ✓
 - **GitHub Pages:** Live ✓
 
