@@ -2066,29 +2066,47 @@ Output as a grid or individual portraits. Each must be clearly distinguishable.
 
 The FIFOX system includes a complete avatar management system for all 13 agents. Each agent has a profile picture that can be used in the Command Center, social media posts, and marketing materials.
 
-### Quick Setup
+### ⚡ Quick Start (Easiest Way)
 
-1. **Generate Avatars:**
-   - Use the avatar generation prompt above with AI tools (Gemini, Midjourney, DALL-E, etc.)
-   - Generate all 13 fox agents with their unique characteristics
+Create placeholder avatars instantly, then replace them later with AI-generated ones:
 
-2. **Place Avatar Files:**
-   - Save images in the `avatars/` directory
-   - Use naming convention: `{agent-name}.png` (e.g., `mara.png`, `rhea.png`)
-   - Supported formats: PNG, JPG, JPEG, WEBP
+```bash
+python setup_avatars.py --placeholders
+```
 
-3. **Validate Setup:**
+This creates colorful placeholder avatars for all 13 agents in seconds! View them in `fox_gallery.html`.
+
+### 📸 Generate AI Avatars (Optional)
+
+1. **Get the Prompt:**
+   - Use the avatar generation prompt below (SINGLE PROMPT FOR ALL 13 FOXES)
+   - Copy the complete prompt
+
+2. **Generate with AI:**
+   - Use: Gemini, Midjourney, DALL-E, or Leonardo.ai
+   - Save images as PNG files
+
+3. **Replace Placeholders:**
+   - Place images in `avatars/` directory
+   - Use naming: `mara.png`, `rhea.png`, etc.
+
+4. **Validate:**
    ```bash
    python setup_avatars.py
    ```
-   This will:
-   - Check that all 13 avatars are present
-   - Generate an HTML gallery page (`fox_gallery.html`)
-   - Display setup instructions for any missing avatars
 
-4. **View Gallery:**
-   - Open `fox_gallery.html` in your browser
-   - See all 13 FIFOX agents with their avatars
+### 🎨 Avatar Commands
+
+```bash
+# Create placeholder avatars (fastest way to start)
+python setup_avatars.py --placeholders
+
+# Check status and generate gallery
+python setup_avatars.py
+
+# Show all options
+python setup_avatars.py --help
+```
 
 ### Avatar Configuration
 

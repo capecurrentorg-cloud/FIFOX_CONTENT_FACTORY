@@ -2,6 +2,22 @@
 
 This directory contains avatar profile pictures for all 13 FIFOX agents.
 
+## ⚡ QUICK START (Easiest Way)
+
+Create placeholder avatars instantly:
+
+```bash
+cd ..  # Go to repository root if you're in avatars/
+python setup_avatars.py --placeholders
+```
+
+✅ **Done!** All 13 agents now have colorful placeholder avatars.  
+📱 Open `fox_gallery.html` to see them.
+
+Replace placeholders with AI-generated avatars anytime (see below).
+
+---
+
 ## 🦊 Avatar Naming Convention
 
 Each avatar should be named using the following format:

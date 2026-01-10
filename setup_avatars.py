@@ -2,10 +2,17 @@
 """
 FIFOX Avatar Setup Script
 Validates avatar presence, generates HTML gallery, and provides setup instructions
+
+USAGE:
+    python setup_avatars.py              # Check status and generate gallery
+    python setup_avatars.py --placeholders  # Create placeholder avatars
+    python setup_avatars.py --help       # Show this help
 """
 
 import os
+import sys
 import json
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -324,43 +331,168 @@ def generate_html_gallery(found_avatars):
     print(f"   Open in browser to view all {len(found_avatars)} fox agents")
 
 
+def create_placeholder_avatars():
+    """Create simple SVG placeholder avatars for all agents"""
+    avatars_dir = Path("avatars")
+    avatars_dir.mkdir(exist_ok=True)
+    
+    print("\n🎨 Creating placeholder avatars...")
+    print("=" * 60)
+    
+    # Color mapping for each agent
+    colors = {
+        "mara": "#FF8C00",  # Orange
+        "rhea": "#FF69B4",  # Pink
+        "vera": "#50C878",  # Emerald Green
+        "dara": "#4169E1",  # Royal Blue
+        "lara": "#FF4500",  # Red-Orange
+        "tira": "#FF1493",  # Black and Pink (using pink)
+        "tora": "#00CED1",  # Black and Cyan (using cyan)
+        "sara": "#FFD700",  # Bright Yellow
+        "kara": "#DAA520",  # Golden Yellow
+        "iara": "#9370DB",  # Purple and Magenta
+        "gara": "#FF69B4",  # Pink and Orange
+        "fara": "#000080",  # Navy Blue
+        "bara": "#DC143C"   # Red
+    }
+    
+    created_count = 0
+    skipped_count = 0
+    
+    for agent in AGENTS:
+        agent_file = agent["file"]
+        base_name = Path(agent_file).stem
+        avatar_path = avatars_dir / agent_file
+        
+        # Skip if avatar already exists (any format)
+        if any((avatars_dir / f"{base_name}{ext}").exists() for ext in SUPPORTED_FORMATS):
+            print(f"⊘ {agent['name']:8} - Skipped (already exists)")
+            skipped_count += 1
+            continue
+        
+        # Create SVG placeholder
+        color = colors.get(base_name, "#999999")
+        initials = agent["name"][:2].upper()
+        
+        svg_content = f'''<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="{color}"/>
+  <text x="256" y="300" font-size="200" font-family="Arial, sans-serif" 
+        text-anchor="middle" fill="white" font-weight="bold">{initials}</text>
+  <text x="256" y="380" font-size="40" font-family="Arial, sans-serif" 
+        text-anchor="middle" fill="white" opacity="0.9">{agent["name"]}</text>
+</svg>'''
+        
+        # Save as PNG-named file with SVG content (browsers will render it)
+        with open(avatar_path, 'w') as f:
+            f.write(svg_content)
+        
+        print(f"✓ {agent['name']:8} - Created placeholder")
+        created_count += 1
+    
+    print("=" * 60)
+    if created_count > 0:
+        print(f"✅ Created {created_count} placeholder avatar(s)")
+    if skipped_count > 0:
+        print(f"⊘ Skipped {skipped_count} existing avatar(s)")
+    
+    if created_count > 0:
+        print("\n💡 TIP: Replace placeholders with AI-generated avatars")
+        print("   See README.md for the avatar generation prompt")
+    
+    return created_count
+
+
 def display_instructions():
     """Display setup instructions"""
     print("\n" + "=" * 60)
-    print("📖 AVATAR SETUP INSTRUCTIONS")
+    print("📖 QUICK START GUIDE")
     print("=" * 60)
     print("""
-To generate avatars for missing agents:
+🚀 FASTEST WAY TO GET STARTED:
 
-1. OPTION A - Generate with AI Tools:
-   • Open the main README.md
-   • Find the "SINGLE PROMPT FOR ALL 13 FOXES" section
+   python setup_avatars.py --placeholders
+
+   This creates placeholder avatars for all 13 agents instantly!
+   Then replace them with AI-generated avatars when ready.
+
+📸 GENERATE REAL AVATARS:
+
+1. Get the AI Prompt:
+   • Open README.md
+   • Find "SINGLE PROMPT FOR ALL 13 FOXES"
    • Copy the complete prompt
-   • Use with: Gemini, Midjourney, Leonardo.ai, or DALL-E
-   • Save generated images as PNG files
 
-2. OPTION B - Use Existing Images:
-   • Rename images to match: {agent-name}.png
-   • Ensure format is PNG, JPG, JPEG, or WEBP
+2. Generate with AI:
+   • Use: Gemini, Midjourney, Leonardo.ai, or DALL-E
+   • Save as PNG files with names: mara.png, rhea.png, etc.
    • Place in avatars/ directory
 
-3. Validate Setup:
+3. Validate:
    • Run: python setup_avatars.py
-   • Check fox_gallery.html in browser
-   • Verify all 13 agents appear correctly
+   • Open fox_gallery.html to view
 
-4. Integration:
-   • Avatars automatically link to Command Center
-   • Use in social media posts
-   • Include in marketing materials
+📝 MORE OPTIONS:
+
+   python setup_avatars.py --help       # Show all commands
+   python setup_avatars.py              # Check status
 
 For detailed instructions, see: avatars/README.md
 """)
 
 
+def parse_arguments():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(
+        description="FIFOX Avatar Setup - Manage avatars for all 13 agents",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python setup_avatars.py                 # Check status and generate gallery
+  python setup_avatars.py --placeholders  # Create placeholder avatars
+  python setup_avatars.py --help          # Show this help
+
+For more information, see avatars/README.md
+        """
+    )
+    
+    parser.add_argument(
+        '--placeholders',
+        action='store_true',
+        help='Create placeholder avatars for all missing agents'
+    )
+    
+    parser.add_argument(
+        '--force-placeholders',
+        action='store_true',
+        help='Create placeholders even if avatars already exist (overwrites)'
+    )
+    
+    return parser.parse_args()
+
+
 def main():
     """Main setup function"""
+    args = parse_arguments()
+    
     print("\n")
+    print("🦊 FIFOX AVATAR SETUP")
+    print("=" * 60)
+    
+    # Handle placeholder creation
+    if args.placeholders or args.force_placeholders:
+        if args.force_placeholders:
+            # Remove existing avatars first
+            avatars_dir = Path("avatars")
+            if avatars_dir.exists():
+                for agent in AGENTS:
+                    base_name = Path(agent["file"]).stem
+                    for ext in SUPPORTED_FORMATS:
+                        avatar_file = avatars_dir / f"{base_name}{ext}"
+                        if avatar_file.exists():
+                            avatar_file.unlink()
+        
+        created = create_placeholder_avatars()
+        print()
     
     # Validate avatars
     all_present, found_avatars, missing_avatars = validate_avatars()
@@ -369,8 +501,9 @@ def main():
     if found_avatars:
         generate_html_gallery(found_avatars)
     
-    # Display instructions
-    display_instructions()
+    # Display instructions if avatars are missing
+    if not all_present:
+        display_instructions()
     
     # Summary
     print("=" * 60)
@@ -378,8 +511,8 @@ def main():
         print("🎉 Setup Complete! All 13 FIFOX agents have avatars!")
         print(f"   View the gallery: fox_gallery.html")
     else:
-        print(f"⚠️  Setup Incomplete: {len(missing_avatars)} avatar(s) still needed")
-        print(f"   Follow instructions above to complete setup")
+        print(f"⚠️  {len(missing_avatars)} avatar(s) still needed")
+        print(f"\n💡 Quick fix: python setup_avatars.py --placeholders")
     print("=" * 60)
     print()
 
