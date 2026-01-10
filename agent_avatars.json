@@ -1,0 +1,95 @@
+{
+  "agents": [
+    {
+      "name": "Mara",
+      "role": "Phone Orders & Reservations",
+      "avatar_path": "avatars/mara.png",
+      "color": "orange",
+      "ear_color": "ORANGE"
+    },
+    {
+      "name": "Rhea",
+      "role": "Reservations & Customer Appreciation",
+      "avatar_path": "avatars/rhea.png",
+      "color": "pink",
+      "ear_color": "PINK"
+    },
+    {
+      "name": "Vera",
+      "role": "Quality Control & Verification",
+      "avatar_path": "avatars/vera.png",
+      "color": "emerald green",
+      "ear_color": "EMERALD GREEN"
+    },
+    {
+      "name": "Dara",
+      "role": "Content Strategy Director",
+      "avatar_path": "avatars/dara.png",
+      "color": "royal blue",
+      "ear_color": "ROYAL BLUE"
+    },
+    {
+      "name": "Lara",
+      "role": "Kitchen Operations & Inventory",
+      "avatar_path": "avatars/lara.png",
+      "color": "red-orange",
+      "ear_color": "RED-ORANGE"
+    },
+    {
+      "name": "Tira",
+      "role": "TikTok Content Creator",
+      "avatar_path": "avatars/tira.png",
+      "color": "black and pink",
+      "ear_color": "BLACK AND PINK"
+    },
+    {
+      "name": "Tora",
+      "role": "Twitter/X Content Creator",
+      "avatar_path": "avatars/tora.png",
+      "color": "black and cyan",
+      "ear_color": "BLACK AND CYAN"
+    },
+    {
+      "name": "Sara",
+      "role": "Snapchat Content Creator",
+      "avatar_path": "avatars/sara.png",
+      "color": "bright yellow",
+      "ear_color": "BRIGHT YELLOW"
+    },
+    {
+      "name": "Kara",
+      "role": "Facebook Content Creator",
+      "avatar_path": "avatars/kara.png",
+      "color": "golden yellow",
+      "ear_color": "GOLDEN YELLOW"
+    },
+    {
+      "name": "IaRA",
+      "role": "Instagram Content Creator",
+      "avatar_path": "avatars/iara.png",
+      "color": "purple and magenta",
+      "ear_color": "PURPLE AND MAGENTA"
+    },
+    {
+      "name": "Gara",
+      "role": "Pinterest & LinkedIn Content Creator",
+      "avatar_path": "avatars/gara.png",
+      "color": "pink and orange",
+      "ear_color": "PINK AND ORANGE"
+    },
+    {
+      "name": "Fara",
+      "role": "Copywriter",
+      "avatar_path": "avatars/fara.png",
+      "color": "navy blue",
+      "ear_color": "NAVY BLUE"
+    },
+    {
+      "name": "Bara",
+      "role": "YouTube Content Creator",
+      "avatar_path": "avatars/bara.png",
+      "color": "red",
+      "ear_color": "RED"
+    }
+  ]
+}
