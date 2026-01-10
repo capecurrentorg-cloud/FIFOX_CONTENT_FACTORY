@@ -5,394 +5,245 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #0a0a0a;
-        color: #fff;
-        overflow: hidden;
-    }
-    
-    .header {
-        background: linear-gradient(135deg, #e67e22, #f39c12);
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-    
-    .header h1 {
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .header .time {
-        font-size: 18px;
-        opacity: 0.9;
-    }
-    
-    .dashboard {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1.5fr;
-        height: calc(100vh - 70px);
-        gap: 0;
-    }
-    
-    .panel {
-        padding: 20px;
-        overflow-y: auto;
-        border-right: 1px solid #333;
-    }
-    
-    .panel:last-child {
-        border-right: none;
-    }
-    
-    .panel-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #e67e22;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    /* Active Orders Panel */
-    .order-card {
-        background: #1a1a1a;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-left: 4px solid #e67e22;
-        transition: transform 0.2s;
-    }
-    
-    .order-card:hover {
-        transform: translateX(5px);
-        background: #252525;
-    }
-    
-    .order-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-    
-    .order-number {
-        font-weight: bold;
-        font-size: 16px;
-        color: #e67e22;
-    }
-    
-    .order-time {
-        color: #888;
-        font-size: 14px;
-    }
-    
-    .customer-name {
-        font-size: 14px;
-        margin-bottom: 5px;
-        color: #ccc;
-    }
-    
-    .order-items {
-        font-size: 13px;
-        color: #999;
-        margin-bottom: 10px;
-    }
-    
-    .order-status {
-        display: inline-block;
-        padding: 5px 12px;
-        border-radius: 15px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: #fff; overflow: hidden; }
+    .header { background: linear-gradient(135deg, #e67e22, #f39c12); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    .header h1 { font-size: 24px; display: flex; align-items: center; gap: 10px; }
+    .header .time { font-size: 18px; opacity: 0.9; }
+    .dashboard { display: grid; grid-template-columns: 1fr 1fr 1.5fr; height: calc(100vh - 70px); gap: 0; }
+    .panel { padding: 20px; overflow-y: auto; border-right: 1px solid #333; }
+    .panel:last-child { border-right: none; }
+    .panel-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #e67e22; text-transform: uppercase; letter-spacing: 1px; }
+    .order-card { background: #1a1a1a; border-radius: 10px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #e67e22; transition: transform 0.2s; cursor: pointer; }
+    .order-card:hover { transform: translateX(5px); background: #252525; }
+    .order-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .order-number { font-weight: bold; font-size: 16px; color: #e67e22; }
+    .order-time { color: #888; font-size: 14px; }
+    .customer-name { font-size: 14px; margin-bottom: 5px; color: #ccc; }
+    .order-items { font-size: 13px; color: #999; margin-bottom: 10px; }
+    .order-status { display: inline-block; padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; }
     .status-pending { background: #3498db; }
     .status-preparing { background: #f39c12; }
     .status-ready { background: #2ecc71; }
     .status-delivery { background: #9b59b6; }
-    
-    /* Timer Panel */
-    .timer-item {
-        background: #1a1a1a;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    .timer-order {
-        font-weight: bold;
-        min-width: 60px;
-    }
-    
-    .timer-bar {
-        flex: 1;
-        height: 20px;
-        background: #333;
-        border-radius: 10px;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .timer-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #2ecc71, #f39c12, #e74c3c);
-        transition: width 1s linear;
-    }
-    
-    .timer-text {
-        font-size: 14px;
-        color: #e67e22;
-        font-weight: bold;
-        min-width: 50px;
-        text-align: right;
-    }
-    
-    .timer-stats {
-        background: #1a1a1a;
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 20px;
-        text-align: center;
-    }
-    
-    .timer-stats .stat {
-        margin: 10px 0;
-    }
-    
-    .timer-stats .stat-value {
-        font-size: 24px;
-        color: #e67e22;
-        font-weight: bold;
-    }
-    
-    /* Map Panel */
-    #map {
-        width: 100%;
-        height: calc(100% - 60px);
-        border-radius: 10px;
-        background: #1a1a1a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666;
-    }
-    
-    .map-placeholder {
-        text-align: center;
-    }
-    
-    .map-placeholder p {
-        margin-top: 10px;
-        font-size: 14px;
-    }
-    
-    /* Demo banner */
-    .demo-banner {
-        background: #e74c3c;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
+    .timer-item { background: #1a1a1a; border-radius: 10px; padding: 12px; margin-bottom: 12px; border-left: 3px solid #f39c12; }
+    .timer-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .timer-order { font-weight: bold; color: #f39c12; }
+    .timer-time { font-size: 20px; font-weight: bold; font-family: 'Courier New', monospace; }
+    .timer-warning { border-left-color: #e74c3c; }
+    .timer-warning .timer-time { color: #e74c3c; }
+    .generator-section { margin-bottom: 25px; }
+    .generator-section h3 { font-size: 16px; color: #3498db; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gen-button { background: linear-gradient(135deg, #3498db, #2980b9); border: none; padding: 12px; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 13px; }
+    .gen-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+    .gen-button.instagram { background: linear-gradient(135deg, #e056fd, #d83a9f); }
+    .gen-button.tiktok { background: linear-gradient(135deg, #000, #fe2c55); }
+    .gen-button.facebook { background: linear-gradient(135deg, #3b5998, #2d4373); }
+    .gen-button.youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+    .fox-team { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .fox-card { background: #1a1a1a; border-radius: 8px; padding: 10px; text-align: center; transition: transform 0.2s; cursor: pointer; border: 2px solid transparent; }
+    .fox-card:hover { transform: scale(1.05); border-color: #e67e22; }
+    .fox-icon { font-size: 24px; margin-bottom: 5px; }
+    .fox-name { font-size: 11px; font-weight: bold; color: #e67e22; }
+    .fox-role { font-size: 9px; color: #888; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .stat-card { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; }
+    .stat-number { font-size: 32px; font-weight: bold; color: #2ecc71; }
+    .stat-label { font-size: 12px; color: #888; margin-top: 5px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+    .modal-content { background: #1a1a1a; padding: 30px; border-radius: 15px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-close { background: #e74c3c; border: none; color: white; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    .modal-preview { background: #0a0a0a; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    .modal-caption { font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+    .modal-insight { background: #2c3e50; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .modal-buttons { display: flex; gap: 10px; }
+    .modal-button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+    .modal-button:hover { transform: translateY(-2px); }
+    .button-approve { background: #2ecc71; color: white; }
+    .button-regenerate { background: #f39c12; color: white; }
 </style>
 </head>
 <body>
-    <div class="demo-banner">
-        🚧 DEMO MODE - Connect to Toast POS & Google Maps API for live data
-    </div>
-    
     <div class="header">
-        <h1>🦊 FIFOX COMMAND CENTER</h1>
-        <div class="time" id="current-time">12:45 PM</div>
+        <h1>🦊 FIFOX Command Center</h1>
+        <div class="time" id="currentTime">--:--:--</div>
     </div>
-    
     <div class="dashboard">
-        <!-- Active Orders Panel -->
         <div class="panel">
-            <div class="panel-title">Active Orders (5)</div>
-            
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-number">#1247</span>
-                    <span class="order-time">🕐 12:34</span>
-                </div>
-                <div class="customer-name">John Doe - (555) 123-4567</div>
-                <div class="order-items">
-                    1x Ribeye Steak ($26.99)<br>
-                    1x Caesar Salad ($9.99)
-                </div>
-                <span class="order-status status-preparing">🔥 PREPARING</span>
+            <div class="panel-title">📋 Active Orders</div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-number" id="activeCount">3</div><div class="stat-label">Active</div></div>
+                <div class="stat-card"><div class="stat-number" id="todayCount">47</div><div class="stat-label">Today</div></div>
             </div>
-            
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-number">#1248</span>
-                    <span class="order-time">🕐 12:28</span>
+            <div id="ordersList">
+                <div class="order-card">
+                    <div class="order-header"><span class="order-number">#1234</span><span class="order-time">5 min ago</span></div>
+                    <div class="customer-name">Sarah Johnson - (555) 123-4567</div>
+                    <div class="order-items">• Signature Burger<br>• Caesar Salad<br>• Strawberry Lemonade</div>
+                    <span class="order-status status-preparing">Preparing</span>
                 </div>
-                <div class="customer-name">Jane Smith - (555) 234-5678</div>
-                <div class="order-items">
-                    1x Grilled Salmon ($22.99)<br>
-                    1x House Wine ($12.00)
+                <div class="order-card">
+                    <div class="order-header"><span class="order-number">#1233</span><span class="order-time">12 min ago</span></div>
+                    <div class="customer-name">Mike Chen - (555) 987-6543</div>
+                    <div class="order-items">• Ribeye Steak<br>• Garlic Mashed Potatoes<br>• Red Wine</div>
+                    <span class="order-status status-ready">Ready</span>
                 </div>
-                <span class="order-status status-ready">✓ READY</span>
-            </div>
-            
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-number">#1249</span>
-                    <span class="order-time">🕐 12:20</span>
-                </div>
-                <div class="customer-name">Mike Johnson - (555) 345-6789</div>
-                <div class="order-items">
-                    2x Signature Burger ($31.98)<br>
-                    1x Chicken Wings ($14.99)
-                </div>
-                <span class="order-status status-delivery">🚗 OUT FOR DELIVERY</span>
-            </div>
-            
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-number">#1250</span>
-                    <span class="order-time">🕐 12:15</span>
-                </div>
-                <div class="customer-name">Sarah Williams - (555) 456-7890</div>
-                <div class="order-items">
-                    1x Lobster Roll ($28.99)<br>
-                    1x Mac & Cheese ($16.99)
-                </div>
-                <span class="order-status status-preparing">🔥 PREPARING</span>
-            </div>
-            
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-number">#1251</span>
-                    <span class="order-time">🕐 12:40</span>
-                </div>
-                <div class="customer-name">Tom Brown - (555) 567-8901</div>
-                <div class="order-items">
-                    1x Fish Tacos ($15.99)<br>
-                    1x Greek Salad ($11.99)
-                </div>
-                <span class="order-status status-pending">⏳ PENDING</span>
-            </div>
-        </div>
-        
-        <!-- Timer Panel -->
-        <div class="panel">
-            <div class="panel-title">Order Timers</div>
-            
-            <div class="timer-item">
-                <span class="timer-order">#1247</span>
-                <div class="timer-bar">
-                    <div class="timer-fill" style="width: 53%;"></div>
-                </div>
-                <span class="timer-text">8 min</span>
-            </div>
-            
-            <div class="timer-item">
-                <span class="timer-order">#1248</span>
-                <div class="timer-bar">
-                    <div class="timer-fill" style="width: 80%;"></div>
-                </div>
-                <span class="timer-text">12 min</span>
-            </div>
-            
-            <div class="timer-item">
-                <span class="timer-order">#1249</span>
-                <div class="timer-bar">
-                    <div class="timer-fill" style="width: 95%;"></div>
-                </div>
-                <span class="timer-text">18 min</span>
-            </div>
-            
-            <div class="timer-item">
-                <span class="timer-order">#1250</span>
-                <div class="timer-bar">
-                    <div class="timer-fill" style="width: 100%;"></div>
-                </div>
-                <span class="timer-text">22 min</span>
-            </div>
-            
-            <div class="timer-item">
-                <span class="timer-order">#1251</span>
-                <div class="timer-bar">
-                    <div class="timer-fill" style="width: 33%;"></div>
-                </div>
-                <span class="timer-text">5 min</span>
-            </div>
-            
-            <div class="timer-stats">
-                <div class="stat">
-                    <div>Average Time</div>
-                    <div class="stat-value">13 min</div>
-                </div>
-                <div class="stat">
-                    <div>Total Today</div>
-                    <div class="stat-value">47 orders</div>
+                <div class="order-card">
+                    <div class="order-header"><span class="order-number">#1232</span><span class="order-time">18 min ago</span></div>
+                    <div class="customer-name">Emma Davis - (555) 456-7890</div>
+                    <div class="order-items">• Grilled Salmon<br>• Asparagus<br>• Sparkling Water</div>
+                    <span class="order-status status-delivery">Out for Delivery</span>
                 </div>
             </div>
         </div>
-        
-        <!-- Map Panel -->
         <div class="panel">
-            <div class="panel-title">Delivery Map</div>
-            <div id="map">
-                <div class="map-placeholder">
-                    <div style="font-size: 48px;">🗺️</div>
-                    <p>Google Maps integration</p>
-                    <p style="font-size: 12px; margin-top: 20px;">
-                        Add your Google Maps API key to display<br>
-                        live delivery locations and routes
-                    </p>
-                    <p style="margin-top: 20px; color: #e67e22;">
-                        📍 #1247 - 123 Main St<br>
-                        📍 #1248 - 456 Oak Ave<br>
-                        📍 #1249 - 789 Pine Rd<br>
-                        📍 #1250 - 321 Elm St
-                    </p>
+            <div class="panel-title">⏱️ Kitchen Timers</div>
+            <div id="timersList">
+                <div class="timer-item">
+                    <div class="timer-header"><span class="timer-order">Order #1234</span><span>🍔 Burger</span></div>
+                    <div class="timer-time" id="timer1">08:45</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-header"><span class="timer-order">Order #1233</span><span>🥩 Steak</span></div>
+                    <div class="timer-time" id="timer2">12:30</div>
+                </div>
+                <div class="timer-item timer-warning">
+                    <div class="timer-header"><span class="timer-order">Order #1230</span><span>🍕 Pizza</span></div>
+                    <div class="timer-time" id="timer3">02:15</div>
+                </div>
+            </div>
+            <div class="panel-title" style="margin-top: 30px;">🦊 Fox Team Status</div>
+            <div class="fox-team">
+                <div class="fox-card" style="border-color: #e67e22;"><div class="fox-icon">🦊</div><div class="fox-name">MARA</div><div class="fox-role">Phone</div></div>
+                <div class="fox-card" style="border-color: #e91e63;"><div class="fox-icon">🦊</div><div class="fox-name">RHEA</div><div class="fox-role">Reservations</div></div>
+                <div class="fox-card" style="border-color: #2ecc71;"><div class="fox-icon">🦊</div><div class="fox-name">VERA</div><div class="fox-role">Verifier</div></div>
+                <div class="fox-card" style="border-color: #3498db;"><div class="fox-icon">🦊</div><div class="fox-name">DARA</div><div class="fox-role">Overseer</div></div>
+                <div class="fox-card" style="border-color: #e74c3c;"><div class="fox-icon">🦊</div><div class="fox-name">LARA</div><div class="fox-role">Kitchen</div></div>
+                <div class="fox-card" style="border-color: #9b59b6;"><div class="fox-icon">🦊</div><div class="fox-name">IRA</div><div class="fox-role">Instagram</div></div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-title">🎨 Two-Click Content System</div>
+            <div class="generator-section">
+                <h3>📱 Instagram</h3>
+                <div class="button-grid">
+                    <button class="gen-button instagram" onclick="generatePost('instagram', 'post')">Generate Post</button>
+                    <button class="gen-button instagram" onclick="generatePost('instagram', 'story')">Generate Story</button>
+                    <button class="gen-button instagram" onclick="generatePost('instagram', 'reel')">Generate Reel</button>
+                    <button class="gen-button instagram" onclick="generatePost('instagram', 'carousel')">Generate Carousel</button>
+                </div>
+            </div>
+            <div class="generator-section">
+                <h3>🎵 TikTok</h3>
+                <div class="button-grid">
+                    <button class="gen-button tiktok" onclick="generatePost('tiktok', 'video')">Generate Video</button>
+                    <button class="gen-button tiktok" onclick="generatePost('tiktok', 'trending')">Trending Sound</button>
+                </div>
+            </div>
+            <div class="generator-section">
+                <h3>👥 Facebook</h3>
+                <div class="button-grid">
+                    <button class="gen-button facebook" onclick="generatePost('facebook', 'post')">Generate Post</button>
+                    <button class="gen-button facebook" onclick="generatePost('facebook', 'event')">Create Event</button>
+                </div>
+            </div>
+            <div class="generator-section">
+                <h3>📺 YouTube</h3>
+                <div class="button-grid">
+                    <button class="gen-button youtube" onclick="generatePost('youtube', 'short')">Generate Short</button>
+                    <button class="gen-button youtube" onclick="generatePost('youtube', 'video')">Generate Video</button>
+                </div>
+            </div>
+            <div class="generator-section">
+                <h3>👻 Snapchat</h3>
+                <div class="button-grid">
+                    <button class="gen-button" onclick="generatePost('snapchat', 'story')" style="background: linear-gradient(135deg, #fffc00, #f9d423);">Generate Story</button>
+                    <button class="gen-button" onclick="generatePost('snapchat', 'spotlight')" style="background: linear-gradient(135deg, #fffc00, #f9d423);">Generate Spotlight</button>
                 </div>
             </div>
         </div>
     </div>
-    
+    <div class="modal" id="contentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">📱 Content Preview</h2>
+                <button class="modal-close" onclick="closeModal()">✕ Close</button>
+            </div>
+            <div class="modal-preview">
+                <div id="modalImage" style="width: 100%; height: 300px; background: #2c3e50; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;"><span style="font-size: 48px;">🍔</span></div>
+                <div class="modal-caption" id="modalCaption">Remember your first burger with Dad? That feeling never gets old. 🍔❤️<br><br>#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats</div>
+            </div>
+            <div class="modal-insight"><strong>🔍 Dara's Insight:</strong><br><span id="modalInsight">Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes.</span></div>
+            <div style="background: #27ae60; padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center;"><strong>✅ VERA Verified</strong><br>Viral Score: <span id="modalScore">87%</span></div>
+            <div class="modal-buttons">
+                <button class="modal-button button-approve" onclick="approvePost()">✓ Approve & Prepare to Post</button>
+                <button class="modal-button button-regenerate" onclick="regeneratePost()">↻ Regenerate</button>
+            </div>
+        </div>
+    </div>
     <script>
-        // Update clock
-        function updateTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-US', { 
-                hour: 'numeric', 
-                minute: '2-digit',
-                hour12: true 
-            });
-            document.getElementById('current-time').textContent = timeStr;
+        function updateTime() { const now = new Date(); document.getElementById('currentTime').textContent = now.toLocaleTimeString(); }
+        setInterval(updateTime, 1000); updateTime();
+        function startTimer(id, startMinutes, startSeconds) {
+            let totalSeconds = startMinutes * 60 + startSeconds;
+            setInterval(() => {
+                if (totalSeconds <= 0) return;
+                totalSeconds--;
+                const mins = Math.floor(totalSeconds / 60); const secs = totalSeconds % 60;
+                document.getElementById(id).textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+                if (totalSeconds < 180) document.getElementById(id).closest('.timer-item').classList.add('timer-warning');
+            }, 1000);
         }
-        
-        setInterval(updateTime, 1000);
-        updateTime();
-        
-        // Simulate timer updates (demo)
-        setInterval(() => {
-            document.querySelectorAll('.timer-fill').forEach(fill => {
-                let width = parseInt(fill.style.width);
-                if (width < 100) {
-                    fill.style.width = (width + 1) + '%';
-                }
+        startTimer('timer1', 8, 45); startTimer('timer2', 12, 30); startTimer('timer3', 2, 15);
+        const contentExamples = {
+            instagram: {
+                post: { caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats", insight: "Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes.", score: 87 },
+                story: { caption: "Behind the scenes in our kitchen right now 👨‍🍳🔥\n\nSwipe up to order!", insight: "Stories with kitchen content get 34% more engagement. Best posted 11am-2pm.", score: 82 },
+                reel: { caption: "POV: You just walked into heaven 😍🍕\n\n#Reels #FoodPorn #PizzaLover #Satisfying", insight: "Reels using trending audio 'Good 4 U' seeing 2.3x normal reach. Recommend close-up food shots.", score: 91 },
+                carousel: { caption: "Our Top 5 Most Ordered Dishes (Slide to see why) 👉\n\n1️⃣ Signature Burger\n2️⃣ Grilled Salmon\n3️⃣ Ribeye Steak\n4️⃣ Caesar Salad\n5️⃣ Chocolate Lava Cake", insight: "Carousel posts get 3x more saves than single images. Perfect for driving repeat visits.", score: 85 }
+            },
+            tiktok: {
+                video: { caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull #SatisfyingVideo #FoodASMR", insight: "TikTok algorithm favoring food ASMR content. Cheese pull videos averaging 50k+ views.", score: 93 },
+                trending: { caption: "Making our famous burger to this sound cause why not 💅🍔 #Trending #BurgerTok", insight: "Current trending sound has 2.3M uses. Early adopters seeing 5x normal engagement.", score: 88 }
+            },
+            facebook: {
+                post: { caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nBring the whole family! Kids eat free on Tuesdays.\n\nReservations: (555) 123-4567\n\n📍 123 Main Street, Your City", insight: "Facebook users respond best to family-oriented promotions. Posts with location get 2x more clicks.", score: 79 },
+                event: { caption: "🎉 LIVE MUSIC NIGHT - This Friday!\n\nJoin us for great food, drinks, and entertainment.\n\n🎸 Band starts at 7 PM\n📅 Save the date!", insight: "Event posts get shared 4x more than regular posts. Create event listing for automatic reminders.", score: 84 }
+            },
+            youtube: {
+                short: { caption: "The secret to our perfect medium-rare steak 🥩🔥\n\n#Shorts #Cooking #SteakTok #ChefTips", insight: "YouTube Shorts under 30 seconds performing best. Recipe tips getting high retention.", score: 86 },
+                video: { caption: "FULL RECIPE: How We Make Our Signature Burger From Scratch\n\nIngredients in description! 🍔👨‍🍳", insight: "Long-form recipe videos averaging 8min watch time. Include timestamps in description.", score: 81 }
+            },
+            snapchat: {
+                story: { caption: "Order now through the link! Fresh out the oven 🔥", insight: "Snapchat users prefer authentic, unpolished content. Stories with 'right now' urgency perform best.", score: 77 },
+                spotlight: { caption: "Watch us make 100 burgers in 10 minutes ⚡🍔", insight: "Spotlight trending: fast-paced, impressive cooking feats. Time-lapse format recommended.", score: 83 }
+            }
+        };
+        let currentPlatform, currentType;
+        function generatePost(platform, type) {
+            currentPlatform = platform; currentType = type;
+            const content = contentExamples[platform][type];
+            const platformEmoji = { instagram: '📱', tiktok: '🎵', facebook: '👥', youtube: '📺', snapchat: '👻' };
+            document.getElementById('modalTitle').textContent = platformEmoji[platform] + ' ' + platform.toUpperCase() + ' - ' + type.toUpperCase() + ' Preview';
+            document.getElementById('modalCaption').innerHTML = content.caption.replace(/\n/g, '<br>');
+            document.getElementById('modalInsight').textContent = content.insight;
+            document.getElementById('modalScore').textContent = content.score + '%';
+            document.getElementById('contentModal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('contentModal').style.display = 'none'; }
+        function approvePost() {
+            const caption = document.getElementById('modalCaption').textContent;
+            navigator.clipboard.writeText(caption).then(() => {
+                alert('✅ Caption copied to clipboard!\n\nOpening ' + currentPlatform.toUpperCase() + '...\n\nJust paste and post! 🎉');
+                const urls = { instagram: 'https://www.instagram.com', tiktok: 'https://www.tiktok.com/upload', facebook: 'https://www.facebook.com', youtube: 'https://studio.youtube.com', snapchat: 'https://www.snapchat.com' };
+                window.open(urls[currentPlatform], '_blank');
+                closeModal();
             });
-        }, 2000);
+        }
+        function regeneratePost() { alert('↻ Regenerating with new angle...'); closeModal(); setTimeout(() => generatePost(currentPlatform, currentType), 500); }
+        document.getElementById('contentModal').addEventListener('click', (e) => { if (e.target.id === 'contentModal') closeModal(); });
     </script>
 </body>
 </html>
