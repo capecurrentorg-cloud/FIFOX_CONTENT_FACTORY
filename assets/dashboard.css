@@ -905,21 +905,40 @@ body {
 }
 
 .fox-agent-card {
-    background: #1a1a1a;
-    border-radius: 12px;
-    padding: 15px;
+    background: linear-gradient(135deg, #1a1a1a, #252525);
     border: 2px solid #333;
-    transition: all 0.3s ease;
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fox-agent-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.fox-agent-card:hover::before {
+    left: 100%;
 }
 
 .fox-agent-card:hover {
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, #252525, #2a2a2a);
     border-color: #e67e22;
-    box-shadow: 0 5px 20px rgba(230, 126, 34, 0.3);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(230, 126, 34, 0.4),
+                0 0 50px rgba(230, 126, 34, 0.1);
 }
 
 .fox-avatar {
@@ -953,16 +972,21 @@ body {
 }
 
 .fox-name {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 800;
     color: #e67e22;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(230, 126, 34, 0.5);
 }
 
 .fox-role {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 5px;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 .fox-status {
@@ -976,47 +1000,148 @@ body {
 .fox-status.active {
     background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
 }
 
 /* Content Generation Sections */
 .content-generation-section {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .content-generation-section h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #e67e22;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #333;
+    text-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+}
+
+.content-generation-section h2::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #e67e22, transparent);
 }
 
 .button-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(230, 126, 34, 0.1);
+}
+
+/* Fox Platform Container */
+.fox-platform-container {
+    background: linear-gradient(135deg, #1a1a1a, #252525);
+    border-radius: 15px;
+    padding: 25px;
+    border: 2px solid #333;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.fox-platform-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #e67e22, #f39c12, #e67e22);
+    opacity: 0.6;
+}
+
+.fox-platform-container:hover {
+    border-color: #e67e22;
+    box-shadow: 0 12px 40px rgba(230, 126, 34, 0.2);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
 }
 
 .gen-button {
     background: linear-gradient(135deg, #3498db, #2980b9);
-    border: none;
-    padding: 15px;
-    border-radius: 10px;
+    border: 2px solid transparent;
+    padding: 18px 30px;
+    border-radius: 12px;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gen-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.gen-button:hover::before {
+    left: 100%;
 }
 
 .gen-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(52, 152, 219, 0.6),
+                0 0 50px rgba(52, 152, 219, 0.2),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.gen-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.gen-button .btn-icon {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .gen-button.instagram {
