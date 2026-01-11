@@ -423,6 +423,71 @@ const contentExamples = {
 };
 
 // ========================================
+// LIVE ORDERS DISPLAY
+// ========================================
+
+function populateLiveOrders() {
+    const liveOrdersGrid = document.getElementById('liveOrdersGrid');
+    if (!liveOrdersGrid) return;
+    
+    const liveOrders = [
+        {
+            number: '#1234',
+            customer: 'Sarah Johnson - (555) 123-4567',
+            items: ['Signature Burger', 'Caesar Salad', 'Strawberry Lemonade'],
+            timeAgo: '5 min ago',
+            status: 'preparing'
+        },
+        {
+            number: '#1233',
+            customer: 'Mike Chen - (555) 987-6543',
+            items: ['Ribeye Steak', 'Garlic Mashed Potatoes', 'Red Wine'],
+            timeAgo: '12 min ago',
+            status: 'preparing'
+        },
+        {
+            number: '#1232',
+            customer: 'Emily Davis - (555) 456-7890',
+            items: ['Margherita Pizza', 'Garden Salad', 'Iced Tea'],
+            timeAgo: '18 min ago',
+            status: 'ready'
+        },
+        {
+            number: '#1231',
+            customer: 'James Wilson - (555) 234-5678',
+            items: ['Grilled Salmon', 'Steamed Vegetables', 'Lemon Water'],
+            timeAgo: '23 min ago',
+            status: 'ready'
+        },
+        {
+            number: '#1230',
+            customer: 'Lisa Anderson - (555) 345-6789',
+            items: ['Chicken Alfredo', 'Garlic Bread', 'Coke'],
+            timeAgo: '2 min ago',
+            status: 'pending'
+        }
+    ];
+    
+    liveOrdersGrid.innerHTML = liveOrders.map(order => `
+        <div class="live-order-card" onclick="switchPanel('command-center')">
+            <div class="live-order-header">
+                <span class="order-number">${order.number}</span>
+                <span class="order-time-ago">${order.timeAgo}</span>
+            </div>
+            <div class="order-customer">📞 ${order.customer}</div>
+            <div class="order-items">
+                ${order.items.map(item => `<div class="order-item">${item}</div>`).join('')}
+            </div>
+            <span class="order-status-badge ${order.status}">
+                ${order.status === 'pending' ? '⏳ Pending' : 
+                  order.status === 'preparing' ? '🍳 Preparing' : 
+                  '✅ Ready'}
+            </span>
+        </div>
+    `).join('');
+}
+
+// ========================================
 // CUSTOM CONTENT REQUEST
 // ========================================
 
@@ -691,7 +756,7 @@ function showToast(message) {
 
 function initDashboard() {
     // Populate initial data
-    populateCommunications();
+    populateLiveOrders();
     populateOrders();
     populateTimers();
     startCarousel();

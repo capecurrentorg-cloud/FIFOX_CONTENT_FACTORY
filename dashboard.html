@@ -105,33 +105,28 @@
                 </div>
             </div>
 
-            <div class="fox-communications">
-                <h2>🦊 Live Fox Communications</h2>
-                <div class="comm-feed" id="commFeed">
-                    <!-- Communications will be populated by JavaScript -->
+            <div class="live-orders-section">
+                <h2>📋 Live Restaurant Orders</h2>
+                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Orders received from MARA (Phone Agent) - Click to view in Command Center</p>
+                <div class="live-orders-grid" id="liveOrdersGrid">
+                    <!-- Live orders will be populated by JavaScript -->
                 </div>
             </div>
 
-            <div class="system-status-section">
-                <h2>Core System Agents</h2>
-                <div class="fox-status-grid">
-                    <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
-                        <span class="fox-icon">🦊</span>
-                        <span class="fox-name">MARA</span>
-                        <span class="status-badge">Operational</span>
-                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Phone Agent</small>
+            <div class="system-agents-compact">
+                <h2>🦊 System Agents Status</h2>
+                <div class="agents-status-bar">
+                    <div class="agent-chip" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
+                        <span>🟢</span> MARA (Phone)
                     </div>
-                    <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
-                        <span class="fox-icon">🦊</span>
-                        <span class="fox-name">VERA</span>
-                        <span class="status-badge">Operational</span>
-                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Verifier</small>
+                    <div class="agent-chip" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
+                        <span>🟢</span> VERA (Verify)
                     </div>
-                    <div class="fox-status-card operational" onclick="switchPanel('command-center')" style="cursor: pointer;">
-                        <span class="fox-icon">🦊</span>
-                        <span class="fox-name">LARA</span>
-                        <span class="status-badge">Operational</span>
-                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Kitchen Manager</small>
+                    <div class="agent-chip" onclick="switchPanel('command-center')" style="cursor: pointer;">
+                        <span>🟢</span> LARA (Kitchen)
+                    </div>
+                    <div class="agent-chip" onclick="switchPanel('content-factory')" style="cursor: pointer;">
+                        <span>🟢</span> Content Team (6 agents)
                     </div>
                 </div>
             </div>
