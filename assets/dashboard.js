@@ -376,6 +376,13 @@ function generateContent(platform) {
     currentPlatform = platform;
     const content = contentExamples[platform];
     
+    // Error handling: Check if platform exists
+    if (!content) {
+        console.error(`Invalid platform: ${platform}`);
+        showToast('❌ Platform not supported');
+        return;
+    }
+    
     const platformEmojis = {
         instagram: '📷',
         tiktok: '🎵',
@@ -434,37 +441,73 @@ function approveAndPost() {
     // CLICK 2 - Copy caption and open platform
     const caption = document.querySelector('.preview-caption p').textContent;
     
-    // Copy to clipboard
-    navigator.clipboard.writeText(caption).then(() => {
-        showToast('✅ Caption copied to clipboard!');
-        
-        // Open social media platform
-        const platformUrls = {
-            instagram: 'https://www.instagram.com',
-            tiktok: 'https://www.tiktok.com/upload',
-            facebook: 'https://www.facebook.com',
-            youtube: 'https://studio.youtube.com',
-            snapchat: 'https://www.snapchat.com'
-        };
-        
-        if (currentPlatform && platformUrls[currentPlatform]) {
-            setTimeout(() => {
-                window.open(platformUrls[currentPlatform], '_blank');
-                showToast(`🚀 Opening ${currentPlatform.toUpperCase()}... Paste and post!`);
-            }, 1000);
+    // Copy to clipboard with fallback for browsers that don't support Clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Modern clipboard API (requires HTTPS in production)
+        navigator.clipboard.writeText(caption).then(() => {
+            showToast('✅ Caption copied to clipboard!');
+            openPlatformAndUpdateStats();
+        }).catch(err => {
+            console.error('Clipboard API failed:', err);
+            fallbackCopyToClipboard(caption);
+        });
+    } else {
+        // Fallback for older browsers or non-HTTPS contexts
+        fallbackCopyToClipboard(caption);
+    }
+}
+
+// Fallback copy method for browsers without Clipboard API
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showToast('✅ Caption copied to clipboard!');
+            openPlatformAndUpdateStats();
+        } else {
+            showToast('⚠️ Please copy the caption manually.');
         }
-        
-        closeContentModal();
-        
-        // Update stats
-        const contentPosted = document.getElementById('contentPosted');
-        if (contentPosted) {
-            const current = parseInt(contentPosted.textContent);
-            contentPosted.textContent = current + 1;
-        }
-    }).catch(err => {
-        showToast('❌ Failed to copy. Please copy manually.');
-    });
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        showToast('⚠️ Please copy the caption manually.');
+    } finally {
+        document.body.removeChild(textArea);
+    }
+}
+
+// Helper function to open platform and update stats
+function openPlatformAndUpdateStats() {
+    // Open social media platform
+    const platformUrls = {
+        instagram: 'https://www.instagram.com',
+        tiktok: 'https://www.tiktok.com/upload',
+        facebook: 'https://www.facebook.com',
+        youtube: 'https://studio.youtube.com',
+        snapchat: 'https://www.snapchat.com'
+    };
+    
+    if (currentPlatform && platformUrls[currentPlatform]) {
+        setTimeout(() => {
+            window.open(platformUrls[currentPlatform], '_blank');
+            showToast(`🚀 Opening ${currentPlatform.toUpperCase()}... Paste and post!`);
+        }, 1000);
+    }
+    
+    closeContentModal();
+    
+    // Update stats
+    const contentPosted = document.getElementById('contentPosted');
+    if (contentPosted) {
+        const current = parseInt(contentPosted.textContent);
+        contentPosted.textContent = current + 1;
+    }
 }
 
 function regenerateContent() {
@@ -523,15 +566,18 @@ function initDashboard() {
     }
     
     // Simulate stats updates
+    const STAT_UPDATE_PROBABILITY = 0.7; // 30% chance of update per interval
+    const STAT_UPDATE_INTERVAL = 30000; // Update check every 30 seconds
+    
     setInterval(() => {
         const callsHandled = document.getElementById('callsHandled');
         if (callsHandled) {
             const current = parseInt(callsHandled.textContent);
-            if (Math.random() > 0.7) {
+            if (Math.random() > STAT_UPDATE_PROBABILITY) {
                 callsHandled.textContent = current + 1;
             }
         }
-    }, 30000); // Update every 30 seconds
+    }, STAT_UPDATE_INTERVAL);
     
     console.log('🦊 FIFOX Dashboard initialized successfully!');
 }
