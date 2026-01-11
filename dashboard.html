@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFOX Dashboard - Complete Restaurant Automation Hub</title>
+    <link rel="stylesheet" href="assets/dashboard.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">🦊 FIFOX</div>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-panel="overview">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="#" class="nav-item" data-panel="command-center">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Command Center</span>
+            </a>
+            <a href="#" class="nav-item" data-panel="phone-agent">
+                <span class="nav-icon">📞</span>
+                <span class="nav-text">Phone Agent Status</span>
+            </a>
+            <a href="#" class="nav-item" data-panel="content-factory">
+                <span class="nav-icon">🎬</span>
+                <span class="nav-text">Content Factory</span>
+            </a>
+            <a href="#" class="nav-item" data-panel="social-hub">
+                <span class="nav-icon">📱</span>
+                <span class="nav-text">Social Media Hub</span>
+            </a>
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🎥</span>
+                <span class="nav-text">Video Gallery</span>
+            </a>
+            <a href="#" class="nav-item" data-panel="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="system-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">All Systems Operational</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" id="mainContent">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <span class="breadcrumb-item active" id="breadcrumb">Home / Overview</span>
+        </div>
+
+        <!-- Overview Panel -->
+        <div class="panel active" id="overview-panel">
+            <div class="panel-header">
+                <h1>🏠 Dashboard Overview</h1>
+                <div class="time-display" id="currentTime">--:--:--</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-number" id="todayOrders">47</div>
+                    <div class="stat-label">Orders Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-number" id="contentPosted">12</div>
+                    <div class="stat-label">Content Posted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📞</div>
+                    <div class="stat-number" id="callsHandled">89</div>
+                    <div class="stat-label">Calls Handled</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Order Accuracy</div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="switchPanel('content-factory')">
+                        <span>🎬</span> Generate Content
+                    </button>
+                    <button class="action-btn" onclick="switchPanel('command-center')">
+                        <span>📊</span> View Orders
+                    </button>
+                    <button class="action-btn" onclick="switchPanel('phone-agent')">
+                        <span>📞</span> Check Phone Status
+                    </button>
+                </div>
+            </div>
+
+            <div class="fox-communications">
+                <h2>🦊 Live Fox Communications</h2>
+                <div class="comm-feed" id="commFeed">
+                    <!-- Communications will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="system-status-section">
+                <h2>System Status</h2>
+                <div class="fox-status-grid">
+                    <div class="fox-status-card operational">
+                        <span class="fox-icon">🦊</span>
+                        <span class="fox-name">MARA</span>
+                        <span class="status-badge">Operational</span>
+                    </div>
+                    <div class="fox-status-card operational">
+                        <span class="fox-icon">🦊</span>
+                        <span class="fox-name">VERA</span>
+                        <span class="status-badge">Operational</span>
+                    </div>
+                    <div class="fox-status-card operational">
+                        <span class="fox-icon">🦊</span>
+                        <span class="fox-name">DARA</span>
+                        <span class="status-badge">Operational</span>
+                    </div>
+                    <div class="fox-status-card operational">
+                        <span class="fox-icon">🦊</span>
+                        <span class="fox-name">LARA</span>
+                        <span class="status-badge">Operational</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Command Center Panel -->
+        <div class="panel" id="command-center-panel">
+            <div class="panel-header">
+                <h1>📊 Command Center</h1>
+                <div class="time-display" id="commandCenterTime">--:--:--</div>
+            </div>
+
+            <div class="command-center-grid">
+                <!-- Active Orders Column -->
+                <div class="cc-column">
+                    <div class="cc-column-title">📋 Active Orders</div>
+                    <div class="cc-stats">
+                        <div class="cc-stat"><strong>3</strong> Active</div>
+                        <div class="cc-stat"><strong>47</strong> Today</div>
+                    </div>
+                    <div class="order-list" id="orderList">
+                        <!-- Orders populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Kitchen Timers Column -->
+                <div class="cc-column">
+                    <div class="cc-column-title">⏱️ Kitchen Timers</div>
+                    <div class="timer-list" id="timerList">
+                        <!-- Timers populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Map Column -->
+                <div class="cc-column map-column">
+                    <div class="cc-column-title">🗺️ Delivery Map</div>
+                    <div class="map-container" id="deliveryMap">
+                        <div class="map-placeholder">
+                            <p>📍 Google Maps Integration</p>
+                            <p class="map-note">Add your API key in Settings to enable live delivery tracking</p>
+                            <div class="map-sample-pins">
+                                <div class="map-pin">📍 123 Main St - ETA: 15 min</div>
+                                <div class="map-pin">📍 456 Oak Ave - ETA: 8 min</div>
+                                <div class="map-pin">📍 789 Elm Rd - ETA: 22 min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Agent Status Panel -->
+        <div class="panel" id="phone-agent-panel">
+            <div class="panel-header">
+                <h1>📞 Phone Agent Status - 3-Agent Verification System</h1>
+            </div>
+
+            <div class="verification-workflow">
+                <h2>Live Order Verification</h2>
+                <div class="agent-cards">
+                    <div class="agent-card mara">
+                        <div class="agent-header">
+                            <span class="agent-icon">🟠</span>
+                            <h3>MARA</h3>
+                            <span class="agent-role">Active - Taking Order</span>
+                        </div>
+                        <div class="agent-status">
+                            <div class="order-display">
+                                <strong>Order #1247</strong>
+                                <p>Ribeye Steak (Med Rare) + Caesar Salad</p>
+                            </div>
+                            <div class="transcription">
+                                <small>Transcription: "One ribeye medium rare and a Caesar salad..."</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agent-card llama">
+                        <div class="agent-header">
+                            <span class="agent-icon">🔵</span>
+                            <h3>LLaMA</h3>
+                            <span class="agent-role">Listening - Validator 1</span>
+                        </div>
+                        <div class="agent-status">
+                            <div class="order-display">
+                                <strong>Order #1247</strong>
+                                <p>Ribeye Steak (Med Rare) + Caesar Salad</p>
+                            </div>
+                            <div class="match-indicator match">
+                                ✓ Match with MARA
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agent-card ollama">
+                        <div class="agent-header">
+                            <span class="agent-icon">🟣</span>
+                            <h3>Ollama</h3>
+                            <span class="agent-role">Listening - Validator 2</span>
+                        </div>
+                        <div class="agent-status">
+                            <div class="order-display">
+                                <strong>Order #1247</strong>
+                                <p>Ribeye Steak (Medium) + Caesar Salad</p>
+                            </div>
+                            <div class="match-indicator mismatch">
+                                ⚠️ Slight variance detected
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agent-card vera">
+                        <div class="agent-header">
+                            <span class="agent-icon">🟢</span>
+                            <h3>VERA</h3>
+                            <span class="agent-role">Verifier - Consensus</span>
+                        </div>
+                        <div class="agent-status">
+                            <div class="consensus-result">
+                                <div class="consensus-badge success">2/3 MATCH ✓</div>
+                                <p><strong>Using majority:</strong> Med Rare</p>
+                                <div class="action-taken">
+                                    <strong>Action:</strong> Sent to Kitchen ✓
+                                </div>
+                                <div class="timer-started">
+                                    Timer Started: <span class="live-timer">0:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-visualization">
+                    <h3>Workflow Example:</h3>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <strong>MARA →</strong> Order #1247: Ribeye (Med Rare) + Salad ✓
+                        </div>
+                        <div class="workflow-step">
+                            <strong>LLaMA →</strong> Order #1247: Ribeye (Med Rare) + Salad ✓
+                        </div>
+                        <div class="workflow-step mismatch">
+                            <strong>Ollama →</strong> Order #1247: Ribeye (Medium) + Salad ⚠️
+                        </div>
+                        <div class="workflow-step result">
+                            <strong>VERA:</strong> 2/3 MATCH - Using majority (Med Rare)<br>
+                            → Sent to Kitchen ✓ Timer Started: 0:00
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="verification-stats">
+                <h2>Today's Verification Stats</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">45</div>
+                        <div class="stat-label">Perfect Match (3/3)</div>
+                        <div class="stat-percent">95.7%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Majority Match (2/3)</div>
+                        <div class="stat-percent">4.3%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">No Consensus (0/3)</div>
+                        <div class="stat-percent">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Overall Accuracy</div>
+                        <div class="stat-percent">✓</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Factory Panel -->
+        <div class="panel" id="content-factory-panel">
+            <div class="panel-header">
+                <h1>🎬 Content Factory - 3-Click System</h1>
+            </div>
+
+            <div class="menu-carousel">
+                <h2>📸 Menu Picture Carousel</h2>
+                <div class="carousel-container">
+                    <div class="carousel-image" id="carouselImage">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Menu Item">
+                    </div>
+                    <div class="carousel-info">
+                        <h3 id="carouselItemName">Signature Burger</h3>
+                        <p id="carouselItemDesc">8oz grass-fed beef burger with aged cheddar & bacon</p>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn" onclick="randomMenuItem()">🎲 Random Menu Item</button>
+                        <button class="carousel-btn" onclick="document.getElementById('fileUpload').click()">📸 Take New Picture</button>
+                        <input type="file" id="fileUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="platform-selection">
+                <h2>Select Platform</h2>
+                <div class="platform-buttons">
+                    <button class="platform-btn instagram" onclick="generateContent('instagram')" data-platform="instagram">
+                        <span class="platform-icon">📷</span>
+                        <span class="platform-name">Instagram</span>
+                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    </button>
+                    <button class="platform-btn tiktok" onclick="generateContent('tiktok')" data-platform="tiktok">
+                        <span class="platform-icon">🎵</span>
+                        <span class="platform-name">TikTok</span>
+                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    </button>
+                    <button class="platform-btn snapchat" onclick="generateContent('snapchat')" data-platform="snapchat">
+                        <span class="platform-icon">👻</span>
+                        <span class="platform-name">Snapchat</span>
+                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    </button>
+                    <button class="platform-btn facebook" onclick="generateContent('facebook')" data-platform="facebook">
+                        <span class="platform-icon">📘</span>
+                        <span class="platform-name">Facebook</span>
+                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    </button>
+                    <button class="platform-btn youtube" onclick="generateContent('youtube')" data-platform="youtube">
+                        <span class="platform-icon">▶️</span>
+                        <span class="platform-name">YouTube</span>
+                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Hub Panel -->
+        <div class="panel" id="social-hub-panel">
+            <div class="panel-header">
+                <h1>📱 Social Media Hub</h1>
+            </div>
+
+            <div class="social-overview">
+                <h2>Platform Overview</h2>
+                <div class="social-stats">
+                    <div class="social-stat-card instagram">
+                        <div class="social-icon">📷</div>
+                        <div class="social-name">Instagram</div>
+                        <div class="social-number">12.5K</div>
+                        <div class="social-label">Followers</div>
+                        <div class="social-growth">+245 this week</div>
+                    </div>
+                    <div class="social-stat-card tiktok">
+                        <div class="social-icon">🎵</div>
+                        <div class="social-name">TikTok</div>
+                        <div class="social-number">28.3K</div>
+                        <div class="social-label">Followers</div>
+                        <div class="social-growth">+892 this week</div>
+                    </div>
+                    <div class="social-stat-card facebook">
+                        <div class="social-icon">📘</div>
+                        <div class="social-name">Facebook</div>
+                        <div class="social-number">8.7K</div>
+                        <div class="social-label">Likes</div>
+                        <div class="social-growth">+134 this week</div>
+                    </div>
+                    <div class="social-stat-card youtube">
+                        <div class="social-icon">▶️</div>
+                        <div class="social-name">YouTube</div>
+                        <div class="social-number">5.2K</div>
+                        <div class="social-label">Subscribers</div>
+                        <div class="social-growth">+67 this week</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-posts">
+                <h2>Recent Posts</h2>
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <div class="post-platform instagram">Instagram</div>
+                        <div class="post-content">
+                            <p>"Fresh salmon just landed! 🐟✨"</p>
+                        </div>
+                        <div class="post-stats">
+                            <span>❤️ 847</span>
+                            <span>💬 32</span>
+                        </div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                    <div class="post-card">
+                        <div class="post-platform tiktok">TikTok</div>
+                        <div class="post-content">
+                            <p>"Cheese pull challenge 🧀😮‍💨"</p>
+                        </div>
+                        <div class="post-stats">
+                            <span>❤️ 12.3K</span>
+                            <span>💬 234</span>
+                        </div>
+                        <div class="post-time">5 hours ago</div>
+                    </div>
+                    <div class="post-card">
+                        <div class="post-platform facebook">Facebook</div>
+                        <div class="post-content">
+                            <p>"Family special this weekend! Kids eat free 👨‍👩‍👧‍👦"</p>
+                        </div>
+                        <div class="post-stats">
+                            <span>👍 234</span>
+                            <span>💬 18</span>
+                        </div>
+                        <div class="post-time">1 day ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="panel" id="settings-panel">
+            <div class="panel-header">
+                <h1>⚙️ Settings</h1>
+            </div>
+
+            <div class="settings-section">
+                <h2>API Configuration</h2>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label>Google Maps API Key</label>
+                        <input type="text" placeholder="Enter your Google Maps API key" class="settings-input">
+                        <small>Used for delivery tracking and route optimization</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Toast POS API Key</label>
+                        <input type="text" placeholder="Enter your Toast POS API key" class="settings-input">
+                        <small>Integration with Toast POS system</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Vapi.ai API Key</label>
+                        <input type="text" placeholder="Enter your Vapi.ai API key" class="settings-input">
+                        <small>Phone agent (MARA) configuration</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Social Media Tokens</h2>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label>Instagram Access Token</label>
+                        <input type="text" placeholder="Enter Instagram token" class="settings-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Facebook Page Token</label>
+                        <input type="text" placeholder="Enter Facebook token" class="settings-input">
+                    </div>
+                    <div class="form-group">
+                        <label>TikTok API Key</label>
+                        <input type="text" placeholder="Enter TikTok API key" class="settings-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Agent Configuration</h2>
+                <div class="agent-toggles">
+                    <div class="toggle-item">
+                        <span>MARA (Phone Agent)</span>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>VERA (Verifier)</span>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>DARA (Content Overseer)</span>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>LARA (Kitchen Manager)</span>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button class="settings-btn primary">Save Settings</button>
+                <button class="settings-btn">Reset to Defaults</button>
+            </div>
+
+            <div class="settings-note">
+                <p><strong>Note:</strong> This settings panel is for demonstration purposes. In production, these would connect to actual APIs and services.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Preview Modal -->
+    <div class="modal" id="contentModal">
+        <div class="modal-overlay" onclick="closeContentModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Content Preview</h2>
+                <button class="modal-close" onclick="closeContentModal()">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="content-preview">
+                    <div class="preview-image" id="modalImage">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Content Preview">
+                    </div>
+                    <div class="preview-caption" id="modalCaption">
+                        <strong>Caption:</strong>
+                        <p>Remember your first burger with Dad? That feeling never gets old. 🍔❤️</p>
+                        <p class="hashtags">#ComfortFood #FamilyMoments #BurgerLove #FoodMemories</p>
+                    </div>
+                </div>
+
+                <div class="dara-insight">
+                    <h3>🔍 DARA's Competitive Insight:</h3>
+                    <p id="modalInsight">Luigi's Pizza got 12k likes on similar post. Trending: comfort food nostalgia themes.</p>
+                </div>
+
+                <div class="vera-verification">
+                    <h3>✓ VERA Verified</h3>
+                    <div class="viral-score">
+                        <span>Viral Score:</span>
+                        <strong id="modalScore">87%</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-btn approve" onclick="approveAndPost()">
+                    ✓ Approve & Post
+                </button>
+                <button class="modal-btn regenerate" onclick="regenerateContent()">
+                    ↻ Regenerate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Action completed!</span>
+    </div>
+
+    <script src="assets/dashboard.js"></script>
+</body>
+</html>
