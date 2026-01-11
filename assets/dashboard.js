@@ -339,41 +339,135 @@ function handleImageUpload(event) {
 
 const contentExamples = {
     instagram: {
-        caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats",
-        insight: "Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes.",
-        score: 87,
-        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+        post: {
+            caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats",
+            insight: "Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes.",
+            score: 87,
+            image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+        },
+        story: {
+            caption: "Behind the scenes in our kitchen right now 👨‍🍳🔥\n\nSwipe up to order!",
+            insight: "Stories with kitchen content get 34% more engagement. Best posted 11am-2pm.",
+            score: 82,
+            image: 'https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=600'
+        },
+        reel: {
+            caption: "POV: You just walked into heaven 😍🍕\n\n#Reels #FoodPorn #PizzaLover #Satisfying",
+            insight: "Reels using trending audio 'Good 4 U' seeing 2.3x normal reach. Recommend close-up food shots.",
+            score: 91,
+            image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600'
+        },
+        carousel: {
+            caption: "Our Top 5 Most Ordered Dishes (Slide to see why) 👉\n\n1️⃣ Signature Burger\n2️⃣ Grilled Salmon\n3️⃣ Ribeye Steak\n4️⃣ Caesar Salad\n5️⃣ Chocolate Lava Cake",
+            insight: "Carousel posts get 3x more saves than single images. Perfect for driving repeat visits.",
+            score: 85,
+            image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'
+        }
     },
     tiktok: {
-        caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull #SatisfyingVideo #FoodASMR",
-        insight: "TikTok algorithm favoring food ASMR content. Cheese pull videos averaging 50k+ views.",
-        score: 93,
-        image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600'
-    },
-    snapchat: {
-        caption: "Order now through the link! Fresh out the oven 🔥",
-        insight: "Snapchat users prefer authentic, unpolished content. Stories with 'right now' urgency perform best.",
-        score: 77,
-        image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600'
+        video: {
+            caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull #SatisfyingVideo #FoodASMR",
+            insight: "TikTok algorithm favoring food ASMR content. Cheese pull videos averaging 50k+ views.",
+            score: 93,
+            image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600'
+        },
+        trending: {
+            caption: "Making our famous burger to this sound cause why not 💅🍔 #Trending #BurgerTok",
+            insight: "Current trending sound has 2.3M uses. Early adopters seeing 5x normal engagement.",
+            score: 88,
+            image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+        }
     },
     facebook: {
-        caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nBring the whole family! Kids eat free on Tuesdays.\n\nReservations: (555) 123-4567\n\n📍 123 Main Street, Your City",
-        insight: "Facebook users respond best to family-oriented promotions. Posts with location get 2x more clicks.",
-        score: 79,
-        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'
+        post: {
+            caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nBring the whole family! Kids eat free on Tuesdays.\n\nReservations: (555) 123-4567\n\n📍 123 Main Street, Your City",
+            insight: "Facebook users respond best to family-oriented promotions. Posts with location get 2x more clicks.",
+            score: 79,
+            image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'
+        },
+        event: {
+            caption: "🎉 LIVE MUSIC NIGHT - This Friday!\n\nJoin us for great food, drinks, and entertainment.\n\n🎸 Band starts at 7 PM\n📅 Save the date!",
+            insight: "Event posts get shared 4x more than regular posts. Create event listing for automatic reminders.",
+            score: 84,
+            image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600'
+        }
     },
     youtube: {
-        caption: "The secret to our perfect medium-rare steak 🥩🔥\n\n#Shorts #Cooking #SteakTok #ChefTips",
-        insight: "YouTube Shorts under 30 seconds performing best. Recipe tips getting high retention.",
-        score: 86,
-        image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=600'
+        short: {
+            caption: "The secret to our perfect medium-rare steak 🥩🔥\n\n#Shorts #Cooking #SteakTok #ChefTips",
+            insight: "YouTube Shorts under 30 seconds performing best. Recipe tips getting high retention.",
+            score: 86,
+            image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=600'
+        },
+        video: {
+            caption: "FULL RECIPE: How We Make Our Signature Burger From Scratch\n\nIngredients in description! 🍔👨‍🍳",
+            insight: "Long-form recipe videos averaging 8min watch time. Include timestamps in description.",
+            score: 81,
+            image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+        }
+    },
+    snapchat: {
+        story: {
+            caption: "Order now through the link! Fresh out the oven 🔥",
+            insight: "Snapchat users prefer authentic, unpolished content. Stories with 'right now' urgency perform best.",
+            score: 77,
+            image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600'
+        },
+        spotlight: {
+            caption: "Watch us make 100 burgers in 10 minutes ⚡🍔",
+            insight: "Spotlight trending: fast-paced, impressive cooking feats. Time-lapse format recommended.",
+            score: 83,
+            image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+        }
     }
 };
 
 let currentPlatform = null;
 
+let currentPlatform = null;
+let currentContentType = null;
+
+// New function for platform-specific content generation
+function generatePlatformContent(platform, type) {
+    currentPlatform = platform;
+    currentContentType = type;
+    
+    const content = contentExamples[platform][type];
+    
+    // Error handling: Check if content exists
+    if (!content) {
+        console.error(`Invalid platform/type: ${platform}/${type}`);
+        showToast('❌ Content not available');
+        return;
+    }
+    
+    const platformEmojis = {
+        instagram: '📷',
+        tiktok: '🎵',
+        snapchat: '👻',
+        facebook: '📘',
+        youtube: '▶️'
+    };
+    
+    // Update modal content with type information
+    const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+    document.getElementById('modalTitle').textContent = 
+        `${platformEmojis[platform]} ${platform.toUpperCase()} - ${typeLabel}`;
+    
+    document.querySelector('.preview-image img').src = content.image;
+    document.querySelector('.preview-caption p').textContent = content.caption;
+    document.getElementById('modalInsight').textContent = content.insight;
+    document.getElementById('modalScore').textContent = content.score + '%';
+    
+    // Show modal
+    openContentModal();
+    
+    showToast(`✨ ${platform.toUpperCase()} ${typeLabel} generated! CLICK 1 complete.`);
+}
+
 function generateContent(platform) {
     currentPlatform = platform;
+    currentContentType = 'post'; // default type
     const content = contentExamples[platform];
     
     // Error handling: Check if platform exists
@@ -382,6 +476,9 @@ function generateContent(platform) {
         showToast('❌ Platform not supported');
         return;
     }
+    
+    // Use the first available content type or 'post' default
+    const contentData = content.post || content[Object.keys(content)[0]];
     
     const platformEmojis = {
         instagram: '📷',
@@ -395,10 +492,10 @@ function generateContent(platform) {
     document.getElementById('modalTitle').textContent = 
         `${platformEmojis[platform]} ${platform.toUpperCase()} - Content Preview`;
     
-    document.querySelector('.preview-image img').src = content.image;
-    document.querySelector('.preview-caption p').textContent = content.caption;
-    document.getElementById('modalInsight').textContent = content.insight;
-    document.getElementById('modalScore').textContent = content.score + '%';
+    document.querySelector('.preview-image img').src = contentData.image;
+    document.querySelector('.preview-caption p').textContent = contentData.caption;
+    document.getElementById('modalInsight').textContent = contentData.insight;
+    document.getElementById('modalScore').textContent = contentData.score + '%';
     
     // Show modal
     openContentModal();
@@ -517,7 +614,10 @@ function regenerateContent() {
     
     // Simulate regeneration delay
     setTimeout(() => {
-        if (currentPlatform) {
+        if (currentPlatform && currentContentType) {
+            generatePlatformContent(currentPlatform, currentContentType);
+            showToast('✨ New content variation generated!');
+        } else if (currentPlatform) {
             generateContent(currentPlatform);
             showToast('✨ New content variation generated!');
         }
@@ -636,6 +736,7 @@ window.addEventListener('resize', function() {
 
 window.switchPanel = switchPanel;
 window.generateContent = generateContent;
+window.generatePlatformContent = generatePlatformContent;
 window.closeContentModal = closeContentModal;
 window.approveAndPost = approveAndPost;
 window.regenerateContent = regenerateContent;

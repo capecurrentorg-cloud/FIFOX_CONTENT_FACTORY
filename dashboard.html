@@ -113,24 +113,24 @@
             </div>
 
             <div class="system-status-section">
-                <h2>System Status</h2>
+                <h2>System Status - Click Fox to View Details</h2>
                 <div class="fox-status-grid">
-                    <div class="fox-status-card operational">
+                    <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">MARA</span>
                         <span class="status-badge">Operational</span>
                     </div>
-                    <div class="fox-status-card operational">
+                    <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">VERA</span>
                         <span class="status-badge">Operational</span>
                     </div>
-                    <div class="fox-status-card operational">
+                    <div class="fox-status-card operational" onclick="switchPanel('content-factory')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">DARA</span>
                         <span class="status-badge">Operational</span>
                     </div>
-                    <div class="fox-status-card operational">
+                    <div class="fox-status-card operational" onclick="switchPanel('command-center')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">LARA</span>
                         <span class="status-badge">Operational</span>
@@ -316,54 +316,129 @@
         <!-- Content Factory Panel -->
         <div class="panel" id="content-factory-panel">
             <div class="panel-header">
-                <h1>🎬 Content Factory - 3-Click System</h1>
+                <h1>🎬 Content Factory - Two-Click Generation System</h1>
             </div>
 
-            <div class="menu-carousel">
-                <h2>📸 Menu Picture Carousel</h2>
-                <div class="carousel-container">
-                    <div class="carousel-image" id="carouselImage">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Menu Item">
+            <div class="fox-team-status">
+                <h2>🦊 Content Generation Team</h2>
+                <div class="fox-team-grid">
+                    <div class="fox-agent-card" data-fox="dara">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #3498db, #2980b9);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">DARA</div>
+                            <div class="fox-role">Content Overseer</div>
+                            <div class="fox-status active">🟢 Analyzing Competitors</div>
+                        </div>
                     </div>
-                    <div class="carousel-info">
-                        <h3 id="carouselItemName">Signature Burger</h3>
-                        <p id="carouselItemDesc">8oz grass-fed beef burger with aged cheddar & bacon</p>
+                    <div class="fox-agent-card" data-fox="ira">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">IRA</div>
+                            <div class="fox-role">Instagram Specialist</div>
+                            <div class="fox-status active">🟢 Ready to Generate</div>
+                        </div>
                     </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn" onclick="randomMenuItem()">🎲 Random Menu Item</button>
-                        <button class="carousel-btn" onclick="document.getElementById('fileUpload').click()">📸 Take New Picture</button>
-                        <input type="file" id="fileUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                    <div class="fox-agent-card" data-fox="gara">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #e056fd, #d83a9f);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">GARA</div>
+                            <div class="fox-role">Instagram Visual</div>
+                            <div class="fox-status active">🟢 Ready to Generate</div>
+                        </div>
+                    </div>
+                    <div class="fox-agent-card" data-fox="tira">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #fe2c55, #000);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">TIRA</div>
+                            <div class="fox-role">TikTok Specialist</div>
+                            <div class="fox-status active">🟢 Ready to Generate</div>
+                        </div>
+                    </div>
+                    <div class="fox-agent-card" data-fox="vera">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">VERA</div>
+                            <div class="fox-role">Content Verifier</div>
+                            <div class="fox-status active">🟢 Ready to Verify</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="platform-selection">
-                <h2>Select Platform</h2>
-                <div class="platform-buttons">
-                    <button class="platform-btn instagram" onclick="generateContent('instagram')" data-platform="instagram">
-                        <span class="platform-icon">📷</span>
-                        <span class="platform-name">Instagram</span>
-                        <span class="new-content-badge" style="display: none;">NEW</span>
+            <div class="content-generation-section">
+                <h2>📱 Instagram Content</h2>
+                <div class="button-grid-2col">
+                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'post')">
+                        <span class="btn-icon">📷</span>
+                        <span>Generate Post</span>
                     </button>
-                    <button class="platform-btn tiktok" onclick="generateContent('tiktok')" data-platform="tiktok">
-                        <span class="platform-icon">🎵</span>
-                        <span class="platform-name">TikTok</span>
-                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'story')">
+                        <span class="btn-icon">📖</span>
+                        <span>Generate Story</span>
                     </button>
-                    <button class="platform-btn snapchat" onclick="generateContent('snapchat')" data-platform="snapchat">
-                        <span class="platform-icon">👻</span>
-                        <span class="platform-name">Snapchat</span>
-                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'reel')">
+                        <span class="btn-icon">🎬</span>
+                        <span>Generate Reel</span>
                     </button>
-                    <button class="platform-btn facebook" onclick="generateContent('facebook')" data-platform="facebook">
-                        <span class="platform-icon">📘</span>
-                        <span class="platform-name">Facebook</span>
-                        <span class="new-content-badge" style="display: none;">NEW</span>
+                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'carousel')">
+                        <span class="btn-icon">🖼️</span>
+                        <span>Generate Carousel</span>
                     </button>
-                    <button class="platform-btn youtube" onclick="generateContent('youtube')" data-platform="youtube">
-                        <span class="platform-icon">▶️</span>
-                        <span class="platform-name">YouTube</span>
-                        <span class="new-content-badge" style="display: none;">NEW</span>
+                </div>
+            </div>
+
+            <div class="content-generation-section">
+                <h2>🎵 TikTok Content</h2>
+                <div class="button-grid-2col">
+                    <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'video')">
+                        <span class="btn-icon">📹</span>
+                        <span>Generate Video</span>
+                    </button>
+                    <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'trending')">
+                        <span class="btn-icon">🔥</span>
+                        <span>Trending Sound</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-generation-section">
+                <h2>📘 Facebook Content</h2>
+                <div class="button-grid-2col">
+                    <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'post')">
+                        <span class="btn-icon">📝</span>
+                        <span>Generate Post</span>
+                    </button>
+                    <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'event')">
+                        <span class="btn-icon">🎉</span>
+                        <span>Create Event</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-generation-section">
+                <h2>▶️ YouTube Content</h2>
+                <div class="button-grid-2col">
+                    <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'short')">
+                        <span class="btn-icon">⚡</span>
+                        <span>Generate Short</span>
+                    </button>
+                    <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'video')">
+                        <span class="btn-icon">🎥</span>
+                        <span>Generate Video</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-generation-section">
+                <h2>👻 Snapchat Content</h2>
+                <div class="button-grid-2col">
+                    <button class="gen-button snapchat" onclick="generatePlatformContent('snapchat', 'story')">
+                        <span class="btn-icon">📸</span>
+                        <span>Generate Story</span>
+                    </button>
+                    <button class="gen-button snapchat" onclick="generatePlatformContent('snapchat', 'spotlight')">
+                        <span class="btn-icon">✨</span>
+                        <span>Generate Spotlight</span>
                     </button>
                 </div>
             </div>
