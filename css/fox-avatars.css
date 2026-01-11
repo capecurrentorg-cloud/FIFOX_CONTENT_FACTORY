@@ -1,0 +1,365 @@
+/* FIFOX Avatar System - CSS-based cartoon fox avatars */
+
+/* Base fox avatar container */
+.fox-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+}
+
+.fox-avatar-large {
+    width: 120px;
+    height: 120px;
+}
+
+.fox-avatar-small {
+    width: 50px;
+    height: 50px;
+}
+
+/* Fox face base */
+.fox-face {
+    width: 100%;
+    height: 100%;
+    background: #FFA866;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Fox ears */
+.fox-ears {
+    position: absolute;
+    top: -15%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+}
+
+.fox-ear {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #e67e22;
+}
+
+/* Fox features */
+.fox-features {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fox-eyes {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.fox-eye {
+    width: 8px;
+    height: 8px;
+    background: #2c3e50;
+    border-radius: 50%;
+}
+
+.fox-snout {
+    width: 20px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.fox-nose {
+    width: 6px;
+    height: 6px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fox-smile {
+    width: 20px;
+    height: 10px;
+    border-bottom: 2px solid #2c3e50;
+    border-radius: 0 0 50% 50%;
+    margin-top: 3px;
+}
+
+/* Individual fox color themes */
+.fox-mara .fox-ear { border-bottom-color: #e67e22; }
+.fox-mara .fox-face { border: 3px solid #e67e22; }
+
+.fox-rhea .fox-ear { border-bottom-color: #e91e63; }
+.fox-rhea .fox-face { border: 3px solid #e91e63; }
+
+.fox-vera .fox-ear { border-bottom-color: #2ecc71; }
+.fox-vera .fox-face { border: 3px solid #2ecc71; }
+
+.fox-dara .fox-ear { border-bottom-color: #3498db; }
+.fox-dara .fox-face { border: 3px solid #3498db; }
+
+.fox-lara .fox-ear { border-bottom-color: #e74c3c; }
+.fox-lara .fox-face { border: 3px solid #e74c3c; }
+
+.fox-tira .fox-ear { border-bottom-color: #e91e63; }
+.fox-tira .fox-face { border: 3px solid #000; background: linear-gradient(135deg, #000 50%, #e91e63 50%); }
+
+.fox-tora .fox-ear { border-bottom-color: #00bcd4; }
+.fox-tora .fox-face { border: 3px solid #000; background: linear-gradient(135deg, #000 50%, #00bcd4 50%); }
+
+.fox-sara .fox-ear { border-bottom-color: #ffeb3b; }
+.fox-sara .fox-face { border: 3px solid #ffeb3b; }
+
+.fox-kara .fox-ear { border-bottom-color: #ffc107; }
+.fox-kara .fox-face { border: 3px solid #ffc107; }
+
+.fox-ira .fox-ear { border-bottom-color: #9c27b0; }
+.fox-ira .fox-face { border: 3px solid #9c27b0; background: linear-gradient(135deg, #9c27b0 50%, #e91e63 50%); }
+
+.fox-gara .fox-ear { border-bottom-color: #ff6b9d; }
+.fox-gara .fox-face { border: 3px solid #ff6b9d; background: linear-gradient(135deg, #ff6b9d 50%, #ff9800 50%); }
+
+.fox-farah .fox-ear { border-bottom-color: #1565c0; }
+.fox-farah .fox-face { border: 3px solid #1565c0; }
+
+.fox-bara .fox-ear { border-bottom-color: #f44336; }
+.fox-bara .fox-face { border: 3px solid #f44336; }
+
+/* Fox card styling */
+.fox-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.fox-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);
+}
+
+.fox-card-active {
+    border-color: #e67e22;
+    background: #252525;
+}
+
+.fox-card-name {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 8px 0 4px;
+    color: #fff;
+}
+
+.fox-card-role {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.fox-card-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.status-active {
+    background: #2ecc71;
+    color: #000;
+}
+
+.status-idle {
+    background: #95a5a6;
+    color: #fff;
+}
+
+.status-working {
+    background: #f39c12;
+    color: #000;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Fox team grid layouts */
+.fox-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.fox-team-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fox-team-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Fox info panel */
+.fox-info-panel {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.fox-info-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.fox-info-details {
+    flex: 1;
+}
+
+.fox-info-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 5px;
+}
+
+.fox-info-role {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.fox-info-description {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.fox-info-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.fox-stat {
+    background: #0a0a0a;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fox-stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.fox-stat-label {
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Fox creator credit badge */
+.fox-creator-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(230, 126, 34, 0.2);
+    padding: 8px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.fox-creator-badge .fox-avatar {
+    width: 30px;
+    height: 30px;
+}
+
+.fox-creator-badge .fox-ear {
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #e67e22;
+}
+
+.fox-creator-badge .fox-eye {
+    width: 4px;
+    height: 4px;
+}
+
+.fox-creator-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #e67e22;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .fox-team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+    }
+    
+    .fox-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .fox-info-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Personality-based styling */
+.fox-personality-warm .fox-smile {
+    border-bottom: 3px solid #2c3e50;
+}
+
+.fox-personality-focused .fox-eye {
+    width: 6px;
+    height: 10px;
+    border-radius: 40%;
+}
+
+.fox-personality-energetic {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.fox-personality-leader .fox-face {
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+}

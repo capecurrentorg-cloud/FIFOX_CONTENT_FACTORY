@@ -4,6 +4,7 @@
 <title>FIFOX Command Center - Order Dashboard</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/fox-avatars.css">
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: #fff; overflow: hidden; }
@@ -80,18 +81,45 @@
             <div id="ordersList">
                 <div class="order-card">
                     <div class="order-header"><span class="order-number">#1234</span><span class="order-time">5 min ago</span></div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div id="maraAvatar"></div>
+                        <div style="flex: 1;">
+                            <div class="customer-name">Taken by MARA</div>
+                            <div style="font-size: 12px; color: #e67e22;">Phone Order</div>
+                        </div>
+                    </div>
                     <div class="customer-name">Sarah Johnson - (555) 123-4567</div>
                     <div class="order-items">• Signature Burger<br>• Caesar Salad<br>• Strawberry Lemonade</div>
-                    <span class="order-status status-preparing">Preparing</span>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                        <div id="laraAvatar"></div>
+                        <span class="order-status status-preparing">LARA: Preparing</span>
+                    </div>
                 </div>
                 <div class="order-card">
                     <div class="order-header"><span class="order-number">#1233</span><span class="order-time">12 min ago</span></div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div id="maraAvatar2"></div>
+                        <div style="flex: 1;">
+                            <div class="customer-name">Taken by MARA</div>
+                            <div style="font-size: 12px; color: #e67e22;">Phone Order</div>
+                        </div>
+                    </div>
                     <div class="customer-name">Mike Chen - (555) 987-6543</div>
                     <div class="order-items">• Ribeye Steak<br>• Garlic Mashed Potatoes<br>• Red Wine</div>
-                    <span class="order-status status-ready">Ready</span>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                        <div id="laraAvatar2"></div>
+                        <span class="order-status status-ready">LARA: Ready</span>
+                    </div>
                 </div>
                 <div class="order-card">
                     <div class="order-header"><span class="order-number">#1232</span><span class="order-time">18 min ago</span></div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <div id="rheaAvatar"></div>
+                        <div style="flex: 1;">
+                            <div class="customer-name">Booked by RHEA</div>
+                            <div style="font-size: 12px; color: #e91e63;">Reservation</div>
+                        </div>
+                    </div>
                     <div class="customer-name">Emma Davis - (555) 456-7890</div>
                     <div class="order-items">• Grilled Salmon<br>• Asparagus<br>• Sparkling Water</div>
                     <span class="order-status status-delivery">Out for Delivery</span>
@@ -114,15 +142,9 @@
                     <div class="timer-time" id="timer3">02:15</div>
                 </div>
             </div>
-            <div class="panel-title" style="margin-top: 30px;">🦊 Fox Team Status</div>
-            <div class="fox-team">
-                <div class="fox-card" style="border-color: #e67e22;"><div class="fox-icon">🦊</div><div class="fox-name">MARA</div><div class="fox-role">Phone</div></div>
-                <div class="fox-card" style="border-color: #e91e63;"><div class="fox-icon">🦊</div><div class="fox-name">RHEA</div><div class="fox-role">Reservations</div></div>
-                <div class="fox-card" style="border-color: #2ecc71;"><div class="fox-icon">🦊</div><div class="fox-name">VERA</div><div class="fox-role">Verifier</div></div>
-                <div class="fox-card" style="border-color: #3498db;"><div class="fox-icon">🦊</div><div class="fox-name">DARA</div><div class="fox-role">Overseer</div></div>
-                <div class="fox-card" style="border-color: #e74c3c;"><div class="fox-icon">🦊</div><div class="fox-name">LARA</div><div class="fox-role">Kitchen</div></div>
-                <div class="fox-card" style="border-color: #9b59b6;"><div class="fox-icon">🦊</div><div class="fox-name">IRA</div><div class="fox-role">Instagram</div></div>
-            </div>
+            <div class="panel-title" style="margin-top: 30px;">🦊 Fox Team Roster</div>
+            <div id="foxTeamRoster"></div>
+            <button onclick="window.location.href='team.html'" style="width: 100%; margin-top: 15px; padding: 12px; background: linear-gradient(135deg, #e67e22, #f39c12); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 14px;">View Full Team →</button>
         </div>
         <div class="panel">
             <div class="panel-title">🎨 Two-Click Content System</div>
@@ -172,6 +194,24 @@
                 <button class="modal-close" onclick="closeModal()">✕ Close</button>
             </div>
             <div class="modal-preview">
+                <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center;">
+                    <div style="text-align: center;">
+                        <div id="modalDaraAvatar"></div>
+                        <div style="font-size: 11px; color: #3498db; margin-top: 5px;">DARA<br>Analysis</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalCopywriterAvatar"></div>
+                        <div style="font-size: 11px; margin-top: 5px;" id="modalCopywriterName">IRA<br>Copywriter</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalVisualAvatar"></div>
+                        <div style="font-size: 11px; margin-top: 5px;" id="modalVisualName">GARA<br>Visual</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalVeraAvatar"></div>
+                        <div style="font-size: 11px; color: #2ecc71; margin-top: 5px;">VERA<br>Verified</div>
+                    </div>
+                </div>
                 <div id="modalImage" style="width: 100%; height: 300px; background: #2c3e50; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;"><span style="font-size: 48px;">🍔</span></div>
                 <div class="modal-caption" id="modalCaption">Remember your first burger with Dad? That feeling never gets old. 🍔❤️<br><br>#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats</div>
             </div>
@@ -183,7 +223,29 @@
             </div>
         </div>
     </div>
+    <script src="js/fox-team.js"></script>
     <script>
+        // Initialize fox avatars in order cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatarContainers = [
+                { id: 'maraAvatar', fox: 'mara', size: 'small' },
+                { id: 'maraAvatar2', fox: 'mara', size: 'small' },
+                { id: 'laraAvatar', fox: 'lara', size: 'small' },
+                { id: 'laraAvatar2', fox: 'lara', size: 'small' },
+                { id: 'rheaAvatar', fox: 'rhea', size: 'small' }
+            ];
+            
+            avatarContainers.forEach(item => {
+                const container = document.getElementById(item.id);
+                if (container) {
+                    container.innerHTML = generateFoxAvatar(item.fox, item.size);
+                }
+            });
+            
+            // Initialize fox team roster
+            generateFoxRoster('#foxTeamRoster');
+        });
+        
         function updateTime() { const now = new Date(); document.getElementById('currentTime').textContent = now.toLocaleTimeString(); }
         setInterval(updateTime, 1000); updateTime();
         function startTimer(id, startMinutes, startSeconds) {
@@ -226,6 +288,27 @@
             currentPlatform = platform; currentType = type;
             const content = contentExamples[platform][type];
             const platformEmoji = { instagram: '📱', tiktok: '🎵', facebook: '👥', youtube: '📺', snapchat: '👻' };
+            
+            // Get fox team for this platform
+            const foxes = getFoxesForPlatform(platform);
+            
+            // Update modal fox avatars
+            document.getElementById('modalDaraAvatar').innerHTML = generateFoxAvatar('dara', 'small');
+            document.getElementById('modalVeraAvatar').innerHTML = generateFoxAvatar('vera', 'small');
+            
+            if (foxes) {
+                const copywriterFox = FIFOX_TEAM[foxes.copywriter];
+                const visualFox = FIFOX_TEAM[foxes.visual];
+                
+                document.getElementById('modalCopywriterAvatar').innerHTML = generateFoxAvatar(foxes.copywriter, 'small');
+                document.getElementById('modalCopywriterName').innerHTML = `${copywriterFox.name}<br>Copywriter`;
+                document.getElementById('modalCopywriterName').style.color = copywriterFox.themeColor;
+                
+                document.getElementById('modalVisualAvatar').innerHTML = generateFoxAvatar(foxes.visual, 'small');
+                document.getElementById('modalVisualName').innerHTML = `${visualFox.name}<br>Visual`;
+                document.getElementById('modalVisualName').style.color = visualFox.themeColor;
+            }
+            
             document.getElementById('modalTitle').textContent = platformEmoji[platform] + ' ' + platform.toUpperCase() + ' - ' + type.toUpperCase() + ' Preview';
             document.getElementById('modalCaption').innerHTML = content.caption.replace(/\n/g, '<br>');
             document.getElementById('modalInsight').textContent = content.insight;
