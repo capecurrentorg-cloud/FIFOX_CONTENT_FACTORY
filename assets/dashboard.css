@@ -923,14 +923,29 @@ body {
 }
 
 .fox-avatar {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 36px;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(230, 126, 34, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(230, 126, 34, 0.3),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(230, 126, 34, 0.5),
+                    inset 0 0 25px rgba(255, 255, 255, 0.15);
+    }
 }
 
 .fox-details {

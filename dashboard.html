@@ -330,122 +330,142 @@
                 </div>
             </div>
 
+            <!-- DARA - Content Overseer (All Platforms) -->
             <div class="fox-team-status">
-                <h2>🦊 Content Creation Team</h2>
-                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Specialized agents for each social media platform</p>
-                <div class="fox-team-grid">
+                <h2>🦊 Content Overseer</h2>
+                <div class="fox-team-grid" style="grid-template-columns: 1fr;">
                     <div class="fox-agent-card" data-fox="dara">
                         <div class="fox-avatar" style="background: linear-gradient(135deg, #3498db, #2980b9);">🦊</div>
                         <div class="fox-details">
                             <div class="fox-name">DARA</div>
-                            <div class="fox-role">Content Overseer</div>
+                            <div class="fox-role">Content Overseer - Competitive Analysis & Insights</div>
                             <div class="fox-status active">🟢 Analyzing Competitors</div>
                         </div>
                     </div>
-                    <div class="fox-agent-card" data-fox="ira">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🦊</div>
-                        <div class="fox-details">
-                            <div class="fox-name">IRA</div>
-                            <div class="fox-role">Instagram Specialist</div>
-                            <div class="fox-status active">🟢 Ready</div>
+                </div>
+            </div>
+
+            <!-- Instagram Team: IRA + GARA -->
+            <div class="content-generation-section">
+                <h2>📱 Instagram Content - IRA & GARA Team</h2>
+                <div class="fox-platform-container">
+                    <div class="fox-team-grid" style="margin-bottom: 15px;">
+                        <div class="fox-agent-card" data-fox="ira">
+                            <div class="fox-avatar" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🦊</div>
+                            <div class="fox-details">
+                                <div class="fox-name">IRA</div>
+                                <div class="fox-role">Instagram Copywriter</div>
+                                <div class="fox-status active">🟢 Ready</div>
+                            </div>
+                        </div>
+                        <div class="fox-agent-card" data-fox="gara">
+                            <div class="fox-avatar" style="background: linear-gradient(135deg, #e056fd, #d83a9f);">🦊</div>
+                            <div class="fox-details">
+                                <div class="fox-name">GARA</div>
+                                <div class="fox-role">Instagram Visual Designer</div>
+                                <div class="fox-status active">🟢 Ready</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="fox-agent-card" data-fox="gara">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #e056fd, #d83a9f);">🦊</div>
-                        <div class="fox-details">
-                            <div class="fox-name">GARA</div>
-                            <div class="fox-role">Instagram Visual</div>
-                            <div class="fox-status active">🟢 Ready</div>
-                        </div>
-                    </div>
-                    <div class="fox-agent-card" data-fox="tira">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #fe2c55, #000);">🦊</div>
-                        <div class="fox-details">
-                            <div class="fox-name">TIRA</div>
-                            <div class="fox-role">TikTok Specialist</div>
-                            <div class="fox-status active">🟢 Ready</div>
-                        </div>
-                    </div>
-                    <div class="fox-agent-card" data-fox="fara">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #3b5998, #2d4373);">🦊</div>
-                        <div class="fox-details">
-                            <div class="fox-name">FARA</div>
-                            <div class="fox-role">Facebook Specialist</div>
-                            <div class="fox-status active">🟢 Ready</div>
-                        </div>
-                    </div>
-                    <div class="fox-agent-card" data-fox="yara">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #ff0000, #cc0000);">🦊</div>
-                        <div class="fox-details">
-                            <div class="fox-name">YARA</div>
-                            <div class="fox-role">YouTube Specialist</div>
-                            <div class="fox-status active">🟢 Ready</div>
-                        </div>
+                    <div class="button-grid-2col">
+                        <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'post')">
+                            <span class="btn-icon">📷</span>
+                            <span>Generate Post</span>
+                        </button>
+                        <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'story')">
+                            <span class="btn-icon">📖</span>
+                            <span>Generate Story</span>
+                        </button>
+                        <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'reel')">
+                            <span class="btn-icon">🎬</span>
+                            <span>Generate Reel</span>
+                        </button>
+                        <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'carousel')">
+                            <span class="btn-icon">🖼️</span>
+                            <span>Generate Carousel</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
+            <!-- TikTok Team: TIRA -->
             <div class="content-generation-section">
-                <h2>📱 Instagram Content</h2>
-                <div class="button-grid-2col">
-                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'post')">
-                        <span class="btn-icon">📷</span>
-                        <span>Generate Post</span>
-                    </button>
-                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'story')">
-                        <span class="btn-icon">📖</span>
-                        <span>Generate Story</span>
-                    </button>
-                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'reel')">
-                        <span class="btn-icon">🎬</span>
-                        <span>Generate Reel</span>
-                    </button>
-                    <button class="gen-button instagram" onclick="generatePlatformContent('instagram', 'carousel')">
-                        <span class="btn-icon">🖼️</span>
-                        <span>Generate Carousel</span>
-                    </button>
+                <h2>🎵 TikTok Content - TIRA Team</h2>
+                <div class="fox-platform-container">
+                    <div class="fox-team-grid" style="grid-template-columns: 1fr; margin-bottom: 15px;">
+                        <div class="fox-agent-card" data-fox="tira">
+                            <div class="fox-avatar" style="background: linear-gradient(135deg, #fe2c55, #000);">🦊</div>
+                            <div class="fox-details">
+                                <div class="fox-name">TIRA</div>
+                                <div class="fox-role">TikTok Specialist - Viral Content Creator</div>
+                                <div class="fox-status active">🟢 Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-grid-2col">
+                        <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'video')">
+                            <span class="btn-icon">📹</span>
+                            <span>Generate Video</span>
+                        </button>
+                        <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'trending')">
+                            <span class="btn-icon">🔥</span>
+                            <span>Trending Sound</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Facebook Team: FARA -->
             <div class="content-generation-section">
-                <h2>🎵 TikTok Content</h2>
-                <div class="button-grid-2col">
-                    <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'video')">
-                        <span class="btn-icon">📹</span>
-                        <span>Generate Video</span>
-                    </button>
-                    <button class="gen-button tiktok" onclick="generatePlatformContent('tiktok', 'trending')">
-                        <span class="btn-icon">🔥</span>
-                        <span>Trending Sound</span>
-                    </button>
+                <h2>📘 Facebook Content - FARA Team</h2>
+                <div class="fox-platform-container">
+                    <div class="fox-team-grid" style="grid-template-columns: 1fr; margin-bottom: 15px;">
+                        <div class="fox-agent-card" data-fox="fara">
+                            <div class="fox-avatar" style="background: linear-gradient(135deg, #3b5998, #2d4373);">🦊</div>
+                            <div class="fox-details">
+                                <div class="fox-name">FARA</div>
+                                <div class="fox-role">Facebook Specialist - Community Manager</div>
+                                <div class="fox-status active">🟢 Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-grid-2col">
+                        <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'post')">
+                            <span class="btn-icon">📝</span>
+                            <span>Generate Post</span>
+                        </button>
+                        <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'event')">
+                            <span class="btn-icon">🎉</span>
+                            <span>Create Event</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
+            <!-- YouTube Team: YARA -->
             <div class="content-generation-section">
-                <h2>📘 Facebook Content</h2>
-                <div class="button-grid-2col">
-                    <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'post')">
-                        <span class="btn-icon">📝</span>
-                        <span>Generate Post</span>
-                    </button>
-                    <button class="gen-button facebook" onclick="generatePlatformContent('facebook', 'event')">
-                        <span class="btn-icon">🎉</span>
-                        <span>Create Event</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="content-generation-section">
-                <h2>▶️ YouTube Content</h2>
-                <div class="button-grid-2col">
-                    <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'short')">
-                        <span class="btn-icon">⚡</span>
-                        <span>Generate Short</span>
-                    </button>
-                    <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'video')">
-                        <span class="btn-icon">🎥</span>
-                        <span>Generate Video</span>
-                    </button>
+                <h2>▶️ YouTube Content - YARA Team</h2>
+                <div class="fox-platform-container">
+                    <div class="fox-team-grid" style="grid-template-columns: 1fr; margin-bottom: 15px;">
+                        <div class="fox-agent-card" data-fox="yara">
+                            <div class="fox-avatar" style="background: linear-gradient(135deg, #ff0000, #cc0000);">🦊</div>
+                            <div class="fox-details">
+                                <div class="fox-name">YARA</div>
+                                <div class="fox-role">YouTube Specialist - Video Content Creator</div>
+                                <div class="fox-status active">🟢 Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-grid-2col">
+                        <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'short')">
+                            <span class="btn-icon">⚡</span>
+                            <span>Generate Short</span>
+                        </button>
+                        <button class="gen-button youtube" onclick="generatePlatformContent('youtube', 'video')">
+                            <span class="btn-icon">🎥</span>
+                            <span>Generate Video</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
