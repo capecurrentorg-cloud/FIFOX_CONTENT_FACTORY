@@ -64,6 +64,27 @@
     .modal-button:hover { transform: translateY(-2px); }
     .button-approve { background: #2ecc71; color: white; }
     .button-regenerate { background: #f39c12; color: white; }
+    /* Verification System Styles */
+    .listening-indicator { position: fixed; bottom: 20px; right: 20px; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 2px solid #e67e22; box-shadow: 0 5px 20px rgba(230, 126, 34, 0.3); z-index: 100; min-width: 300px; }
+    .listening-status h4 { color: #e67e22; margin-bottom: 15px; font-size: 16px; }
+    .agent-indicators { display: flex; justify-content: space-around; gap: 10px; margin-bottom: 10px; }
+    .agent-indicator { text-align: center; opacity: 0.3; transition: opacity 0.3s; }
+    .agent-indicator.active { opacity: 1; }
+    .agent-avatar { font-size: 32px; margin-bottom: 5px; }
+    .agent-indicator span { font-size: 11px; color: #888; }
+    .verification-result { max-width: 600px; }
+    .verification-status { padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 20px; }
+    .verification-status h3 { font-size: 28px; margin-bottom: 10px; }
+    .confidence-score { font-size: 48px; font-weight: bold; margin-top: 10px; }
+    .matching-agents { background: #252525; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    .matching-agents h4 { color: #e67e22; margin-bottom: 15px; }
+    .agent-list { display: flex; gap: 15px; flex-wrap: wrap; }
+    .agent-badge { display: flex; align-items: center; gap: 10px; background: #1a1a1a; padding: 10px 15px; border-radius: 8px; }
+    .discrepancies { background: #3a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #e74c3c; }
+    .discrepancies h4 { color: #e74c3c; margin-bottom: 10px; }
+    .discrepancies ul { margin-left: 20px; color: #ccc; }
+    .next-action { background: #2a3a2a; padding: 15px; border-radius: 8px; text-align: center; border-left: 4px solid #2ecc71; }
+    .next-action.rejected { background: #3a2a2a; border-left-color: #e74c3c; }
 </style>
 </head>
 <body>
@@ -224,6 +245,7 @@
         </div>
     </div>
     <script src="js/fox-team.js"></script>
+    <script src="js/order-verification.js"></script>
     <script>
         // Initialize fox avatars in order cards
         document.addEventListener('DOMContentLoaded', function() {
