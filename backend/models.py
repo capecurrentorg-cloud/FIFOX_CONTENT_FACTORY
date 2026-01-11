@@ -147,7 +147,7 @@ class AgentStatus(db.Model):
     last_active = db.Column(db.DateTime, default=datetime.utcnow)
     calls_handled = db.Column(db.Integer, default=0)
     success_rate = db.Column(db.Float, default=100.0)
-    metadata = db.Column(db.Text)  # JSON string for additional agent-specific data
+    agent_metadata = db.Column(db.Text)  # JSON string for additional agent-specific data
     
     def to_dict(self):
         """Convert agent status to dictionary"""
@@ -159,5 +159,5 @@ class AgentStatus(db.Model):
             'last_active': self.last_active.isoformat() if self.last_active else None,
             'calls_handled': self.calls_handled,
             'success_rate': self.success_rate,
-            'metadata': json.loads(self.metadata) if self.metadata else {}
+            'metadata': json.loads(self.agent_metadata) if self.agent_metadata else {}
         }

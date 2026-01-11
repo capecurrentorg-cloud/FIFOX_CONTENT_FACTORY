@@ -18,7 +18,7 @@ app.config.from_object(get_config())
 
 # Initialize extensions
 CORS(app, origins=app.config['CORS_ORIGINS'])
-socketio = SocketIO(app, cors_allowed_origins=app.config['SOCKETIO_CORS_ALLOWED_ORIGINS'], async_mode='eventlet')
+socketio = SocketIO(app, cors_allowed_origins=app.config['SOCKETIO_CORS_ALLOWED_ORIGINS'], async_mode='threading')
 db.init_app(app)
 
 # Configure logging

@@ -48,7 +48,7 @@ def update_agent_status(agent_name):
         if 'success_rate' in data:
             agent.success_rate = data['success_rate']
         if 'metadata' in data:
-            agent.metadata = json.dumps(data['metadata'])
+            agent.agent_metadata = json.dumps(data['metadata'])
         
         agent.last_active = datetime.utcnow()
         db.session.commit()
