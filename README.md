@@ -124,6 +124,67 @@ Automated post generation:
 
 ## 🚀 Quick Start
 
+### FIFOX Command Center Dashboard
+
+**NEW: Real-time Order Management Dashboard with Flask Backend!**
+
+#### 1. Start the Backend Server
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Start the Flask server
+python app.py
+```
+
+The backend will start on `http://localhost:5000`
+
+#### 2. Open the Dashboard
+
+Navigate to `http://localhost:5000` in your web browser to access the Command Center Dashboard.
+
+**Features:**
+- 📋 Real-time order tracking
+- ⏱️ Live kitchen timers
+- 🎨 AI-powered content generation for all platforms
+- 🦊 13 AI Fox Agents status monitoring
+- 📊 Order statistics
+
+#### 3. Test API Endpoints
+
+```bash
+# Get all active orders
+curl http://localhost:5000/api/orders
+
+# Get order statistics
+curl http://localhost:5000/api/orders/stats
+
+# Generate Instagram content
+curl -X POST http://localhost:5000/api/content/generate \
+  -H "Content-Type: application/json" \
+  -d '{"platform": "instagram", "content_type": "post", "topic": "burger"}'
+
+# Get agent statuses
+curl http://localhost:5000/api/agents/status
+
+# Create a test order
+curl -X POST http://localhost:5000/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customer_name": "Test Customer",
+    "customer_phone": "(555) 123-4567",
+    "items": [{"name": "Burger", "quantity": 1}],
+    "total_amount": 14.99,
+    "order_type": "delivery"
+  }'
+```
+
+---
+
 ### View Video Ads
 Visit: https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/
 
@@ -153,6 +214,75 @@ Edit `sample_restaurant_menu.json` with your actual menu items, then regenerate:
 python setup_phone_agent.py  # Updates phone agent
 python test_content_generator.py  # Tests with new menu
 ```
+
+---
+
+## 🔧 Backend Configuration
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and configure your API keys:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to add your API keys:
+- `TOAST_POS_API_KEY` - Toast POS integration
+- `VAPI_API_KEY` - Vapi.ai phone agent
+- `OPENAI_API_KEY` - Content generation (optional)
+- `INSTAGRAM_TOKEN`, `FACEBOOK_TOKEN`, etc. - Social media posting
+
+### Mock Mode
+
+By default, the backend runs in **Mock Mode** for development and testing:
+- All services return realistic mock data
+- No real API calls are made
+- Perfect for demos and development
+
+To use real API integrations, set `USE_MOCK_DATA=False` in your `.env` file.
+
+### API Documentation
+
+#### Orders API
+- `GET /api/orders` - Get all orders
+- `GET /api/orders/<order_id>` - Get specific order
+- `POST /api/orders` - Create new order
+- `PUT /api/orders/<order_id>` - Update order
+- `GET /api/orders/stats` - Get statistics
+
+#### Content Generation API
+- `POST /api/content/generate` - Generate platform content
+- `POST /api/content/custom` - Generate custom content
+- `GET /api/content/recent` - Get recent content
+- `POST /api/content/<id>/approve` - Approve content
+
+#### Agents API
+- `GET /api/agents/status` - Get all agent statuses
+- `POST /api/agents/mara/call` - Simulate MARA call
+- `GET /api/agents/verification/stats` - Get verification stats
+
+#### Timers API
+- `GET /api/timers` - Get active timers
+- `POST /api/timers` - Start new timer
+- `PUT /api/timers/<id>` - Update timer
+- `DELETE /api/timers/<id>` - Complete timer
+
+#### Settings API
+- `GET /api/settings` - Get all settings
+- `PUT /api/settings` - Update settings
+
+### WebSocket Events
+
+The dashboard connects via Socket.IO for real-time updates:
+
+- `connect` - Client connection
+- `new_order` - New order received
+- `order_update` - Order status changed
+- `timer_update` - Timer countdown update
+- `timer_complete` - Timer finished
+- `agent_status_change` - Agent status changed
+- `content_generated` - New content ready
 
 ---
 

@@ -183,67 +183,338 @@
             </div>
         </div>
     </div>
+    <!-- Socket.IO Client -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
-        function updateTime() { const now = new Date(); document.getElementById('currentTime').textContent = now.toLocaleTimeString(); }
-        setInterval(updateTime, 1000); updateTime();
-        function startTimer(id, startMinutes, startSeconds) {
-            let totalSeconds = startMinutes * 60 + startSeconds;
-            setInterval(() => {
-                if (totalSeconds <= 0) return;
-                totalSeconds--;
-                const mins = Math.floor(totalSeconds / 60); const secs = totalSeconds % 60;
-                document.getElementById(id).textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
-                if (totalSeconds < 180) document.getElementById(id).closest('.timer-item').classList.add('timer-warning');
-            }, 1000);
-        }
-        startTimer('timer1', 8, 45); startTimer('timer2', 12, 30); startTimer('timer3', 2, 15);
-        const contentExamples = {
-            instagram: {
-                post: { caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats", insight: "Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes.", score: 87 },
-                story: { caption: "Behind the scenes in our kitchen right now 👨‍🍳🔥\n\nSwipe up to order!", insight: "Stories with kitchen content get 34% more engagement. Best posted 11am-2pm.", score: 82 },
-                reel: { caption: "POV: You just walked into heaven 😍🍕\n\n#Reels #FoodPorn #PizzaLover #Satisfying", insight: "Reels using trending audio 'Good 4 U' seeing 2.3x normal reach. Recommend close-up food shots.", score: 91 },
-                carousel: { caption: "Our Top 5 Most Ordered Dishes (Slide to see why) 👉\n\n1️⃣ Signature Burger\n2️⃣ Grilled Salmon\n3️⃣ Ribeye Steak\n4️⃣ Caesar Salad\n5️⃣ Chocolate Lava Cake", insight: "Carousel posts get 3x more saves than single images. Perfect for driving repeat visits.", score: 85 }
-            },
-            tiktok: {
-                video: { caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull #SatisfyingVideo #FoodASMR", insight: "TikTok algorithm favoring food ASMR content. Cheese pull videos averaging 50k+ views.", score: 93 },
-                trending: { caption: "Making our famous burger to this sound cause why not 💅🍔 #Trending #BurgerTok", insight: "Current trending sound has 2.3M uses. Early adopters seeing 5x normal engagement.", score: 88 }
-            },
-            facebook: {
-                post: { caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nBring the whole family! Kids eat free on Tuesdays.\n\nReservations: (555) 123-4567\n\n📍 123 Main Street, Your City", insight: "Facebook users respond best to family-oriented promotions. Posts with location get 2x more clicks.", score: 79 },
-                event: { caption: "🎉 LIVE MUSIC NIGHT - This Friday!\n\nJoin us for great food, drinks, and entertainment.\n\n🎸 Band starts at 7 PM\n📅 Save the date!", insight: "Event posts get shared 4x more than regular posts. Create event listing for automatic reminders.", score: 84 }
-            },
-            youtube: {
-                short: { caption: "The secret to our perfect medium-rare steak 🥩🔥\n\n#Shorts #Cooking #SteakTok #ChefTips", insight: "YouTube Shorts under 30 seconds performing best. Recipe tips getting high retention.", score: 86 },
-                video: { caption: "FULL RECIPE: How We Make Our Signature Burger From Scratch\n\nIngredients in description! 🍔👨‍🍳", insight: "Long-form recipe videos averaging 8min watch time. Include timestamps in description.", score: 81 }
-            },
-            snapchat: {
-                story: { caption: "Order now through the link! Fresh out the oven 🔥", insight: "Snapchat users prefer authentic, unpolished content. Stories with 'right now' urgency perform best.", score: 77 },
-                spotlight: { caption: "Watch us make 100 burgers in 10 minutes ⚡🍔", insight: "Spotlight trending: fast-paced, impressive cooking feats. Time-lapse format recommended.", score: 83 }
+        // Backend configuration
+        const BACKEND_URL = 'http://localhost:5000';
+        
+        // Initialize Socket.IO connection
+        const socket = io(BACKEND_URL);
+        
+        socket.on('connect', () => {
+            console.log('✅ Connected to FIFOX Backend');
+            // Request initial data
+            fetchOrders();
+            fetchTimers();
+            fetchStats();
+        });
+        
+        socket.on('disconnect', () => {
+            console.log('⚠️ Disconnected from backend');
+        });
+        
+        socket.on('connection_response', (data) => {
+            console.log('Backend connection:', data);
+        });
+        
+        // Handle real-time order updates
+        socket.on('new_order', (order) => {
+            console.log('New order received:', order);
+            addOrderToList(order);
+            updateStats();
+        });
+        
+        socket.on('order_update', (order) => {
+            console.log('Order updated:', order);
+            updateOrderInList(order);
+            updateStats();
+        });
+        
+        // Handle real-time timer updates
+        socket.on('timer_update', (timer) => {
+            updateTimerDisplay(timer);
+        });
+        
+        socket.on('timer_started', (timer) => {
+            console.log('Timer started:', timer);
+            addTimerToList(timer);
+        });
+        
+        socket.on('timer_complete', (timer) => {
+            console.log('Timer complete:', timer);
+            removeTimerFromList(timer.timer_id);
+        });
+        
+        // Handle agent status changes
+        socket.on('agent_status_change', (agent) => {
+            console.log('Agent status changed:', agent);
+        });
+        
+        // Fetch functions
+        async function fetchOrders() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/orders?status=pending&status=preparing&status=ready`);
+                const orders = await response.json();
+                displayOrders(orders);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
             }
-        };
-        let currentPlatform, currentType;
-        function generatePost(platform, type) {
-            currentPlatform = platform; currentType = type;
-            const content = contentExamples[platform][type];
-            const platformEmoji = { instagram: '📱', tiktok: '🎵', facebook: '👥', youtube: '📺', snapchat: '👻' };
-            document.getElementById('modalTitle').textContent = platformEmoji[platform] + ' ' + platform.toUpperCase() + ' - ' + type.toUpperCase() + ' Preview';
-            document.getElementById('modalCaption').innerHTML = content.caption.replace(/\n/g, '<br>');
-            document.getElementById('modalInsight').textContent = content.insight;
-            document.getElementById('modalScore').textContent = content.score + '%';
-            document.getElementById('contentModal').style.display = 'flex';
         }
-        function closeModal() { document.getElementById('contentModal').style.display = 'none'; }
-        function approvePost() {
+        
+        async function fetchTimers() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/timers?active_only=true`);
+                const timers = await response.json();
+                displayTimers(timers);
+            } catch (error) {
+                console.error('Error fetching timers:', error);
+            }
+        }
+        
+        async function fetchStats() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/orders/stats`);
+                const stats = await response.json();
+                document.getElementById('activeCount').textContent = stats.active_count || 0;
+                document.getElementById('todayCount').textContent = stats.today_count || 0;
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+        
+        async function updateStats() {
+            fetchStats();
+        }
+        
+        // Display functions
+        function displayOrders(orders) {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = '';
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">No active orders</div>';
+                return;
+            }
+            
+            orders.forEach(order => {
+                addOrderToList(order);
+            });
+        }
+        
+        function addOrderToList(order) {
+            const ordersList = document.getElementById('ordersList');
+            const existingOrder = document.querySelector(`[data-order-id="${order.order_id}"]`);
+            
+            if (existingOrder) {
+                existingOrder.remove();
+            }
+            
+            const timeAgo = getTimeAgo(order.timestamp);
+            const items = order.items.map(item => `• ${item.name || item}`).join('<br>');
+            
+            const orderCard = document.createElement('div');
+            orderCard.className = 'order-card';
+            orderCard.setAttribute('data-order-id', order.order_id);
+            orderCard.innerHTML = `
+                <div class="order-header">
+                    <span class="order-number">#${order.order_id}</span>
+                    <span class="order-time">${timeAgo}</span>
+                </div>
+                <div class="customer-name">${order.customer_name || 'Unknown'} - ${order.customer_phone || ''}</div>
+                <div class="order-items">${items}</div>
+                <span class="order-status status-${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+            `;
+            
+            ordersList.insertBefore(orderCard, ordersList.firstChild);
+        }
+        
+        function updateOrderInList(order) {
+            addOrderToList(order);
+        }
+        
+        function displayTimers(timers) {
+            const timersList = document.getElementById('timersList');
+            timersList.innerHTML = '';
+            
+            if (timers.length === 0) {
+                timersList.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">No active timers</div>';
+                return;
+            }
+            
+            timers.forEach(timer => {
+                addTimerToList(timer);
+            });
+        }
+        
+        function addTimerToList(timer) {
+            const timersList = document.getElementById('timersList');
+            const existingTimer = document.querySelector(`[data-timer-id="${timer.timer_id}"]`);
+            
+            if (existingTimer) {
+                return; // Already exists
+            }
+            
+            const timerDiv = document.createElement('div');
+            timerDiv.className = 'timer-item';
+            if (timer.remaining < 180) {
+                timerDiv.classList.add('timer-warning');
+            }
+            timerDiv.setAttribute('data-timer-id', timer.timer_id);
+            timerDiv.innerHTML = `
+                <div class="timer-header">
+                    <span class="timer-order">Order ${timer.order_id}</span>
+                    <span>🍳 ${timer.dish_name}</span>
+                </div>
+                <div class="timer-time" id="timer-${timer.timer_id}">${formatTime(timer.remaining)}</div>
+            `;
+            
+            timersList.insertBefore(timerDiv, timersList.firstChild);
+        }
+        
+        function updateTimerDisplay(timer) {
+            const timerElement = document.getElementById(`timer-${timer.timer_id}`);
+            if (timerElement) {
+                timerElement.textContent = formatTime(timer.remaining);
+                
+                const timerDiv = timerElement.closest('.timer-item');
+                if (timer.remaining < 180) {
+                    timerDiv.classList.add('timer-warning');
+                }
+            }
+        }
+        
+        function removeTimerFromList(timerId) {
+            const timerDiv = document.querySelector(`[data-timer-id="${timerId}"]`);
+            if (timerDiv) {
+                timerDiv.remove();
+            }
+        }
+        
+        // Utility functions
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const past = new Date(timestamp);
+            const diffMs = now - past;
+            const diffMins = Math.floor(diffMs / 60000);
+            
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} min ago`;
+            const diffHours = Math.floor(diffMins / 60);
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            const diffDays = Math.floor(diffHours / 24);
+            return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+        }
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+        
+        function updateTime() { 
+            const now = new Date(); 
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString(); 
+        }
+        setInterval(updateTime, 1000); 
+        updateTime();
+        
+        // Content generation - now uses backend API
+        let currentPlatform, currentType;
+        
+        async function generatePost(platform, type) {
+            currentPlatform = platform; 
+            currentType = type;
+            
+            try {
+                // Call backend API to generate content
+                const response = await fetch(`${BACKEND_URL}/api/content/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ platform, content_type: type, topic: '' })
+                });
+                
+                const content = await response.json();
+                
+                // Display in modal
+                const platformEmoji = { instagram: '📱', tiktok: '🎵', facebook: '👥', youtube: '📺', snapchat: '👻' };
+                document.getElementById('modalTitle').textContent = platformEmoji[platform] + ' ' + platform.toUpperCase() + ' - ' + type.toUpperCase() + ' Preview';
+                document.getElementById('modalCaption').innerHTML = (content.caption || '').replace(/\n/g, '<br>');
+                document.getElementById('modalInsight').textContent = content.dara_insight || 'No insight available';
+                document.getElementById('modalScore').textContent = (content.viral_score || 0) + '%';
+                document.getElementById('contentModal').style.display = 'flex';
+                
+                // Store content ID for approval
+                window.currentContentId = content.content_id;
+            } catch (error) {
+                console.error('Error generating content:', error);
+                alert('Failed to generate content. Using fallback mock data.');
+                
+                // Fallback to mock data
+                const fallbackContent = getMockContent(platform, type);
+                const platformEmoji = { instagram: '📱', tiktok: '🎵', facebook: '👥', youtube: '📺', snapchat: '👻' };
+                document.getElementById('modalTitle').textContent = platformEmoji[platform] + ' ' + platform.toUpperCase() + ' - ' + type.toUpperCase() + ' Preview';
+                document.getElementById('modalCaption').innerHTML = (fallbackContent.caption || '').replace(/\n/g, '<br>');
+                document.getElementById('modalInsight').textContent = fallbackContent.insight || '';
+                document.getElementById('modalScore').textContent = (fallbackContent.score || 0) + '%';
+                document.getElementById('contentModal').style.display = 'flex';
+            }
+        }
+        
+        function getMockContent(platform, type) {
+            const contentExamples = {
+                instagram: {
+                    post: { caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove", insight: "Competitor Luigi's got 12k likes on similar content.", score: 87 }
+                },
+                tiktok: {
+                    video: { caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull", insight: "Cheese pull videos averaging 50k+ views.", score: 93 }
+                },
+                facebook: {
+                    post: { caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nKids eat free on Tuesdays!", insight: "Facebook users respond to family promotions.", score: 79 }
+                },
+                youtube: {
+                    short: { caption: "The secret to our perfect steak 🥩🔥 #Shorts", insight: "Recipe tips getting high retention.", score: 86 }
+                },
+                snapchat: {
+                    story: { caption: "Fresh out the oven 🔥", insight: "Authentic content performs best.", score: 77 }
+                }
+            };
+            return contentExamples[platform]?.[type] || { caption: 'Check out our food!', insight: 'No data', score: 75 };
+        }
+        
+        function closeModal() { 
+            document.getElementById('contentModal').style.display = 'none'; 
+        }
+        
+        async function approvePost() {
             const caption = document.getElementById('modalCaption').textContent;
+            
+            // Approve content via backend if we have an ID
+            if (window.currentContentId) {
+                try {
+                    await fetch(`${BACKEND_URL}/api/content/${window.currentContentId}/approve`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                } catch (error) {
+                    console.error('Error approving content:', error);
+                }
+            }
+            
+            // Copy to clipboard and open platform
             navigator.clipboard.writeText(caption).then(() => {
                 alert('✅ Caption copied to clipboard!\n\nOpening ' + currentPlatform.toUpperCase() + '...\n\nJust paste and post! 🎉');
-                const urls = { instagram: 'https://www.instagram.com', tiktok: 'https://www.tiktok.com/upload', facebook: 'https://www.facebook.com', youtube: 'https://studio.youtube.com', snapchat: 'https://www.snapchat.com' };
+                const urls = { 
+                    instagram: 'https://www.instagram.com', 
+                    tiktok: 'https://www.tiktok.com/upload', 
+                    facebook: 'https://www.facebook.com', 
+                    youtube: 'https://studio.youtube.com', 
+                    snapchat: 'https://www.snapchat.com' 
+                };
                 window.open(urls[currentPlatform], '_blank');
                 closeModal();
             });
         }
-        function regeneratePost() { alert('↻ Regenerating with new angle...'); closeModal(); setTimeout(() => generatePost(currentPlatform, currentType), 500); }
-        document.getElementById('contentModal').addEventListener('click', (e) => { if (e.target.id === 'contentModal') closeModal(); });
+        
+        function regeneratePost() { 
+            alert('↻ Regenerating with new angle...'); 
+            closeModal(); 
+            setTimeout(() => generatePost(currentPlatform, currentType), 500); 
+        }
+        
+        document.getElementById('contentModal').addEventListener('click', (e) => { 
+            if (e.target.id === 'contentModal') closeModal(); 
+        });
     </script>
 </body>
 </html>
