@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFOX Team Roster - Meet the 13 Foxes</title>
+    <link rel="stylesheet" href="css/fox-avatars.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            padding: 20px 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-button {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-button:hover {
+            background: rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .intro h2 {
+            font-size: 32px;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        .intro p {
+            font-size: 16px;
+            color: #bbb;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #e67e22;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .fox-profile {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .fox-profile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(230, 126, 34, 0.3);
+        }
+        
+        .fox-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .fox-profile-info {
+            flex: 1;
+        }
+        
+        .fox-profile-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .fox-profile-role {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .fox-profile-age {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .fox-profile-personality {
+            font-size: 13px;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .fox-profile-tasks {
+            margin-top: 15px;
+        }
+        
+        .fox-profile-tasks h4 {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .task-tag {
+            display: inline-block;
+            background: rgba(230, 126, 34, 0.2);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Color-coded profiles */
+        .fox-profile[data-fox="mara"] { border-color: #e67e22; }
+        .fox-profile[data-fox="mara"]:hover { border-color: #e67e22; box-shadow: 0 10px 30px rgba(230, 126, 34, 0.4); }
+        .fox-profile[data-fox="mara"] .fox-profile-name { color: #e67e22; }
+        
+        .fox-profile[data-fox="rhea"] { border-color: #e91e63; }
+        .fox-profile[data-fox="rhea"]:hover { border-color: #e91e63; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4); }
+        .fox-profile[data-fox="rhea"] .fox-profile-name { color: #e91e63; }
+        
+        .fox-profile[data-fox="vera"] { border-color: #2ecc71; }
+        .fox-profile[data-fox="vera"]:hover { border-color: #2ecc71; box-shadow: 0 10px 30px rgba(46, 204, 113, 0.4); }
+        .fox-profile[data-fox="vera"] .fox-profile-name { color: #2ecc71; }
+        
+        .fox-profile[data-fox="dara"] { border-color: #3498db; }
+        .fox-profile[data-fox="dara"]:hover { border-color: #3498db; box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4); }
+        .fox-profile[data-fox="dara"] .fox-profile-name { color: #3498db; }
+        
+        .fox-profile[data-fox="lara"] { border-color: #e74c3c; }
+        .fox-profile[data-fox="lara"]:hover { border-color: #e74c3c; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4); }
+        .fox-profile[data-fox="lara"] .fox-profile-name { color: #e74c3c; }
+        
+        .fox-profile[data-fox="tira"], .fox-profile[data-fox="tora"] { border-color: #e91e63; }
+        .fox-profile[data-fox="tira"]:hover, .fox-profile[data-fox="tora"]:hover { border-color: #e91e63; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4); }
+        .fox-profile[data-fox="tira"] .fox-profile-name, .fox-profile[data-fox="tora"] .fox-profile-name { color: #e91e63; }
+        
+        .fox-profile[data-fox="sara"], .fox-profile[data-fox="kara"] { border-color: #ffeb3b; }
+        .fox-profile[data-fox="sara"]:hover, .fox-profile[data-fox="kara"]:hover { border-color: #ffeb3b; box-shadow: 0 10px 30px rgba(255, 235, 59, 0.4); }
+        .fox-profile[data-fox="sara"] .fox-profile-name, .fox-profile[data-fox="kara"] .fox-profile-name { color: #ffeb3b; }
+        
+        .fox-profile[data-fox="ira"], .fox-profile[data-fox="gara"] { border-color: #9c27b0; }
+        .fox-profile[data-fox="ira"]:hover, .fox-profile[data-fox="gara"]:hover { border-color: #9c27b0; box-shadow: 0 10px 30px rgba(156, 39, 176, 0.4); }
+        .fox-profile[data-fox="ira"] .fox-profile-name, .fox-profile[data-fox="gara"] .fox-profile-name { color: #9c27b0; }
+        
+        .fox-profile[data-fox="farah"] { border-color: #1565c0; }
+        .fox-profile[data-fox="farah"]:hover { border-color: #1565c0; box-shadow: 0 10px 30px rgba(21, 101, 192, 0.4); }
+        .fox-profile[data-fox="farah"] .fox-profile-name { color: #1565c0; }
+        
+        .fox-profile[data-fox="bara"] { border-color: #f44336; }
+        .fox-profile[data-fox="bara"]:hover { border-color: #f44336; box-shadow: 0 10px 30px rgba(244, 67, 54, 0.4); }
+        .fox-profile[data-fox="bara"] .fox-profile-name { color: #f44336; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 20px; }
+            .nav-buttons { flex-direction: column; }
+            .team-grid { grid-template-columns: 1fr; }
+            .intro h2 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>🦊 FIFOX Team Roster</h1>
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="window.location.href='index.html'">📱 Gallery</button>
+                <button class="nav-button" onclick="window.location.href='command_center.html'">🎮 Command Center</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h2>Meet the 13 FIFOX Team Members</h2>
+            <p>Each fox is a specialized AI agent with unique skills, personality, and expertise. Together, they form a complete restaurant automation system handling everything from phone orders to social media content creation.</p>
+        </div>
+        
+        <div class="team-section">
+            <div class="section-title">🎯 Core Operations Team (5 Foxes)</div>
+            <div class="team-grid" id="coreTeam"></div>
+        </div>
+        
+        <div class="team-section">
+            <div class="section-title">📱 Social Media Content Creators (8 Foxes)</div>
+            <div class="team-grid" id="contentTeam"></div>
+        </div>
+    </div>
+    
+    <script src="js/fox-team.js"></script>
+    <script>
+        function generateFoxProfile(foxKey) {
+            const fox = FIFOX_TEAM[foxKey];
+            return `
+                <div class="fox-profile" data-fox="${foxKey}">
+                    <div class="fox-profile-header">
+                        ${generateFoxAvatar(foxKey, 'large')}
+                        <div class="fox-profile-info">
+                            <div class="fox-profile-name">${fox.name}</div>
+                            <div class="fox-profile-role">${fox.role}</div>
+                            <div class="fox-profile-age">Age ${fox.age} • ${fox.background}</div>
+                        </div>
+                    </div>
+                    <div class="fox-profile-personality">"${fox.personality}"</div>
+                    <div style="font-size: 13px; color: #ccc; line-height: 1.6; margin-bottom: 10px;">
+                        ${fox.description}
+                    </div>
+                    <div class="fox-profile-tasks">
+                        <h4>Key Responsibilities:</h4>
+                        ${fox.tasks.map(task => `<span class="task-tag">${task}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Core operations team
+        const coreTeam = ['mara', 'rhea', 'vera', 'dara', 'lara'];
+        const contentTeam = ['tira', 'tora', 'sara', 'kara', 'ira', 'gara', 'farah', 'bara'];
+        
+        document.getElementById('coreTeam').innerHTML = coreTeam.map(fox => generateFoxProfile(fox)).join('');
+        document.getElementById('contentTeam').innerHTML = contentTeam.map(fox => generateFoxProfile(fox)).join('');
+    </script>
+</body>
+</html>

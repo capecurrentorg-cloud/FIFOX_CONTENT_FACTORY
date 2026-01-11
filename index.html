@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>FIFOX Content Factory - Video Gallery</title>
+<link rel="stylesheet" href="css/fox-avatars.css">
 <style>
     body {
         background: #1a1a1a;
@@ -14,7 +15,26 @@
         text-align: center;
         color: #e67e22;
         text-shadow: 0 0 10px #e67e22;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+    }
+    .nav-bar {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .nav-bar a {
+        display: inline-block;
+        background: linear-gradient(135deg, #e67e22, #f39c12);
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        margin: 0 10px;
+        font-weight: bold;
+        transition: all 0.3s;
+    }
+    .nav-bar a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
     }
     .gallery {
         display: grid;
@@ -77,6 +97,10 @@
 </head>
 <body>
     <h1>🦊 FIFOX Content Factory - Video Gallery</h1>
+    <div class="nav-bar">
+        <a href="command_center.html">🎮 Command Center</a>
+        <a href="team.html">👥 Meet the Team</a>
+    </div>
     <div class="gallery">
         <div class="video-card">
             <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Signature Burger">
@@ -84,6 +108,7 @@
                 <span class="video-number">#1</span>
                 <a href="Foxes/video_1.html">SIGNATURE BURGER</a>
                 <p>8oz grass-fed beef burger with aged cheddar & bacon</p>
+                <div class="fox-creator-badge" id="creator1"></div>
             </div>
         </div>
         <div class="video-card">
@@ -319,5 +344,28 @@
             </div>
         </div>
     </div>
+    <script src="js/fox-team.js"></script>
+    <script>
+        // Add fox creator badges to all video cards
+        document.addEventListener('DOMContentLoaded', function() {
+            // Assign random fox creators to videos for demo purposes
+            const contentFoxes = ['tira', 'tora', 'sara', 'kara', 'ira', 'gara', 'farah', 'bara'];
+            const videoCards = document.querySelectorAll('.video-card-content');
+            
+            videoCards.forEach((card, index) => {
+                // Rotate through content foxes
+                const foxKey = contentFoxes[index % contentFoxes.length];
+                const badge = document.createElement('div');
+                badge.innerHTML = generateCreatorBadge(foxKey);
+                card.appendChild(badge.firstChild);
+            });
+            
+            // Special handling for first card if it has the ID
+            const creator1 = document.getElementById('creator1');
+            if (creator1) {
+                creator1.outerHTML = generateCreatorBadge('ira');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFOX Content Generator - Two-Click Posting System</title>
+    <link rel="stylesheet" href="css/fox-avatars.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            padding: 20px 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+        }
+        
+        .nav-button {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-button:hover {
+            background: rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .intro h2 {
+            font-size: 32px;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        .intro p {
+            font-size: 16px;
+            color: #bbb;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .platform-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(230, 126, 34, 0.3);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .platform-icon {
+            font-size: 48px;
+        }
+        
+        .platform-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .platform-info p {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .fox-team-preview {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .fox-preview-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        .fox-preview-name {
+            font-size: 12px;
+            color: #e67e22;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        
+        .fox-preview-role {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .generate-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .generate-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        
+        /* Platform-specific colors */
+        .platform-instagram { border-color: #e056fd; }
+        .platform-instagram:hover { border-color: #e056fd; box-shadow: 0 10px 30px rgba(224, 86, 253, 0.4); }
+        .platform-instagram .generate-button { background: linear-gradient(135deg, #e056fd, #d83a9f); }
+        
+        .platform-tiktok { border-color: #fe2c55; }
+        .platform-tiktok:hover { border-color: #fe2c55; box-shadow: 0 10px 30px rgba(254, 44, 85, 0.4); }
+        .platform-tiktok .generate-button { background: linear-gradient(135deg, #000, #fe2c55); }
+        
+        .platform-snapchat { border-color: #fffc00; }
+        .platform-snapchat:hover { border-color: #fffc00; box-shadow: 0 10px 30px rgba(255, 252, 0, 0.4); }
+        .platform-snapchat .generate-button { background: linear-gradient(135deg, #fffc00, #f9d423); color: #000; }
+        
+        .platform-facebook { border-color: #3b5998; }
+        .platform-facebook:hover { border-color: #3b5998; box-shadow: 0 10px 30px rgba(59, 89, 152, 0.4); }
+        .platform-facebook .generate-button { background: linear-gradient(135deg, #3b5998, #2d4373); }
+        
+        .platform-youtube { border-color: #ff0000; }
+        .platform-youtube:hover { border-color: #ff0000; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4); }
+        .platform-youtube .generate-button { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-header h2 {
+            font-size: 28px;
+            color: #e67e22;
+        }
+        
+        .close-button {
+            background: #e74c3c;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-button:hover {
+            background: #c0392b;
+        }
+        
+        .workflow-section {
+            background: #252525;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .workflow-title {
+            font-size: 18px;
+            color: #e67e22;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .workflow-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        .preview-box {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .preview-caption {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .verification-box {
+            background: #27ae60;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .verification-box strong {
+            font-size: 18px;
+        }
+        
+        .verification-score {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .action-button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .button-approve {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .button-regenerate {
+            background: #f39c12;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>🎨 FIFOX Content Generator</h1>
+            <button class="nav-button" onclick="window.location.href='command_center.html'">← Back to Command Center</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h2>Two-Click Content Posting System</h2>
+            <p>Select a platform below to generate AI-powered social media content. Each post is created by our specialized fox team, analyzed by DARA for competitive insights, and verified by VERA for quality.</p>
+        </div>
+        
+        <div class="platforms-grid">
+            <!-- Instagram -->
+            <div class="platform-card platform-instagram" onclick="openGenerator('instagram')">
+                <div class="platform-header">
+                    <div class="platform-icon">📱</div>
+                    <div class="platform-info">
+                        <h3>Instagram</h3>
+                        <p>Posts, Stories, Reels & Carousels</p>
+                    </div>
+                </div>
+                <div class="fox-team-preview">
+                    <div class="fox-preview-item">
+                        <div id="iraPreview"></div>
+                        <div class="fox-preview-name">IRA</div>
+                        <div class="fox-preview-role">Copywriter</div>
+                    </div>
+                    <div class="fox-preview-item">
+                        <div id="garaPreview"></div>
+                        <div class="fox-preview-name">GARA</div>
+                        <div class="fox-preview-role">Visual</div>
+                    </div>
+                </div>
+                <button class="generate-button">Generate Instagram Content →</button>
+            </div>
+            
+            <!-- TikTok -->
+            <div class="platform-card platform-tiktok" onclick="openGenerator('tiktok')">
+                <div class="platform-header">
+                    <div class="platform-icon">🎵</div>
+                    <div class="platform-info">
+                        <h3>TikTok</h3>
+                        <p>Viral Videos & Trending Sounds</p>
+                    </div>
+                </div>
+                <div class="fox-team-preview">
+                    <div class="fox-preview-item">
+                        <div id="tiraPreview"></div>
+                        <div class="fox-preview-name">TIRA</div>
+                        <div class="fox-preview-role">Copywriter</div>
+                    </div>
+                    <div class="fox-preview-item">
+                        <div id="toraPreview"></div>
+                        <div class="fox-preview-name">TORA</div>
+                        <div class="fox-preview-role">Visual</div>
+                    </div>
+                </div>
+                <button class="generate-button">Generate TikTok Content →</button>
+            </div>
+            
+            <!-- Snapchat -->
+            <div class="platform-card platform-snapchat" onclick="openGenerator('snapchat')">
+                <div class="platform-header">
+                    <div class="platform-icon">👻</div>
+                    <div class="platform-info">
+                        <h3>Snapchat</h3>
+                        <p>Stories & Spotlight</p>
+                    </div>
+                </div>
+                <div class="fox-team-preview">
+                    <div class="fox-preview-item">
+                        <div id="saraPreview"></div>
+                        <div class="fox-preview-name">SARA</div>
+                        <div class="fox-preview-role">Copywriter</div>
+                    </div>
+                    <div class="fox-preview-item">
+                        <div id="karaPreview"></div>
+                        <div class="fox-preview-name">KARA</div>
+                        <div class="fox-preview-role">Visual</div>
+                    </div>
+                </div>
+                <button class="generate-button">Generate Snapchat Content →</button>
+            </div>
+            
+            <!-- Facebook -->
+            <div class="platform-card platform-facebook" onclick="openGenerator('facebook')">
+                <div class="platform-header">
+                    <div class="platform-icon">👥</div>
+                    <div class="platform-info">
+                        <h3>Facebook</h3>
+                        <p>Community Posts & Events</p>
+                    </div>
+                </div>
+                <div class="fox-team-preview">
+                    <div class="fox-preview-item">
+                        <div id="farahPreview"></div>
+                        <div class="fox-preview-name">FARAH</div>
+                        <div class="fox-preview-role">Content Creator</div>
+                    </div>
+                </div>
+                <button class="generate-button">Generate Facebook Content →</button>
+            </div>
+            
+            <!-- YouTube -->
+            <div class="platform-card platform-youtube" onclick="openGenerator('youtube')">
+                <div class="platform-header">
+                    <div class="platform-icon">📺</div>
+                    <div class="platform-info">
+                        <h3>YouTube</h3>
+                        <p>Shorts & Long-Form Videos</p>
+                    </div>
+                </div>
+                <div class="fox-team-preview">
+                    <div class="fox-preview-item">
+                        <div id="baraPreview"></div>
+                        <div class="fox-preview-name">BARA</div>
+                        <div class="fox-preview-role">Content Creator</div>
+                    </div>
+                </div>
+                <button class="generate-button">Generate YouTube Content →</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content Generation Modal -->
+    <div class="modal" id="generatorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">📱 Content Preview</h2>
+                <button class="close-button" onclick="closeModal()">✕ Close</button>
+            </div>
+            
+            <div class="workflow-section">
+                <div class="workflow-title">🔍 DARA's Competitive Analysis</div>
+                <div class="workflow-content" id="daraAnalysis">
+                    Analyzing competitor posts from last 7 days...
+                </div>
+            </div>
+            
+            <div class="preview-box">
+                <div style="display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div id="modalCopyAvatar"></div>
+                        <div style="font-size: 11px; margin-top: 5px;" id="copywriterLabel">Copywriter</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalVisualAvatar"></div>
+                        <div style="font-size: 11px; margin-top: 5px;" id="visualLabel">Visual Creator</div>
+                    </div>
+                </div>
+                <div class="preview-caption" id="generatedCaption">
+                    Generated content will appear here...
+                </div>
+            </div>
+            
+            <div class="verification-box">
+                <strong>✅ VERA Verified</strong>
+                <div class="verification-score" id="viralScore">87%</div>
+                <div>Viral Potential Score</div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-button button-approve" onclick="approveAndPost()">
+                    ✓ Approve & Prepare to Post
+                </button>
+                <button class="action-button button-regenerate" onclick="regenerateContent()">
+                    ↻ Regenerate
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/fox-team.js"></script>
+    <script>
+        // Initialize fox avatars
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('iraPreview').innerHTML = generateFoxAvatar('ira', 'small');
+            document.getElementById('garaPreview').innerHTML = generateFoxAvatar('gara', 'small');
+            document.getElementById('tiraPreview').innerHTML = generateFoxAvatar('tira', 'small');
+            document.getElementById('toraPreview').innerHTML = generateFoxAvatar('tora', 'small');
+            document.getElementById('saraPreview').innerHTML = generateFoxAvatar('sara', 'small');
+            document.getElementById('karaPreview').innerHTML = generateFoxAvatar('kara', 'small');
+            document.getElementById('farahPreview').innerHTML = generateFoxAvatar('farah', 'small');
+            document.getElementById('baraPreview').innerHTML = generateFoxAvatar('bara', 'small');
+        });
+        
+        let currentPlatform = '';
+        
+        const contentSamples = {
+            instagram: {
+                caption: "Remember your first burger with Dad? That feeling never gets old. 🍔❤️\n\n#ComfortFood #FamilyMoments #BurgerLove #FoodMemories #NostalgiaEats",
+                analysis: "Competitor Luigi's got 12k likes on similar close-up shot yesterday. Trending: comfort food nostalgia themes. Instagram algorithm currently favoring emotional storytelling.",
+                score: 87
+            },
+            tiktok: {
+                caption: "When the cheese pull hits different 🧀😮‍💨 #FoodTok #CheesePull #SatisfyingVideo #FoodASMR",
+                analysis: "TikTok algorithm favoring food ASMR content. Cheese pull videos averaging 50k+ views. Trending sound 'Good 4 U' available for use.",
+                score: 93
+            },
+            snapchat: {
+                caption: "Order now through the link! Fresh out the oven 🔥",
+                analysis: "Snapchat users prefer authentic, unpolished content. Stories with 'right now' urgency perform 40% better. Behind-the-scenes content resonates with younger demographic.",
+                score: 77
+            },
+            facebook: {
+                caption: "🍔 FAMILY SPECIAL THIS WEEK 🍔\n\nBring the whole family! Kids eat free on Tuesdays.\n\nReservations: (555) 123-4567\n\n📍 123 Main Street, Your City",
+                analysis: "Facebook users respond best to family-oriented promotions. Posts with location tags get 2x more clicks. Event-style posts see highest engagement on weekdays.",
+                score: 79
+            },
+            youtube: {
+                caption: "The secret to our perfect medium-rare steak 🥩🔥\n\n#Shorts #Cooking #SteakTok #ChefTips\n\nFull recipe in description!",
+                analysis: "YouTube Shorts under 30 seconds performing best. Recipe tips getting high retention. Long-form recipe videos averaging 8min watch time.",
+                score: 86
+            }
+        };
+        
+        function openGenerator(platform) {
+            currentPlatform = platform;
+            const content = contentSamples[platform];
+            const foxes = getFoxesForPlatform(platform);
+            
+            // Update modal title
+            const platformEmoji = {
+                instagram: '📱',
+                tiktok: '🎵',
+                snapchat: '👻',
+                facebook: '👥',
+                youtube: '📺'
+            };
+            document.getElementById('modalTitle').textContent = `${platformEmoji[platform]} ${platform.toUpperCase()} Content Preview`;
+            
+            // Update Dara's analysis
+            document.getElementById('daraAnalysis').textContent = content.analysis;
+            
+            // Update fox avatars and labels
+            if (foxes) {
+                const copywriterFox = FIFOX_TEAM[foxes.copywriter];
+                const visualFox = FIFOX_TEAM[foxes.visual];
+                
+                document.getElementById('modalCopyAvatar').innerHTML = generateFoxAvatar(foxes.copywriter, 'small');
+                document.getElementById('copywriterLabel').innerHTML = `${copywriterFox.name}<br>Copywriter`;
+                document.getElementById('copywriterLabel').style.color = copywriterFox.themeColor;
+                
+                document.getElementById('modalVisualAvatar').innerHTML = generateFoxAvatar(foxes.visual, 'small');
+                document.getElementById('visualLabel').innerHTML = `${visualFox.name}<br>Visual`;
+                document.getElementById('visualLabel').style.color = visualFox.themeColor;
+            }
+            
+            // Update generated content
+            document.getElementById('generatedCaption').innerHTML = content.caption.replace(/\n/g, '<br>');
+            document.getElementById('viralScore').textContent = content.score + '%';
+            
+            // Show modal
+            document.getElementById('generatorModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('generatorModal').style.display = 'none';
+        }
+        
+        function approveAndPost() {
+            const caption = document.getElementById('generatedCaption').textContent;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(caption).then(() => {
+                alert(`✅ Caption copied to clipboard!\n\nOpening ${currentPlatform.toUpperCase()}...\n\nJust paste and post! 🎉`);
+                
+                // Open platform
+                const urls = {
+                    instagram: 'https://www.instagram.com',
+                    tiktok: 'https://www.tiktok.com/upload',
+                    snapchat: 'https://www.snapchat.com',
+                    facebook: 'https://www.facebook.com',
+                    youtube: 'https://studio.youtube.com'
+                };
+                
+                window.open(urls[currentPlatform], '_blank');
+                closeModal();
+            }).catch(err => {
+                alert('Failed to copy to clipboard. Please copy manually.');
+            });
+        }
+        
+        function regenerateContent() {
+            alert('↻ Regenerating with new angle and approach...');
+            closeModal();
+            setTimeout(() => openGenerator(currentPlatform), 500);
+        }
+        
+        // Close modal on outside click
+        document.getElementById('generatorModal').addEventListener('click', function(e) {
+            if (e.target.id === 'generatorModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
