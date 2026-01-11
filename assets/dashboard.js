@@ -423,8 +423,6 @@ const contentExamples = {
 };
 
 let currentPlatform = null;
-
-let currentPlatform = null;
 let currentContentType = null;
 
 // New function for platform-specific content generation
