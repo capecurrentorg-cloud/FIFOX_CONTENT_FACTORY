@@ -422,6 +422,51 @@ const contentExamples = {
     }
 };
 
+// ========================================
+// CUSTOM CONTENT REQUEST
+// ========================================
+
+function startVoiceRequest() {
+    // Simulate voice recording
+    showToast('🎤 Voice recording... (Feature coming soon)');
+    
+    // In production, this would use Web Speech API
+    // const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    // recognition.start();
+}
+
+function generateCustomContent() {
+    const input = document.getElementById('customContentInput');
+    const request = input.value.trim();
+    
+    if (!request) {
+        showToast('⚠️ Please enter a content request');
+        return;
+    }
+    
+    showToast('✨ Generating custom content based on your request...');
+    
+    // Simulate AI processing delay
+    setTimeout(() => {
+        // Analyze request to determine platform
+        let platform = 'instagram'; // default
+        if (request.toLowerCase().includes('tiktok')) platform = 'tiktok';
+        else if (request.toLowerCase().includes('facebook')) platform = 'facebook';
+        else if (request.toLowerCase().includes('youtube')) platform = 'youtube';
+        else if (request.toLowerCase().includes('snapchat')) platform = 'snapchat';
+        
+        // Generate content with custom request context
+        generatePlatformContent(platform, 'post');
+        
+        // Clear input
+        input.value = '';
+    }, 1500);
+}
+
+// ========================================
+// CONTENT GENERATION
+// ========================================
+
 let currentPlatform = null;
 let currentContentType = null;
 
@@ -735,6 +780,8 @@ window.addEventListener('resize', function() {
 window.switchPanel = switchPanel;
 window.generateContent = generateContent;
 window.generatePlatformContent = generatePlatformContent;
+window.startVoiceRequest = startVoiceRequest;
+window.generateCustomContent = generateCustomContent;
 window.closeContentModal = closeContentModal;
 window.approveAndPost = approveAndPost;
 window.regenerateContent = regenerateContent;

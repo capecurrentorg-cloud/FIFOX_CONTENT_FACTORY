@@ -716,6 +716,42 @@ body {
     background: #2a2a2a;
 }
 
+/* Custom Content Request */
+.custom-content-request {
+    margin-bottom: 40px;
+}
+
+.custom-content-request h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.voice-request-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border: none;
+    padding: 15px 25px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.voice-request-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+}
+
+.voice-request-btn:active {
+    transform: scale(0.95);
+}
+
 /* Fox Team Status */
 .fox-team-status {
     margin-bottom: 40px;

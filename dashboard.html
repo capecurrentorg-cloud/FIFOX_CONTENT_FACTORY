@@ -113,27 +113,25 @@
             </div>
 
             <div class="system-status-section">
-                <h2>System Status - Click Fox to View Details</h2>
+                <h2>Core System Agents</h2>
                 <div class="fox-status-grid">
                     <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">MARA</span>
                         <span class="status-badge">Operational</span>
+                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Phone Agent</small>
                     </div>
                     <div class="fox-status-card operational" onclick="switchPanel('phone-agent')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">VERA</span>
                         <span class="status-badge">Operational</span>
-                    </div>
-                    <div class="fox-status-card operational" onclick="switchPanel('content-factory')" style="cursor: pointer;">
-                        <span class="fox-icon">🦊</span>
-                        <span class="fox-name">DARA</span>
-                        <span class="status-badge">Operational</span>
+                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Verifier</small>
                     </div>
                     <div class="fox-status-card operational" onclick="switchPanel('command-center')" style="cursor: pointer;">
                         <span class="fox-icon">🦊</span>
                         <span class="fox-name">LARA</span>
                         <span class="status-badge">Operational</span>
+                        <small style="display: block; margin-top: 5px; font-size: 10px; color: #888;">Kitchen Manager</small>
                     </div>
                 </div>
             </div>
@@ -316,11 +314,30 @@
         <!-- Content Factory Panel -->
         <div class="panel" id="content-factory-panel">
             <div class="panel-header">
-                <h1>🎬 Content Factory - Two-Click Generation System</h1>
+                <h1>🎬 Content Factory - 2-Click Content Generation</h1>
+                <p style="color: #888; font-size: 14px; margin-top: 10px;">Auto-generate content or use microphone for custom requests</p>
+            </div>
+
+            <div class="custom-content-request">
+                <h2>🎤 Custom Content Request</h2>
+                <div style="display: flex; gap: 15px; align-items: center; background: #1a1a1a; padding: 20px; border-radius: 12px;">
+                    <button class="voice-request-btn" onclick="startVoiceRequest()">
+                        <span style="font-size: 32px;">🎤</span>
+                        <span>Voice Request</span>
+                    </button>
+                    <div style="flex: 1;">
+                        <input type="text" id="customContentInput" placeholder="Type your content request... e.g., 'Create Instagram post about today's lunch special'" 
+                               style="width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px;">
+                    </div>
+                    <button class="gen-button" onclick="generateCustomContent()" style="padding: 12px 24px;">
+                        <span>✨ Generate</span>
+                    </button>
+                </div>
             </div>
 
             <div class="fox-team-status">
-                <h2>🦊 Content Generation Team</h2>
+                <h2>🦊 Content Creation Team</h2>
+                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Specialized agents for each social media platform</p>
                 <div class="fox-team-grid">
                     <div class="fox-agent-card" data-fox="dara">
                         <div class="fox-avatar" style="background: linear-gradient(135deg, #3498db, #2980b9);">🦊</div>
@@ -335,7 +352,7 @@
                         <div class="fox-details">
                             <div class="fox-name">IRA</div>
                             <div class="fox-role">Instagram Specialist</div>
-                            <div class="fox-status active">🟢 Ready to Generate</div>
+                            <div class="fox-status active">🟢 Ready</div>
                         </div>
                     </div>
                     <div class="fox-agent-card" data-fox="gara">
@@ -343,7 +360,7 @@
                         <div class="fox-details">
                             <div class="fox-name">GARA</div>
                             <div class="fox-role">Instagram Visual</div>
-                            <div class="fox-status active">🟢 Ready to Generate</div>
+                            <div class="fox-status active">🟢 Ready</div>
                         </div>
                     </div>
                     <div class="fox-agent-card" data-fox="tira">
@@ -351,15 +368,23 @@
                         <div class="fox-details">
                             <div class="fox-name">TIRA</div>
                             <div class="fox-role">TikTok Specialist</div>
-                            <div class="fox-status active">🟢 Ready to Generate</div>
+                            <div class="fox-status active">🟢 Ready</div>
                         </div>
                     </div>
-                    <div class="fox-agent-card" data-fox="vera">
-                        <div class="fox-avatar" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">🦊</div>
+                    <div class="fox-agent-card" data-fox="fara">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #3b5998, #2d4373);">🦊</div>
                         <div class="fox-details">
-                            <div class="fox-name">VERA</div>
-                            <div class="fox-role">Content Verifier</div>
-                            <div class="fox-status active">🟢 Ready to Verify</div>
+                            <div class="fox-name">FARA</div>
+                            <div class="fox-role">Facebook Specialist</div>
+                            <div class="fox-status active">🟢 Ready</div>
+                        </div>
+                    </div>
+                    <div class="fox-agent-card" data-fox="yara">
+                        <div class="fox-avatar" style="background: linear-gradient(135deg, #ff0000, #cc0000);">🦊</div>
+                        <div class="fox-details">
+                            <div class="fox-name">YARA</div>
+                            <div class="fox-role">YouTube Specialist</div>
+                            <div class="fox-status active">🟢 Ready</div>
                         </div>
                     </div>
                 </div>
