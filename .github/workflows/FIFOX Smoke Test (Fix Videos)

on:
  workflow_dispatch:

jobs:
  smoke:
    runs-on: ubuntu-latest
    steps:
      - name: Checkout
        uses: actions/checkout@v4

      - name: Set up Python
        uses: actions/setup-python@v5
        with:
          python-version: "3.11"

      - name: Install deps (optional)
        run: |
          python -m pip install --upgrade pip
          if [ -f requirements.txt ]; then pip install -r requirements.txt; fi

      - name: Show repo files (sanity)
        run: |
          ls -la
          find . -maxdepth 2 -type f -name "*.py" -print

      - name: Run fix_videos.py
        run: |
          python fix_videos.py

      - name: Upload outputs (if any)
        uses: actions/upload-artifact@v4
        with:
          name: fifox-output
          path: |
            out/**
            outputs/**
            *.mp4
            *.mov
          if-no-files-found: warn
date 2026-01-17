@@ -1,0 +1,41 @@
+name: FIFOX Smoke Test (Fix Videos)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps (optional)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Show repo files (sanity)
+        run: |
+          ls -la
+          find . -maxdepth 2 -type f -name "*.py" -print
+
+      - name: Run fix_videos.py
+        run: |
+          python fix_videos.py
+
+      - name: Upload outputs (if any)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fifox-output
+          path: |
+            out/**
+            outputs/**
+            *.mp4
+            *.mov
+          if-no-files-found: warn
