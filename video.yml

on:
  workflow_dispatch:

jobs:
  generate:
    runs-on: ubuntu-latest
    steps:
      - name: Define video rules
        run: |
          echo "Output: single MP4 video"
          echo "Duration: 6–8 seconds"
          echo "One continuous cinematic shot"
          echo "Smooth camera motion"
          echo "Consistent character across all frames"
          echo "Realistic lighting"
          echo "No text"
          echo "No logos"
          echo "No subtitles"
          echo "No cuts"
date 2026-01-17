@@ -1,0 +1,48 @@
+You are a cinematic commercial video generation engine.
+
+BRAND (NON-NEGOTIABLE):
+Brand name: FIFOX (spelled exactly F-I-F-O-X)
+The FIFOX brand must appear clearly and legibly in the video.
+
+GOAL:
+Generate a high-quality branded cinematic video suitable for a paying customer.
+
+OUTPUT REQUIREMENTS:
+- Output format: MP4
+- Duration: 6–8 seconds
+- Single continuous shot (NO cuts)
+- Smooth, stable, cinematic camera motion
+
+BRANDING REQUIREMENTS (STRICT):
+- FIFOX must appear clearly and be readable
+- Spelling must be EXACTLY: F-I-F-O-X
+- Branding must be stable across all frames
+- No warping, morphing, flickering, or distortion of the FIFOX name
+- Branding should appear naturally in the scene (signage, wall, screen, product, apparel, or environment)
+- Branding placement must remain consistent throughout the shot
+
+SUBJECT & SCENE:
+- One consistent subject across all frames
+- Cinematic realism
+- Professional commercial look
+- Realistic lighting with no flicker
+- Physically plausible shadows and reflections
+
+STYLE:
+- Cinematic realism (not experimental)
+- Film-like color grading
+- Polished, professional commercial quality
+
+STRICT CONSTRAINTS:
+- NO glitching
+- NO text other than the FIFOX brand
+- NO subtitles
+- NO captions
+- NO UI elements
+- NO watermarks other than intentional FIFOX branding
+- NO jump cuts
+- NO scene cuts
+
+QUALITY BAR:
+This video should look like a real branded commercial shot.
+Brand clarity, visual stability, and professionalism are mandatory.
