@@ -1,0 +1,21 @@
+name: Video Generation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Define video rules
+        run: |
+          echo "Output: single MP4 video"
+          echo "Duration: 6–8 seconds"
+          echo "One continuous cinematic shot"
+          echo "Smooth camera motion"
+          echo "Consistent character across all frames"
+          echo "Realistic lighting"
+          echo "No text"
+          echo "No logos"
+          echo "No subtitles"
+          echo "No cuts"
