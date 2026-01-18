@@ -1,21 +1,96 @@
-name: Video Generation
+#!/usr/bin/env python3
+"""
+FIFOX Smoke Video Generator (GitHub Actions friendly)
 
-on:
-  workflow_dispatch:
+What it does:
+- Creates out/final.mp4 (a real, playable video)
+- Creates out/smoke.txt (proof + timestamps)
+- Exits non-zero if video was not created (so the workflow can't "green lie")
 
-jobs:
-  generate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Define video rules
-        run: |
-          echo "Output: single MP4 video"
-          echo "Duration: 6–8 seconds"
-          echo "One continuous cinematic shot"
-          echo "Smooth camera motion"
-          echo "Consistent character across all frames"
-          echo "Realistic lighting"
-          echo "No text"
-          echo "No logos"
-          echo "No subtitles"
-          echo "No cuts"
+Assumptions:
+- Running on ubuntu-latest GitHub runner (ffmpeg is available).
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from datetime import datetime, timezone
+import os
+import subprocess
+import sys
+import shutil
+
+
+OUT_DIR = Path("out")
+VIDEO_PATH = OUT_DIR / "final.mp4"
+PROOF_PATH = OUT_DIR / "smoke.txt"
+
+
+def log_line(msg: str) -> None:
+    ts = datetime.now(timezone.utc).isoformat()
+    PROOF_PATH.write_text((PROOF_PATH.read_text(encoding="utf-8") if PROOF_PATH.exists() else "") + f"[{ts}] {msg}\n", encoding="utf-8")
+
+
+def require_ffmpeg() -> str:
+    ffmpeg = shutil.which("ffmpeg")
+    if not ffmpeg:
+        raise RuntimeError("ffmpeg not found on PATH. This script expects ffmpeg on the runner.")
+    return ffmpeg
+
+
+def run(cmd: list[str]) -> None:
+    # Capture minimal output to proof for debugging without spam
+    log_line("RUN: " + " ".join(cmd))
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    log_line("EXIT CODE: " + str(p.returncode))
+    if p.stdout:
+        # Truncate long output to keep proof readable
+        out = p.stdout
+        if len(out) > 4000:
+            out = out[:4000] + "\n...[truncated]...\n"
+        log_line("OUTPUT:\n" + out)
+    if p.returncode != 0:
+        raise RuntimeError("Command failed")
+
+
+def main() -> int:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    log_line("Smoke script started")
+    log_line(f"CWD: {os.getcwd()}")
+
+    try:
+        ffmpeg = require_ffmpeg()
+        log_line(f"ffmpeg: {ffmpeg}")
+
+        # Generate a real 2-second 1280x720 mp4 (black background + silent audio)
+        # Includes audio track for broader compatibility.
+        if VIDEO_PATH.exists():
+            VIDEO_PATH.unlink()
+
+        run([
+            ffmpeg, "-y",
+            "-f", "lavfi", "-i", "color=c=black:s=1280x720:r=30:d=2",
+            "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+            "-shortest",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p",
+            "-c:a", "aac", "-b:a", "128k",
+            str(VIDEO_PATH),
+        ])
+
+        if not VIDEO_PATH.exists():
+            log_line("ERROR: final.mp4 was not created")
+            return 2
+
+        size = VIDEO_PATH.stat().st_size
+        log_line(f"SUCCESS: Created {VIDEO_PATH} ({size} bytes)")
+        print(f"Created {VIDEO_PATH} ({size} bytes)")
+        return 0
+
+    except Exception as e:
+        log_line(f"FATAL: {type(e).__name__}: {e}")
+        print(f"FATAL: {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
