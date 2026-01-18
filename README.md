@@ -5,12 +5,15 @@
 ## 🦊 Overview
 
 The **FIFOX Content Factory** is a complete AI-powered restaurant automation system featuring:
+- **Professional Dashboard Hub** - Unified control panel for all operations ([dashboard.html](dashboard.html))
 - 30 professional video ads for menu items
 - AI phone agent (Mara) for handling calls and orders
 - Restaurant menu management
 - Social media content generation
 
 **Live Demo:** https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/
+
+**🎯 NEW: Professional Dashboard:** [dashboard.html](https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/dashboard.html) - Complete automation hub with sidebar navigation
 
 ---
 
@@ -19,8 +22,13 @@ The **FIFOX Content Factory** is a complete AI-powered restaurant automation sys
 ```
 FIFOX_CONTENT_FACTORY/
 ├── README.md                           # This file
+├── dashboard.html                      # NEW: Professional Dashboard Hub
 ├── index.html                          # Video gallery homepage
 ├── fifox_logo_master.png               # FIFOX branding logo
+│
+├── assets/                             # Dashboard assets
+│   ├── dashboard.css                   # Dashboard styling
+│   └── dashboard.js                    # Dashboard JavaScript
 │
 ├── Foxes/                              # 30 Restaurant video ads
 │   ├── script_1.txt through script_30.txt    # Video scripts
@@ -47,6 +55,27 @@ FIFOX_CONTENT_FACTORY/
 ---
 
 ## 📚 Content Features
+
+### 0. 🎯 Professional Dashboard Hub (NEW!)
+
+**Unified control center for all FIFOX operations:**
+- **Dashboard Overview** - Real-time stats, fox communications, system status
+- **Command Center** - Active orders, kitchen timers, delivery map
+- **Phone Agent Status** - 3-agent verification workflow visualization
+- **Content Factory** - 3-click content generation for all platforms
+- **Social Media Hub** - Platform analytics and recent posts
+- **Settings** - API configuration and agent controls
+
+**Key Features:**
+- Sidebar navigation with instant panel switching
+- No page reloads - smooth single-page application
+- Real-time countdown timers and status updates
+- Auto-rotating menu carousel (5-second intervals)
+- Fox-to-fox communication feed with live timestamps
+- Modal-based content preview with DARA insights & VERA verification
+- Mobile responsive design for tablet devices
+
+**Access Dashboard:** [dashboard.html](dashboard.html) | [Live Demo](https://capecurrentorg-cloud.github.io/FIFOX_CONTENT_FACTORY/dashboard.html)
 
 ### 1. Video Ads (30 Complete Productions)
 
