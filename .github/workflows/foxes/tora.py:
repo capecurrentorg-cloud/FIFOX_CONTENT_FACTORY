@@ -1,0 +1,78 @@
+import google.generativeai as genai
+import requests
+import os
+import json
+import time
+
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+# Load script from Tira
+with open('output/tiktok_script.json', 'r') as f:
+    data = json.load(f)
+    script = data['script']
+
+video_generated = False
+
+# TRY GEMINI 2.0 FLASH FIRST
+try:
+    print("Attempting Gemini 2.0 Flash video generation...")
+    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    
+    video_prompt = f"Create a 30-second TikTok video: {script}"
+    
+    response = model.generate_content(
+        video_prompt,
+        generation_config=genai.types.GenerationConfig(temperature=0.9)
+    )
+    
+    video_data = response.parts[0].inline_data.data
+    with open('output/tiktok_video.mp4', 'wb') as f:
+        f.write(video_data)
+    
+    video_generated = True
+    generator = "Gemini 2.0 Flash"
+    print("✓ Gemini video generated")
+    
+except Exception as e:
+    print(f"Gemini failed: {e}")
+
+# FALLBACK TO A2E IF GEMINI FAILS
+if not video_generated:
+    try:
+        print("Falling back to A2E video generation...")
+        
+        # A2E API call
+        response = requests.post(
+            'https://api.a2e.ai/v1/video/generate',  # Replace with actual A2E endpoint
+            json={
+                'text': script,
+                'duration': 30,
+                'format': 'mp4',
+                'style': 'tiktok'
+            },
+            headers={'Authorization': f"Bearer {os.environ.get('A2E_API_KEY')}"}
+        )
+        
+        if response.status_code == 200:
+            # Save video
+            with open('output/tiktok_video.mp4', 'wb') as f:
+                f.write(response.content)
+            
+            video_generated = True
+            generator = "A2E"
+            print("✓ A2E video generated")
+        
+    except Exception as e:
+        print(f"A2E failed: {e}")
+
+# Save metadata
+if video_generated:
+    with open('output/tiktok_video.json', 'w') as f:
+        json.dump({
+            "script": script,
+            "video_file": "tiktok_video.mp4",
+            "generated_by": generator
+        }, f)
+    print(f"Tora complete - {generator}")
+else:
+    raise Exception("Both Gemini and A2E video generation failed")
